@@ -1,0 +1,18 @@
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 0E670C5D-C985-3EF5-B602-262BDE0F6DB5' ]
+platform:        macosx
+install-name:    '/System/Library/PrivateFrameworks/GPURawCounter.framework/Versions/A/GPURawCounter'
+current-version: 12.1
+exports:         
+  - archs:           [ x86_64 ]
+    symbols:         [ _CTRCopyAllCounterSourceGroup, _CTRReleaseAllCounterSourceGroup, 
+                       _GPURawCounterVersionNumber, _GPURawCounterVersionString ]
+    objc-classes:    [ GPURawCounterSelect, _GPURawCounter, _GPURawCounterSource, 
+                       _GPURawCounterSourceGroup ]
+    objc-ivars:      [ _GPURawCounter._counterValueType, _GPURawCounter._description, 
+                       _GPURawCounter._name, _GPURawCounterSource._name, _GPURawCounterSource._sourceGroup, 
+                       _GPURawCounterSourceGroup._acceleratorPort, _GPURawCounterSourceGroup._name, 
+                       _GPURawCounterSourceGroup._samplingPeriodInMicroseconds, _GPURawCounterSourceGroup._samplingTriggers, 
+                       _GPURawCounterSourceGroup._sourceList, _GPURawCounterSourceGroup._vendorOptions ]
+...

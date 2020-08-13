@@ -1,0 +1,12 @@
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: DDEBC0D8-CCC0-30B7-9AA6-41C68A75C578' ]
+platform:        macosx
+install-name:    '/System/Library/PrivateFrameworks/ConfigurationProfilesUI.framework/Versions/A/ConfigurationProfilesUI'
+exports:         
+  - archs:           [ x86_64 ]
+    symbols:         [ _CPUI_EnrollInRemoteManagementPriv, _CPUI_EnrollInRemoteManagementViaSetupAssistant, 
+                       _CPUI_GetProfilesPrefPaneIcon, _CPUI_PreflightManagedAccountDeletion, 
+                       _CPUI_ProgressWindowCancelClickedResponse ]
+    objc-classes:    [ CPUI_ProgressWindowController ]
+...

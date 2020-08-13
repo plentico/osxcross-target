@@ -1,0 +1,40 @@
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: DB59E2E6-78F9-36D0-A2C1-68DBE7D8B4D5', 'x86_64: DB59E2E6-78F9-36D0-A2C1-68DBE7D8B4D5' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/UIKitMacHelper.framework/Versions/A/UIKitMacHelper'
+current-version: 61000
+exports:         
+  - archs:           [ x86_64 ]
+    symbols:         [ _NSUIImageGetSystemImageForNSImageName, _UINSAppearanceGetApplicationAppearance, 
+                       _UINSAppearanceGetDarkAppearance, _UINSAppearanceGetLightAppearance, 
+                       _UINSAppearanceGetMacAppearanceName, _UINSAppearanceIsMacAppearanceName, 
+                       _UINSApplicationInstantiate, _UINSApplicationMain, _UINSApplicationWaitUntilSystemAppIsReady, 
+                       _UINSColorGetSystemColor, _UINSConfigureMenuToolbarItemWithMenu, 
+                       _UINSConfigureSharingToolbarItemWithActivityItemsConfiguration, 
+                       _UINSConfigureSharingTouchBarItemWithActivityItemsConfiguration, 
+                       _UINSConfigureToolbarItemMenuFormRepresentation, _UINSDefaultsAllowsUserInterfaceIdiomMac, 
+                       _UINSDefaultsAllowsUserInterfaceIdiomMacKey, _UINSDefaultsScaleFactor, 
+                       _UINSDefaultsScaleFactorKey, _UINSIsBridgingConstraint, _UINSLogSubsystem, 
+                       _UINSMakeBridgingConstraintForWindow, _UINSNewAccessibilityInfo, 
+                       _UINSNewButtonToolbarItem, _UINSNewCloudSharingControllerWithPreparationHandler, 
+                       _UINSNewCloudSharingControllerWithShareAndContainer, _UINSNewCursor, 
+                       _UINSNewDocumentBrowserAction, _UINSNewDocumentBrowserViewController, 
+                       _UINSNewDragImageWithSlotID, _UINSNewDragItem, _UINSNewDragOperationMasks, 
+                       _UINSNewFixedSpaceToolbarItem, _UINSNewFlexibleSpaceToolbarItem, 
+                       _UINSNewFontPickerController, _UINSNewGroupToolbarItem, _UINSNewLabelToolbarItem, 
+                       _UINSNewOverlayDatePicker, _UINSNewPopupButtonMenuItem, _UINSNewPopupButtonToolbarItem, 
+                       _UINSNewSearchFieldToolbarItem, _UINSNewSegmentedControlToolbarItem, 
+                       _UINSNewShadowDatePicker, _UINSNewShareToolbarItem, _UINSNewTouchBarItem, 
+                       _UINSNewTrackingShadowRemoteController, _UINSSceneIDUserInfoKey, 
+                       _UINSSceneShouldHideHostWindowValueUserInfoKey, _UINSShareSheetLog, 
+                       _UINSSharedApplicationDelegate, _UINSSharedGraphicsContextStack, 
+                       _UINSSharedRevealController, _UINSSharedShareSheetController, 
+                       _UINSSharedTouchBar, _UINSSharingServiceItemsFromActivityItemsConfiguration, 
+                       _UINSSharingServicesFromActivityItemsConfiguration, _UINSShouldHideHostWindowDidChangeNotification, 
+                       _UINSSystemAppearanceDecodeColor, _UINSViewBridgeLog, __UINSDragSessionIDForDraggingInfo, 
+                       __UINSDragSessionIDForSequenceAndContext ]
+    objc-classes:    [ UINSApplicationDelegate, UINSApplicationShortcutManager, UINSFontManager, 
+                       UINSHostedUIWindowRegistry, UINSPasteboard, UINSSharingToolbarItem, 
+                       UINSViewBridgeWindowConfiguration, UINSWorkspace ]
+...

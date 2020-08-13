@@ -1,0 +1,13 @@
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: A6EAB28C-384D-3CAB-AD17-B3279CE1F637' ]
+platform:        macosx
+install-name:    '/System/Library/PrivateFrameworks/WiFiPeerToPeer.framework/Versions/A/WiFiPeerToPeer'
+exports:         
+  - archs:           [ x86_64 ]
+    objc-classes:    [ WiFiAwareDataSession, WiFiAwareDatapathConfiguration, WiFiAwareDiscoveryResult, 
+                       WiFiAwarePublishConfiguration, WiFiAwarePublishDatapathConfiguration, 
+                       WiFiAwarePublishDatapathSecurityConfiguration, WiFiAwarePublishDatapathServiceSpecificInfo, 
+                       WiFiAwarePublishServiceSpecificInfo, WiFiAwarePublisher, WiFiAwarePublisherDataSessionHandle, 
+                       WiFiAwareSubscribeConfiguration, WiFiAwareSubscriber, WiFiMACAddress ]
+...

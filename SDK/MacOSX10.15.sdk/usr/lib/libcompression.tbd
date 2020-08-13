@@ -1,0 +1,16 @@
+--- !tapi-tbd-v3
+archs:           [ x86_64, x86_64h ]
+uuids:           [ 'x86_64: 3938CD1B-E242-3474-8A7F-9F66D316AFF3', 'x86_64: 3938CD1B-E242-3474-8A7F-9F66D316AFF3', 
+                   'x86_64h: 64C91066-586D-38C0-A2F3-3E60A940F859', 'x86_64h: 64C91066-586D-38C0-A2F3-3E60A940F859' ]
+platform:        zippered
+install-name:    '/usr/lib/libcompression.dylib'
+exports:         
+  - archs:           [ x86_64, x86_64h ]
+    symbols:         [ _compression_decode_buffer, _compression_decode_scratch_buffer_size, 
+                       _compression_encode_buffer, _compression_encode_scratch_buffer_size, 
+                       _compression_stream_destroy, _compression_stream_get_decode_state_size, 
+                       _compression_stream_get_encode_state_size, _compression_stream_get_state_size, 
+                       _compression_stream_identify_algorithm, _compression_stream_init, 
+                       _compression_stream_init_with_state_buffer, _compression_stream_is_state_valid, 
+                       _compression_stream_process, _compression_stream_reinit ]
+...

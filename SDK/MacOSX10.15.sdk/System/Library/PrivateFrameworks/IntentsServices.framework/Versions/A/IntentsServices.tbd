@@ -1,0 +1,15 @@
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: F30D7725-D521-3842-8A14-39BB98561DEC', 'x86_64: F30D7725-D521-3842-8A14-39BB98561DEC' ]
+platform:        zippered
+install-name:    '/System/Library/PrivateFrameworks/IntentsServices.framework/Versions/A/IntentsServices'
+swift-abi-version: 7
+exports:         
+  - archs:           [ x86_64 ]
+    symbols:         [ _INSAssistantErrorDomain, _INSExtensionServiceTraceCompletionHandlerWithCode, 
+                       _INSExtractPreferencesResponseFromMetricsContext, _INSGenerateMetricsContextUsingAppPreferenceResponse, 
+                       _INSJSONEncodedIntent, _INSJSONEncodedIntentResponse, _INSJSONEncodedSlotResolutionResult, 
+                       _INSSiriAceErrorDomain, _INSSiriSerializedUserActivityKey, 
+                       _IntentsServicesVersionNumber, _IntentsServicesVersionString ]
+    objc-classes:    [ INSAnalytics, INSExtensionService ]
+...

@@ -1,0 +1,14 @@
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 5D391FD1-391B-390A-BBC1-62A537C8DAFE', 'x86_64: 5D391FD1-391B-390A-BBC1-62A537C8DAFE' ]
+platform:        zippered
+install-name:    '/System/Library/Frameworks/LocalAuthentication.framework/Versions/A/LocalAuthentication'
+current-version: 693.140.3
+exports:         
+  - archs:           [ x86_64 ]
+    symbols:         [ _LAAvailableMechanisms, _LABiometryDatabaseHash, _LACopyExternalizedContext, 
+                       _LAEnabledBiometryUsers, _LAErrorDomain, _LAErrorInfoBiometryType, 
+                       _LAErrorInfoTCCServerPrompt, _LAErrorInfoTCCService, _LAErrorSubcodeKey, 
+                       _LAPasswordRetryTime, _LATouchIDAuthenticationMaximumAllowableReuseDuration ]
+    objc-classes:    [ LAContext ]
+...

@@ -1,0 +1,15 @@
+--- !tapi-tbd-v3
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: E2FAD8AD-B23A-33E6-A91E-D912E4C4992E', 'x86_64: E2FAD8AD-B23A-33E6-A91E-D912E4C4992E' ]
+platform:        zippered
+install-name:    '/usr/lib/libMTLCapture.dylib'
+current-version: 266.69.6
+compatibility-version: 1.1
+exports:         
+  - archs:           [ x86_64 ]
+    symbols:         [ _DYMTLWrapDeviceWithDebugLayer, _GTHarvesterAddTexturePlane, 
+                       _GTHarvesterGetData, _GTHarvesterGetDataSize, _GTHarvesterGetMetadata, 
+                       _GTHarvesterGetMetadataSize, _GTHarvesterGetTextureMetadataRequiredSize, 
+                       _GTHarvesterGetTexturePlane, _GTHarvesterGetTexturePlaneCount, 
+                       _GTHarvesterInitMetadata, _GTMTLGuestAppClient_initGlobalTransportWithHostURL ]
+...
