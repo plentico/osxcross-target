@@ -32,4 +32,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/github/workspace/osxcross-master/target/lib'
+libdir='/home/runner/work/plenti/plenti-osxcross/target/lib'
