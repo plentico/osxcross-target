@@ -1,0 +1,16 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           2FD74E0C-36C3-30E8-BF80-BCDD2ABBC4B8
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           7C835BAD-201D-3FCD-BFC6-F8F37BE04558
+install-name:    '/System/Library/PrivateFrameworks/PowerlogFullOperators.framework/Versions/A/PowerlogFullOperators'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _kPLPMUAgentSensors, _kPLScheduledWakeAgentEventForwardNameScheduledEvent ]
+    objc-classes:    [ PLPMUAgent, PLScheduledWakeAgent ]
+...

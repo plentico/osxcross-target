@@ -1,0 +1,15 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           442B2090-BC38-3692-8C20-E7247850454B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           195D544B-A539-333F-8AEB-7FDB5AF7CA31
+install-name:    '/System/Library/PrivateFrameworks/PowerlogDatabaseReader.framework/Versions/A/PowerlogDatabaseReader'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    objc-classes:    [ PLDatabaseReader ]
+...

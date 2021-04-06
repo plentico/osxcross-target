@@ -1,0 +1,16 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           F685623A-4D10-3A27-8EE0-5E9D617D32F9
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C213B40C-9C3E-39D3-943C-5A62C7139CAE
+install-name:    '/System/Library/PrivateFrameworks/ASOctaneSupport.framework/Versions/A/ASOctaneSupport'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _ASOctaneSupportVersionNumber, _ASOctaneSupportVersionString ]
+    objc-classes:    [ ASOctaneServer ]
+...

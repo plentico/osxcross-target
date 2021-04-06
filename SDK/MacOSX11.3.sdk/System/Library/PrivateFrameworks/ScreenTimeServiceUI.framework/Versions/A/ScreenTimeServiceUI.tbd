@@ -1,0 +1,23 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           BC61980B-3044-363D-9D7C-B9A885B11D24
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           7F012E19-1BA3-3886-B770-AB66F2EF5785
+install-name:    '/System/Library/PrivateFrameworks/ScreenTimeServiceUI.framework/Versions/A/ScreenTimeServiceUI'
+current-version: 497.4.3
+allowable-clients:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    clients:         [ AppKit, ContactsUI, LockoutUI, ParentalControls, ScreenTime, 
+                       ScreenTimeSettingsUI, ScreenTimeUI, ScreenTimeViewService ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _STBlockingRemoteViewControllerDidFinishDismissalAnimationNotification, 
+                       _STClassNameSTBlockingServiceViewController, _STClassNameSTPINServiceViewController ]
+    objc-classes:    [ STBlockingRemoteViewController, STBlockingViewService, STPINRemoteViewController, 
+                       STPINViewService ]
+...

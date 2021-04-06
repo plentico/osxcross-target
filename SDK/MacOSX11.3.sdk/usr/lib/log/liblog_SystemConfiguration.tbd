@@ -1,0 +1,24 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           D12388FD-2086-3D1A-8D93-5FC318F45900
+  - target:          x86_64-maccatalyst
+    value:           D12388FD-2086-3D1A-8D93-5FC318F45900
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           F11D1304-73DD-3300-849E-AA67210F000F
+  - target:          arm64e-maccatalyst
+    value:           F11D1304-73DD-3300-849E-AA67210F000F
+install-name:    '/usr/lib/log/liblog_SystemConfiguration.dylib'
+current-version: 1109.100.4
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _OSLogCopyFormattedString, _OSStateCreateStringWithData ]
+...

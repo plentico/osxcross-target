@@ -1,0 +1,15 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           D07EB94D-E65E-353F-8479-74F9E849B4E3
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C00FDBFB-C682-346D-870B-01D0D8EC70C0
+install-name:    '/System/Library/Frameworks/TWAIN.framework/Versions/A/TWAIN'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _DSM_Entry ]
+...

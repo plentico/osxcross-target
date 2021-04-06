@@ -1,0 +1,19 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           D5DAB86B-8330-32F3-8929-2F09703F3CA3
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           DB7EAE75-9D32-3C3F-A4B1-B7D7EFE116CF
+install-name:    '/System/Library/PrivateFrameworks/HIDPreferences.framework/Versions/A/HIDPreferences'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _HIDPreferencesCopy, _HIDPreferencesCopyDomain, _HIDPreferencesCopyMultiple, 
+                       _HIDPreferencesSet, _HIDPreferencesSetDomain, _HIDPreferencesSetMultiple, 
+                       _HIDPreferencesSynchronize, _HIDPreferencesVersionNumber, 
+                       _HIDPreferencesVersionString ]
+    objc-classes:    [ HIDPreferences, HIDPreferencesHelperClient, HIDPreferencesHelperListener ]
+...

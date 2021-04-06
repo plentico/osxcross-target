@@ -1,0 +1,17 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           6D0B7AAA-BB0D-307A-B9AF-3F9036D76BEB
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           5490681B-9BBC-31B6-8A2B-AB21D39A6A32
+install-name:    '/System/Library/PrivateFrameworks/QuickLookNonBaseSystem.framework/Versions/A/QuickLookNonBaseSystem'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _QLInitMarkupLogging, _QuickLookNonBaseSystemVersionNumber, 
+                       _QuickLookNonBaseSystemVersionString, _qlMarkupLogHandle ]
+    objc-classes:    [ QLMarkupController, QLMarkupViewController ]
+...

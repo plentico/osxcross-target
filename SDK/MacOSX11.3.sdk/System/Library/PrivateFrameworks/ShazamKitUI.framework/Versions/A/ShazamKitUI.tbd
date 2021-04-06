@@ -1,0 +1,15 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           B9E0F558-0333-30EC-8DC3-81E7E610DA7D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           3EADD890-CA08-351F-8BE9-3234C4935A12
+install-name:    '/System/Library/PrivateFrameworks/ShazamKitUI.framework/Versions/A/ShazamKitUI'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    objc-classes:    [ SHListeningLayer ]
+...

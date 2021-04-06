@@ -1,0 +1,31 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           9B0A0CFD-C59C-3C35-8223-B0524DF4D76D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           20D4D259-6767-383C-A597-D79F9F63E7A3
+install-name:    '/System/Library/PrivateFrameworks/HDAInterface.framework/Versions/A/HDAInterface'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _HDAAudioEngineInputClass, _HDAAudioEngineOutputClass, _HDAErrorDomain ]
+    objc-classes:    [ HDAAudioEngineUserClient, HDABuiltinCodecInterface, HDAControllerInterface, 
+                       HDADSPInterface, HDADSPUserClient, HDAInterface, HDAMikeyInterface, 
+                       HDAUserClient, IOHDAudioCodecDeviceUserClient ]
+    objc-ivars:      [ HDADSPInterface.mInput, HDAInterface.mConnect, HDAInterface.mService, 
+                       HDAMikeyInterface.mInternalMikey, IOHDAudioCodecDeviceUserClient.appleHDAControllerUserClientBuffer, 
+                       IOHDAudioCodecDeviceUserClient.appleHDADriverUserClientBuffer, 
+                       IOHDAudioCodecDeviceUserClient.appleHDA_UserClientBuffer, 
+                       IOHDAudioCodecDeviceUserClient.gDataPort, IOHDAudioCodecDeviceUserClient.gDriverObject, 
+                       IOHDAudioCodecDeviceUserClient.gMasterPort, IOHDAudioCodecDeviceUserClient.iOHDACodecDeviceUserClientBuffer, 
+                       IOHDAudioCodecDeviceUserClient.mCodecRegistryEntryID, IOHDAudioCodecDeviceUserClient.mCodecUserClientIndex, 
+                       IOHDAudioCodecDeviceUserClient.mControllerRegistryEntryID, 
+                       IOHDAudioCodecDeviceUserClient.mControllerUserClientIndex, 
+                       IOHDAudioCodecDeviceUserClient.mEdidPtr, IOHDAudioCodecDeviceUserClient.mHDAInterruptCountInfoPtr, 
+                       IOHDAudioCodecDeviceUserClient.mRegElapsedPtr, IOHDAudioCodecDeviceUserClient.mRegPtr, 
+                       IOHDAudioCodecDeviceUserClient.ucSecondaryTestBuffer, IOHDAudioCodecDeviceUserClient.ucStickyStatusBuffer, 
+                       IOHDAudioCodecDeviceUserClient.ucTestBuffer ]
+...

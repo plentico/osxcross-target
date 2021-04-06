@@ -1,0 +1,27 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           D9428C8C-E7C8-3A4D-A551-8907E6DE48E1
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           5ED3443C-DB61-3426-9791-B475C5008E6A
+install-name:    '/System/Library/PrivateFrameworks/XprotectFramework.framework/Versions/A/XprotectFramework'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _XProtectAnalysisError, _XProtectCaspianContext, _XProtectDetectionType, 
+                       _XProtectIsNotarized, _XProtectMalwareType, _XProtectNotarizationTicketDate, 
+                       _XProtectRevokedByNotaryService, _XProtectShouldSkipAnalysis, 
+                       _XProtectShouldTranslocateDMG, _XProtectSignatureName, _XProtectSignatureVersion, 
+                       __analysisClientInterface, __analysisServiceInterface, _fileIsQuarantined, 
+                       _fileIsUnixExecutable, _hasLibraryValidation, _isAppleInternalSystem, 
+                       _isInAppBundle, _isSIPEnabled, _itemConformsToUTI, _usableRulePath, 
+                       _xprotectGetLog, _xprotectGetSignpostLog ]
+    objc-classes:    [ XProtectAnalysis ]
+    objc-ivars:      [ XProtectAnalysis._feedback, XProtectAnalysis._feedbackQueue, 
+                       XProtectAnalysis._fileURL, XProtectAnalysis._lsProperties, 
+                       XProtectAnalysis._malwareScanOnly, XProtectAnalysis._results, 
+                       XProtectAnalysis._xpc ]
+...

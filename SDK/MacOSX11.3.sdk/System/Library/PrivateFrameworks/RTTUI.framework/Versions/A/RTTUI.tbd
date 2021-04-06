@@ -1,0 +1,18 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           3CBBE44A-D474-3DD7-97A0-005645C5D27C
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           F1DE781F-50D4-3692-8483-5C49FDFB8EF7
+install-name:    '/System/Library/PrivateFrameworks/RTTUI.framework/Versions/A/RTTUI'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _RTTUIVersionNumber, _RTTUIVersionString, _ttyImageNamed ]
+    objc-classes:    [ RTTUIConversationControllerCoordinator, RTTUIConversationViewController, 
+                       RTTUIServiceUpdateCell, RTTUIUtilities, RTTUIUtteranceCell, 
+                       RTTUtteranceRequest, TTYStretchImageView ]
+...

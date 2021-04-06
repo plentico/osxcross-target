@@ -1,0 +1,39 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           3B0D3832-62BE-348E-B53E-98BB5F0D1199
+  - target:          x86_64-maccatalyst
+    value:           3B0D3832-62BE-348E-B53E-98BB5F0D1199
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           5BB99342-D4CA-361B-8B59-97712022BBE7
+  - target:          arm64e-maccatalyst
+    value:           5BB99342-D4CA-361B-8B59-97712022BBE7
+install-name:    '/System/Library/PrivateFrameworks/FMF.framework/Versions/A/FMF'
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _FMFDaysOfWeekCount, _FMFDaysOfWeekFromDayOfWeek, _FMFDevicesChangedNotification, 
+                       _FMFErrorDomain, _FMFFenceAcceptanceStatusAccepted, _FMFFenceAcceptanceStatusPending, 
+                       _FMFFenceAcceptanceStatusPendingHidden, _FMFFenceErrorDomain, 
+                       _FMFFenceTimerAlarmDateKey, _FMFFenceTimerAlarmStream, _FMFFenceTimerAlarmUserVisible, 
+                       _FMFFenceTriggerArriving, _FMFFenceTriggerImmediate, _FMFFenceTriggerLeaving, 
+                       _FMFFenceTriggerScheduled, _FMFFenceTriggerStatusEnter, _FMFFenceTriggerStatusExit, 
+                       _FMFFenceTriggerStatusIn, _FMFFenceTriggerStatusOut, _FMFFenceTriggerStatusUndetermined, 
+                       _FMFFenceTypeNotifyMe, _FMFFenceTypeNotifyOther, _FMFFollowersChangedNotification, 
+                       _FMFFollowersRemovedNotification, _FMFFollowingRemovedNotification, 
+                       _FMFGroupIdDefault, _FMFGroupIdGroup, _FMFGroupIdOneToOne, 
+                       _FMFHomeKitAutomationDeviceChangedNotification, _FMFLocationSharingStatusChanged, 
+                       _FMFMeDeviceChangedNotification, _FMFScheduleTimerIdentifier, 
+                       _kFMFSyncXPCTimeout, _kMapImageKey ]
+    objc-classes:    [ FMFAppAccountInfo, FMFContactUtility, FMFDevice, FMFFence, 
+                       FMFFriendshipRequest, FMFHandle, FMFLocation, FMFMapImageRequest, 
+                       FMFMapSession, FMFNotNowRequest, FMFPlacemark, FMFSchedule, 
+                       FMFScheduler, FMFSession, FMFSynchronizer ]
+...

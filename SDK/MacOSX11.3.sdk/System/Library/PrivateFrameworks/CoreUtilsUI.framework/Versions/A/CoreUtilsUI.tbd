@@ -1,0 +1,21 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           9961F853-D7CA-3D27-A18E-899EF5D52E42
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           04D168B1-78ED-3E22-99E4-511DAFBE5136
+install-name:    '/System/Library/PrivateFrameworks/CoreUtilsUI.framework/Versions/A/CoreUtilsUI'
+current-version: 0
+compatibility-version: 0
+swift-abi-version: 7
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ '_$s11CoreUtilsUI13CUUISwiftTestCMa', '_$s11CoreUtilsUI13CUUISwiftTestCMm', 
+                       '_$s11CoreUtilsUI13CUUISwiftTestCMn', '_$s11CoreUtilsUI13CUUISwiftTestCN', 
+                       '_$s11CoreUtilsUI13CUUISwiftTestCfD', '_$s11CoreUtilsUI13CUUISwiftTestCfd' ]
+    objc-classes:    [ CUUIEnvironment ]
+...

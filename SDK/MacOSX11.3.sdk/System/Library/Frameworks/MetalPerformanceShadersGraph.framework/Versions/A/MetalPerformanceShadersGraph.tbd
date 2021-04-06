@@ -1,0 +1,29 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           CC3C624F-26D0-3C26-B531-FF1A289F2FAF
+  - target:          x86_64-maccatalyst
+    value:           CC3C624F-26D0-3C26-B531-FF1A289F2FAF
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           8349B2DF-F235-3313-94A0-02162BEC6830
+  - target:          arm64e-maccatalyst
+    value:           8349B2DF-F235-3313-94A0-02162BEC6830
+install-name:    '/System/Library/Frameworks/MetalPerformanceShadersGraph.framework/Versions/A/MetalPerformanceShadersGraph'
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
+    objc-classes:    [ MPSGraph, MPSGraphAdamOptimizer, MPSGraphConvolution2DOpDescriptor, 
+                       MPSGraphDepthwiseConvolution2DOpDescriptor, MPSGraphDevice, 
+                       MPSGraphExecutable, MPSGraphExecutableDescriptor, MPSGraphExecutableExecutionDescriptor, 
+                       MPSGraphExecutionDescriptor, MPSGraphOperation, MPSGraphOptimizer, 
+                       MPSGraphPooling2DOpDescriptor, MPSGraphShapedType, MPSGraphStochasticGradientDescentOptimizer, 
+                       MPSGraphTensor, MPSGraphTensorData, MPSGraphVariableInitializer, 
+                       MPSGraphVariableOp ]
+...

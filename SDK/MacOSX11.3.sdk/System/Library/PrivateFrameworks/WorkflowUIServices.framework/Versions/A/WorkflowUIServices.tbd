@@ -1,0 +1,22 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           680143FE-0F95-3529-A431-C32B5E33C08C
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           872123E9-8BD5-3F2C-9258-27E85CD747E8
+install-name:    '/System/Library/PrivateFrameworks/WorkflowUIServices.framework/Versions/A/WorkflowUIServices'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _WFCGColorIsPerceivedLight, _WFCGColorPerceivedLightness, 
+                       _WFLogCategoryWidgetConfiguration, _WFWidgetColorsFromBundle, 
+                       _WFWidgetConfigurationHostXPCInterface, _WFWidgetConfigurationServiceXPCInterface, 
+                       _WFWidgetGetDefaultColors, _WFWidgetSizeClassGetDescription ]
+    objc-classes:    [ WFWidgetConfigurationCardView, WFWidgetConfigurationContainerView, 
+                       WFWidgetConfigurationOptions, WFWidgetConfigurationRequest, 
+                       WFWidgetConfigurationResponse, WFWidgetConfigurationView, 
+                       WFWidgetConfigurationViewController ]
+...

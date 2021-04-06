@@ -1,0 +1,24 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           E5B83BF6-D84B-348F-A3DA-771C60BAF612
+  - target:          x86_64-maccatalyst
+    value:           E5B83BF6-D84B-348F-A3DA-771C60BAF612
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           05A8BB3E-5EFD-3762-BABB-2B446B0D532D
+  - target:          arm64e-maccatalyst
+    value:           05A8BB3E-5EFD-3762-BABB-2B446B0D532D
+install-name:    '/System/Library/PrivateFrameworks/AuthenticationServicesCore.framework/Versions/A/AuthenticationServicesCore'
+current-version: 611.1.18
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _ASCAuthorizationErrorDomain, _descriptionForErrorCode ]
+...

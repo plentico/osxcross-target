@@ -1,0 +1,31 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           5FF48AB2-36ED-3A4A-B0F0-7ECC50D631A1
+  - target:          x86_64-maccatalyst
+    value:           5FF48AB2-36ED-3A4A-B0F0-7ECC50D631A1
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           6E4F8397-B82D-3AF5-B82C-7804536FE7AB
+  - target:          arm64e-maccatalyst
+    value:           6E4F8397-B82D-3AF5-B82C-7804536FE7AB
+install-name:    '/System/Library/PrivateFrameworks/OTSVG.framework/Versions/A/OTSVG'
+current-version: 0
+compatibility-version: 0
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _OTSVGDocumentCreate, _OTSVGDocumentCreateWithData, _OTSVGDocumentEnumerateIDs, 
+                       _OTSVGDocumentGetIntrinsicRect, _OTSVGDocumentRelease, _OTSVGGlyphRecordingCreate, 
+                       _OTSVGGlyphRecordingCreateFromDocument, _OTSVGGlyphRecordingCreateFromID, 
+                       _OTSVGGlyphRecordingGetBoundingRect, _OTSVGGlyphRecordingPlayback, 
+                       _OTSVGGlyphRecordingPlaybackRecordingsAtPositions, _OTSVGGlyphRecordingRelease, 
+                       _OTSVGTableCreateFromData, _OTSVGTableGetDocumentIndexForGlyph, 
+                       _OTSVGTableRelease ]
+...

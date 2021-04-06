@@ -1,0 +1,24 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           A330998C-8A9B-380C-BA80-29524390AF03
+  - target:          x86_64-maccatalyst
+    value:           A330998C-8A9B-380C-BA80-29524390AF03
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C5C82138-82A9-388A-8A7F-F394DC6236A9
+  - target:          arm64e-maccatalyst
+    value:           C5C82138-82A9-388A-8A7F-F394DC6236A9
+install-name:    '/System/Library/CoreServices/Encodings/libCyrillicConverter.dylib'
+current-version: 90
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ ___CFStringEncodingGetCyrillicConverterDefinition ]
+...

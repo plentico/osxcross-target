@@ -1,0 +1,15 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           92CF44DF-D79F-37AC-B34F-02C1EB61BF38
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           F3F1CCF9-97FF-315F-9E4E-DE8B4E8333FE
+install-name:    '/System/Library/PrivateFrameworks/XQuery.framework/Versions/A/XQuery'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    objc-classes:    [ XQuery, XQueryContext ]
+...

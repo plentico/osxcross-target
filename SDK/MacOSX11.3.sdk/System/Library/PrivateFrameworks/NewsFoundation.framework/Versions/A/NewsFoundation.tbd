@@ -1,0 +1,49 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           F999F434-B7B8-3E9B-A1D5-B416CDE3A0F6
+  - target:          x86_64-maccatalyst
+    value:           F999F434-B7B8-3E9B-A1D5-B416CDE3A0F6
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           6CA1E8B3-8341-3730-960C-6C33A96441D0
+  - target:          arm64e-maccatalyst
+    value:           6CA1E8B3-8341-3730-960C-6C33A96441D0
+install-name:    '/System/Library/PrivateFrameworks/NewsFoundation.framework/Versions/A/NewsFoundation'
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _NFCallbackScopeAny, _NFCallbackScopeName, _NFCallbackScopeNames, 
+                       _NFDeviceHasExtendedColorDisplay, _NFDeviceIsA7, _NFDeviceIsA8, 
+                       _NFDeviceModelString, _NFDeviceOSVersion, _NFDevicePlatform, 
+                       _NFGeneralDeviceString, _NFInternalBuild, _NFLockSync, _NFPoolMakeWeakObjectsPool, 
+                       _NFPromiseInvokeOnQueue, _NFSeedBuild, _NFStateMachineErrorDomain, 
+                       _NFStoreDemoMode, _NFWaiterErrorDomain, _NewsFoundationVersionNumber, 
+                       _NewsFoundationVersionString, __UIValueCGRectValue, _kNFPromiseSealingErrorCode, 
+                       _kNFPromiseSealingErrorName, _kNFReachabilityChangedNotification, 
+                       _zalgo, _zalgoIfMain ]
+    objc-classes:    [ NFArchiver, NFCallbackDefinition, NFCallbackRegistration, 
+                       NFCallbackScope, NFCallbackStore, NFContainer, NFContainerCircularDependencyDetectedException, 
+                       NFContainerContextMismatchException, NFContainerDefinitionMismatchException, 
+                       NFContainerDefinitionNilFactoryException, NFContainerDefinitionNotOverridableException, 
+                       NFContainerEnsuringNullableDefinitionException, NFContainerException, 
+                       NFContainerMissingDefinitionException, NFContainerPool, NFContainerPoolObject, 
+                       NFContainerRegistry, NFContext, NFDefinition, NFEventManager, 
+                       NFEventTrigger, NFKey, NFLazy, NFMultiDelegate, NFMutexLock, 
+                       NFObjectReuseManager, NFPendingPromise, NFPromise, NFPromiseSeal, 
+                       NFProxyContainer, NFProxyResolver, NFReachability, NFRouter, 
+                       NFRouterException, NFRouterRouteToNonRoutable, NFStateMachine, 
+                       NFStateMachineEvent, NFStateMachineState, NFStateMachineTransition, 
+                       NFUnfairLock, NFVoid, NFWaiter ]
+    objc-eh-types:   [ NFContainerCircularDependencyDetectedException, NFContainerContextMismatchException, 
+                       NFContainerDefinitionMismatchException, NFContainerDefinitionNilFactoryException, 
+                       NFContainerDefinitionNotOverridableException, NFContainerEnsuringNullableDefinitionException, 
+                       NFContainerException, NFContainerMissingDefinitionException, 
+                       NFRouterException, NFRouterRouteToNonRoutable ]
+...

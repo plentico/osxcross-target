@@ -1,0 +1,25 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           571DA543-E8B8-3190-A144-BAE6140DA53C
+  - target:          x86_64-maccatalyst
+    value:           571DA543-E8B8-3190-A144-BAE6140DA53C
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           0B1A4BAB-36EF-30AC-BC4F-187E658F3F32
+  - target:          arm64e-maccatalyst
+    value:           0B1A4BAB-36EF-30AC-BC4F-187E658F3F32
+install-name:    '/System/Library/PrivateFrameworks/AggregateDictionaryHistory.framework/Versions/A/AggregateDictionaryHistory'
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _ADDatabaseUtilitiesCleanUpCorruption, _ADHistoryCalculateSummaryStatistics, 
+                       _ADHistoryGetLinearHistogram, _ADHistoryGetLogHistogram, _ADIsInternalDevice ]
+    objc-classes:    [ ADHistory, ADHistoryDistributionEnumerator ]
+...

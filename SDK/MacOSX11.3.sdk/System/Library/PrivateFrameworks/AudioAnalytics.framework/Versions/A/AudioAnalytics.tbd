@@ -1,0 +1,15 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           4BECC684-F94C-363C-AC87-9B7FD7A6A118
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           FD729973-B111-3910-8FD5-5F838599C1AB
+install-name:    '/System/Library/PrivateFrameworks/AudioAnalytics.framework/Versions/A/AudioAnalytics'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _AudioAnalyticsVersionNumber, _AudioAnalyticsVersionString ]
+...

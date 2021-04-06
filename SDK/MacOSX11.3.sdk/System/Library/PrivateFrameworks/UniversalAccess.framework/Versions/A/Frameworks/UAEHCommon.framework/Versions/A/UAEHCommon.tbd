@@ -1,0 +1,18 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           3955A200-A2E2-33D5-8F74-758CB3594E11
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           473FBC7C-8EB0-3645-A271-8CF8FA228D89
+install-name:    '/System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Frameworks/UAEHCommon.framework/Versions/A/UAEHCommon'
+current-version: 236
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    objc-classes:    [ UAEHCommonDriver, UAEHCommonOverlayWindow ]
+    objc-ivars:      [ UAEHCommonDriver._enableCaptureFunction, UAEHCommonDriver._safeToQuitFunction, 
+                       UAEHCommonDriver._settingsBlockGen ]
+...

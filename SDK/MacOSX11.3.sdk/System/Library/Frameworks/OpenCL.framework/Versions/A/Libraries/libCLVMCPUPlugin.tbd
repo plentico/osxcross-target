@@ -1,0 +1,14 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           21CA64D4-16B1-3A67-A794-C0B64EF01B9A
+  - target:          x86_64-maccatalyst
+    value:           21CA64D4-16B1-3A67-A794-C0B64EF01B9A
+install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/libCLVMCPUPlugin.dylib'
+current-version: 2.19
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos ]
+    symbols:         [ _cvmsPluginElementBuild, _cvmsPluginServiceInitialize, _cvmsPluginServiceTerminate ]
+...

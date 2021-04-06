@@ -1,0 +1,28 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           49D4171D-E02C-3B64-BD95-A55226DAAD41
+  - target:          x86_64-maccatalyst
+    value:           49D4171D-E02C-3B64-BD95-A55226DAAD41
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           39DE947C-807B-3582-ACC3-9B0E0C7D1A3A
+  - target:          arm64e-maccatalyst
+    value:           39DE947C-807B-3582-ACC3-9B0E0C7D1A3A
+install-name:    '/System/Library/PrivateFrameworks/FTClientServices.framework/Versions/A/FTClientServices'
+current-version: 800
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _FTCServiceAvailabilityAvailabilityKey, _FTCServiceAvailabilityDidChangeNotification, 
+                       _FTCServiceAvailabilityServiceTypeKey, _FTCServiceNameCalling, 
+                       _FTCServiceNameFaceTime, _FTCServiceNameForServiceType, _FTCServiceNameMadrid, 
+                       _FTCServiceNameiMessage, _FTCServiceTypeForServiceName ]
+    objc-classes:    [ FTCServiceAvailabilityCenter ]
+...

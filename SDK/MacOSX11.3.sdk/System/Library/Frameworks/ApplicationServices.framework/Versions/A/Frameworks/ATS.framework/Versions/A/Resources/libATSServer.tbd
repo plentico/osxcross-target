@@ -1,0 +1,16 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           68660ED9-487A-3EE5-A14D-784BEEA9AC91
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           0B8439D5-A5CB-3F6E-9976-F8417203193D
+install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libATSServer.dylib'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _ATSServerGenerateDB, _ATSServerMain, _ATSServerWorker, _CopyATSDumpFileInfo, 
+                       _CopyATSDumpFileURL ]
+...

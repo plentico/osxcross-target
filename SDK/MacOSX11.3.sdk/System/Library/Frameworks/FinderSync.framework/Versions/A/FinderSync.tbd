@@ -1,0 +1,16 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           F169C92F-3CED-3A7A-9F0D-B278E8FD9306
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           F51FC957-4274-3D2E-B19D-CF03CC9FF308
+install-name:    '/System/Library/Frameworks/FinderSync.framework/Versions/A/FinderSync'
+current-version: 0
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    objc-classes:    [ FIFinderSync, FIFinderSyncController ]
+...

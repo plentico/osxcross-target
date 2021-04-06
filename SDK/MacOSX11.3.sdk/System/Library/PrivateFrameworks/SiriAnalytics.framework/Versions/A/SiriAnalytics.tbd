@@ -1,0 +1,25 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           749D073C-1C47-381B-A84C-2AAE277B4396
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           256BC217-F7CD-3CCF-9A34-9A6CA1E6B470
+install-name:    '/System/Library/PrivateFrameworks/SiriAnalytics.framework/Versions/A/SiriAnalytics'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _SiriAnalyticsCurrentClockIdentifier, _SiriAnalyticsLogContextAssistant, 
+                       _SiriAnalyticsLogContextStorage, _SiriAnalyticsLogContextStreaming, 
+                       _SiriAnalyticsLogContextUtility, _SiriAnalyticsLogContextXPC, 
+                       _SiriAnalyticsLoggingInit, _SiriAnalyticsLoggingSubsystem, 
+                       _SiriAnalyticsVersionNumber, _SiriAnalyticsVersionString, 
+                       _SiriAnalyticsXPCServiceInterface, _kAssistantSiriAnalyticsServiceName ]
+    objc-classes:    [ AssistantSiriAnalytics, AssistantSiriAnalyticsService, SiriAnalyticsFBFMessageStorageProvider, 
+                       SiriAnalyticsMessageObserverHandle, SiriAnalyticsMessageObserverStream, 
+                       SiriAnalyticsTimePeriodBuffer, SiriAnalyticsTimeStamp, SiriAnalyticsXPCConnection, 
+                       SiriAnalyticsXPCMessageEnvelope, SiriAnalyticsXPCMessageStream, 
+                       SiriAnalyticsXPCServiceListener ]
+...

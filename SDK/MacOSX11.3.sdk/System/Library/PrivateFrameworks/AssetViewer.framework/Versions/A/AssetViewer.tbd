@@ -1,0 +1,16 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           406FF38F-95D1-3430-A936-56421BE1F67B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           D7ACE0C3-3058-354D-8063-FF029F4FBE6C
+install-name:    '/System/Library/PrivateFrameworks/AssetViewer.framework/Versions/A/AssetViewer'
+current-version: 126
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _AssetViewerVersionNumber, _AssetViewerVersionString ]
+...

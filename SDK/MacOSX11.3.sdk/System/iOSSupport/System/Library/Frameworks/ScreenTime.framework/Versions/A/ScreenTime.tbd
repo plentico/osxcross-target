@@ -1,0 +1,18 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-maccatalyst
+    value:           69DAFC95-6E6B-3ABB-BA85-7FBC1B0F1E10
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-maccatalyst
+    value:           4E4362F4-E807-37D7-BAD4-F4A9B512EF09
+install-name:    '/System/iOSSupport/System/Library/Frameworks/ScreenTime.framework/Versions/A/ScreenTime'
+current-version: 497.4.3
+exports:
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+    symbols:         [ _STMachServiceNameScreenTime ]
+    objc-classes:    [ STScreenTimeAgentConnection, STScreenTimeConfiguration, STScreenTimeConfigurationObserver, 
+                       STWebHistory, STWebRemoteViewController, STWebService, STWebpageController ]
+...

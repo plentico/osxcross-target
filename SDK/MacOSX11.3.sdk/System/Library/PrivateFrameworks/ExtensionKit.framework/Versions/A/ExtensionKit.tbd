@@ -1,0 +1,19 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           8F8D14C3-5F07-3D91-A81C-FC85A1FB9124
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           79A5800D-3023-335C-958A-F6D60277FB0C
+install-name:    '/System/Library/PrivateFrameworks/ExtensionKit.framework/Versions/A/ExtensionKit'
+current-version: 19.4
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _EXExtensionIsPredicateSafeToExecuteWithObject, _EXExtensionIsSafeKeyPathForObject, 
+                       _EXExtensionMain, _EXGetExtensionClass, _EXGetExtensionContextInternalClass, 
+                       _EXGetExtensionContextVendorClass ]
+    objc-classes:    [ EXSwiftUI_Subsystem ]
+...

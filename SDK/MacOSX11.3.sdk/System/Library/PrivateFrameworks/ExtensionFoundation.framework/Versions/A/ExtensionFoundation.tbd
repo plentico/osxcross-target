@@ -1,0 +1,17 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           A6BE242B-CA00-33E7-8A72-A061F29D15DA
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           529523F3-A4A0-3D27-A053-609AC694BC39
+install-name:    '/System/Library/PrivateFrameworks/ExtensionFoundation.framework/Versions/A/ExtensionFoundation'
+current-version: 19.4
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ __EXDefaultLog, __kEXCatalystSDKVariantKey, __kEXConcreteExtensionKey ]
+    objc-classes:    [ EXCacheBuilder, EXDefaults, EXEnumerator ]
+...

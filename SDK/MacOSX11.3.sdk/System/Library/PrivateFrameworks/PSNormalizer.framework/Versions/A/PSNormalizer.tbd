@@ -1,0 +1,16 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           96C67076-693B-3A19-9868-B974EA9D48D2
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           1865199A-AC2B-386D-B81D-6A11AECFEE20
+install-name:    '/System/Library/PrivateFrameworks/PSNormalizer.framework/Versions/A/PSNormalizer'
+current-version: 28.2
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _PSNormalizeFromClientCallback, _PSNormalizeFromFile ]
+...

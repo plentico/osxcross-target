@@ -1,0 +1,17 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-maccatalyst
+    value:           0F0ECCA2-8DC3-35B5-8AB6-943C89B06029
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-maccatalyst
+    value:           C61D3D4A-8B50-3C45-B63D-84B4EE921CF7
+install-name:    '/System/iOSSupport/usr/lib/swift/libswiftSafariServices.dylib'
+current-version: 2
+swift-abi-version: 7
+exports:
+  - targets:         [ arm64e-maccatalyst, x86_64-maccatalyst, arm64-maccatalyst ]
+    symbols:         [ '__swift_FORCE_LOAD_$_swiftSafariServices' ]
+...

@@ -1,0 +1,20 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           66F13111-D4FC-34A9-8680-FAEBEF56AFEF
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           82532940-9F85-3686-A977-CEE5F7EF1CF6
+install-name:    '/System/Library/PrivateFrameworks/BulkSymbolication.framework/Versions/A/BulkSymbolication'
+current-version: 278.3
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _BulkSymbolicationVersionNumber, _BulkSymbolicationVersionString, 
+                       _kBKSJobNoTimeout, _kBKSRequestErrorDomain, _kSpeedTracerAtosBatchesEndPoint, 
+                       _kSpeedTracerEndPoint ]
+    objc-classes:    [ BKSJob, BKSRequest, BKSResult, BKSResultCollection, BKSSymbolOwner, 
+                       BKSSymbolOwnerSegment ]
+...

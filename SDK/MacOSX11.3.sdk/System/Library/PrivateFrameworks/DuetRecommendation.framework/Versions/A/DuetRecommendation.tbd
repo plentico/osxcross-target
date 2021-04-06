@@ -1,0 +1,26 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           FCB70967-1049-32E8-972B-6D8D3DD33104
+  - target:          x86_64-maccatalyst
+    value:           FCB70967-1049-32E8-972B-6D8D3DD33104
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           7DCF4AD7-4FFD-3F4E-A5C4-4F2F635C455B
+  - target:          arm64e-maccatalyst
+    value:           7DCF4AD7-4FFD-3F4E-A5C4-4F2F635C455B
+install-name:    '/System/Library/PrivateFrameworks/DuetRecommendation.framework/DuetRecommendation'
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _DuetRecommendationVersionNumber, _DuetRecommendationVersionString ]
+    objc-classes:    [ _DRInMemoryTopicInterestModel, _DRPaths, _DRTopicActionEntry, 
+                       _DRTopicEnumerationQuery, _DRTopicInterestModel, _DRTopicInterestSummary, 
+                       _DRTopicStatisticsQuery ]
+...

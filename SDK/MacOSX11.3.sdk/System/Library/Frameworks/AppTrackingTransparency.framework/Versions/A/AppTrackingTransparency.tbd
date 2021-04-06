@@ -1,0 +1,24 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           492F2EC9-5440-31B6-9F01-1D817CC5B422
+  - target:          x86_64-maccatalyst
+    value:           492F2EC9-5440-31B6-9F01-1D817CC5B422
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           9A056CA9-212C-3ACE-B04E-52760B5200BC
+  - target:          arm64e-maccatalyst
+    value:           9A056CA9-212C-3ACE-B04E-52760B5200BC
+install-name:    '/System/Library/Frameworks/AppTrackingTransparency.framework/Versions/A/AppTrackingTransparency'
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _AppTrackingTransparencyVersionNumber, _AppTrackingTransparencyVersionString ]
+    objc-classes:    [ ATFollowUpManager, ATTrackingEnforcementManager, ATTrackingManager ]
+...

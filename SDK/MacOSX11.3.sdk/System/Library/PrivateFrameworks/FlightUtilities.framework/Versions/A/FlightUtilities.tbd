@@ -1,0 +1,45 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           3F26030F-EEC4-386F-A2AB-63468B8A7DC9
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           A8A0A0FB-C902-329B-80B5-1C750A4C8141
+install-name:    '/System/Library/PrivateFrameworks/FlightUtilities.framework/Versions/A/FlightUtilities'
+current-version: 141
+reexported-libraries:
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+    libraries:       [ '/System/Library/PrivateFrameworks/FlightUtilitiesCore.framework/Versions/A/FlightUtilitiesCore' ]
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    objc-classes:    [ FUCompactFlightViewController, FUFlightView, FUFlightViewController ]
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           7C242DDD-3AD1-3AA9-AE0E-30F9B2143F07
+  - target:          x86_64-maccatalyst
+    value:           7C242DDD-3AD1-3AA9-AE0E-30F9B2143F07
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           21A781F1-ACFD-37EB-907C-75D4C1D4B145
+  - target:          arm64e-maccatalyst
+    value:           21A781F1-ACFD-37EB-907C-75D4C1D4B145
+install-name:    '/System/Library/PrivateFrameworks/FlightUtilitiesCore.framework/Versions/A/FlightUtilitiesCore'
+current-version: 141
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _FUFactoryProvider_Default, _FUFactoryProvider_Parsec ]
+    objc-classes:    [ FUAirline, FUAirport, FUFlight, FUFlightFactory, FUFlightLeg, 
+                       FUFlightStep, FUStepTime, FUUtils ]
+    objc-ivars:      [ FUFlightStep._delayFromSchedule ]
+...

@@ -1,0 +1,28 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           FB5C817A-3806-3821-A3B1-53A8542C5A62
+  - target:          x86_64-maccatalyst
+    value:           FB5C817A-3806-3821-A3B1-53A8542C5A62
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           88E3CDE9-3EE5-36CC-914D-3AF5A8EE2B39
+  - target:          arm64e-maccatalyst
+    value:           88E3CDE9-3EE5-36CC-914D-3AF5A8EE2B39
+install-name:    '/usr/lib/libsysdiagnose.dylib'
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _metricCompression, _metricGetLogCopying, _metricGetLogGeneration, 
+                       _metricGetOSLogArchive, _metricGetTimeSensitive, _metricLogCopying, 
+                       _metricLogGeneration, _metricOSLogarchiveGeneration, _metricStartToTar, 
+                       _metricTimeSensitive, _metricTotalSize, _sdProgressPercent, 
+                       _sdProgressPhase ]
+    objc-classes:    [ Libsysdiagnose ]
+...

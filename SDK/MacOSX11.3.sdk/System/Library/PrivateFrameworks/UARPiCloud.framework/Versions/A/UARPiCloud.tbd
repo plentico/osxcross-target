@@ -1,0 +1,18 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           123ADA09-6758-32F6-9955-2E2BB7B5B929
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           AAAEE1CC-83BD-3161-8A5A-0CCA1C946642
+install-name:    '/System/Library/PrivateFrameworks/UARPiCloud.framework/Versions/A/UARPiCloud'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _UARPiCloudVersionNumber, _UARPiCloudVersionString, _getEntryForKey, 
+                       _saveEntryForKey ]
+    objc-classes:    [ UARPiCloudAccessory, UARPiCloudAccessoryRecord, UARPiCloudContainer, 
+                       UARPiCloudManager, UARPiCloudZone ]
+...

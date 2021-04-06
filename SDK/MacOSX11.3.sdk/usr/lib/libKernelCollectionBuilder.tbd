@@ -1,0 +1,19 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           71C31F66-AB09-33A4-B3F9-AF873F79B4D0
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           BB3D3A66-14F6-390A-937C-19D3D35E3891
+install-name:    '/usr/lib/libKernelCollectionBuilder.dylib'
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+    symbols:         [ _addCollectionFile, _addInterfaceFile, _addKernelFile, _addKextDataFile, 
+                       _addPrelinkInfo, _addSegmentData, _createKernelCollectionBuilder, 
+                       _destroyKernelCollectionBuilder, _getCollectionFileResults, 
+                       _getErrors, _getKextErrors, _getVersion, _runKernelCollectionBuilder, 
+                       _setProgressCallback ]
+...

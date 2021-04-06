@@ -1,0 +1,19 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           A505A0CB-BA73-3439-8443-F24EA06BD87F
+  - target:          x86_64-maccatalyst
+    value:           A505A0CB-BA73-3439-8443-F24EA06BD87F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           6CDF640A-208C-327F-AC91-505871B4BE67
+  - target:          arm64e-maccatalyst
+    value:           6CDF640A-208C-327F-AC91-505871B4BE67
+install-name:    '/System/Library/PrivateFrameworks/CoreCapture.framework/Versions/A/CoreCapture'
+...

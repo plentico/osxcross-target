@@ -1,0 +1,27 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           94F456B0-391D-3E36-A955-F54356373A5D
+  - target:          x86_64-maccatalyst
+    value:           94F456B0-391D-3E36-A955-F54356373A5D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           5AE15486-EE45-3D13-AF38-09F4E3A9E3A5
+  - target:          arm64e-maccatalyst
+    value:           5AE15486-EE45-3D13-AF38-09F4E3A9E3A5
+install-name:    '/usr/lib/libprequelite.dylib'
+current-version: 106.100.3
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _PQLSqliteErrorDomain, _pql_sqlite3_bind_pointer, _pql_sqlite3_value_object, 
+                       _pql_sqlite3_value_pointer ]
+    objc-classes:    [ PQLConnection, PQLFormatInjection, PQLNameInjection, PQLNameInjectionBase, 
+                       PQLQueryBuilder, PQLRawInjection, PQLResultSet ]
+...

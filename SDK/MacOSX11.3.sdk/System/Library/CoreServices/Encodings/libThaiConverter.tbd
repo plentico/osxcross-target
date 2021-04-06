@@ -1,0 +1,24 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           FDAF70B8-7D42-3364-9C3F-DF1642EB256D
+  - target:          x86_64-maccatalyst
+    value:           FDAF70B8-7D42-3364-9C3F-DF1642EB256D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           BC75C05C-CC38-3CD0-A0F2-DE13C6EB3827
+  - target:          arm64e-maccatalyst
+    value:           BC75C05C-CC38-3CD0-A0F2-DE13C6EB3827
+install-name:    '/System/Library/CoreServices/Encodings/libThaiConverter.dylib'
+current-version: 90
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ ___CFStringEncodingGetThaiConverterDefinition ]
+...

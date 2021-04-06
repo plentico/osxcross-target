@@ -1,0 +1,18 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           E4E38C75-795A-375E-8829-4C2B3E9BFC4D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           DAD0F634-F186-3B50-9318-C9E748ABCA9E
+install-name:    '/System/Library/Frameworks/KernelManagement.framework/Versions/A/KernelManagement'
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+    symbols:         [ _KMExtensionPathForBundleIdentifier, _KMLoadExtensionsWithIdentifiers, 
+                       _KMLoadExtensionsWithPaths, _KernelManagementVersionNumber, 
+                       _KernelManagementVersionString, _OSKernelManagementErrorDomain ]
+    objc-classes:    [ KernelManagementClient ]
+...

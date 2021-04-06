@@ -1,0 +1,23 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           7DF1577E-8AE6-3C6B-97BD-F2F7F3B1F615
+  - target:          x86_64-maccatalyst
+    value:           7DF1577E-8AE6-3C6B-97BD-F2F7F3B1F615
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           904E4EA7-3955-3317-AE4B-791F509B3444
+  - target:          arm64e-maccatalyst
+    value:           904E4EA7-3955-3317-AE4B-791F509B3444
+install-name:    '/System/Library/PrivateFrameworks/DeviceCheckInternal.framework/Versions/A/DeviceCheckInternal'
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    objc-classes:    [ DCCryptoProxyImpl, DCDDeviceMetadata, DCXPCActivityController ]
+...

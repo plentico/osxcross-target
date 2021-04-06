@@ -1,0 +1,22 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           C3CE9479-74A2-3EC0-953D-7CB13EB5BC9E
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           99DA2A43-F5C0-37F2-9DC0-8563CF519B2F
+install-name:    '/System/Library/PrivateFrameworks/Lookup.framework/Versions/A/Lookup'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _LUCanConnectToService, _LULookupVersionNumber, _LULookupVersionString, 
+                       _LUNotificationPopoverWillClose, _LUTermOptionDisableSearchTermIndicator, 
+                       _LUTermOptionKeyClippingRect, _LUTermOptionKeyLanguage, _LUTermOptionKeyPartOfSpeech, 
+                       _LUTermOptionKeyScaleFactor, _LUTermOptionKeySearchContext, 
+                       _LUTermOptionKeySearchDomain, _LUTermOptionKeySelectionType, 
+                       _LUTermOptionKeyTriggerType ]
+    objc-classes:    [ LULookupDefinitionModule, LULookupRemoteViewController, LUPresenter, 
+                       LUTextAccessor ]
+...

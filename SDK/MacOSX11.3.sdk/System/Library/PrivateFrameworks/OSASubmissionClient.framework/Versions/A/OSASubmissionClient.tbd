@@ -1,0 +1,24 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           2D5B6C66-0F12-3D2F-8800-9C4B7CA469CD
+  - target:          x86_64-maccatalyst
+    value:           2D5B6C66-0F12-3D2F-8800-9C4B7CA469CD
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           0DF4102E-BF21-3D2B-9B92-3EEFD1FBDC2C
+  - target:          arm64e-maccatalyst
+    value:           0DF4102E-BF21-3D2B-9B92-3EEFD1FBDC2C
+install-name:    '/System/Library/PrivateFrameworks/OSASubmissionClient.framework/Versions/A/OSASubmissionClient'
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _OSASubmissionClientVersionNumber, _OSASubmissionClientVersionString ]
+    objc-classes:    [ OSASubmissionClient ]
+...

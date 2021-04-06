@@ -1,0 +1,25 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           AD2E1FA2-8A9B-34A4-81A2-81518229B9DD
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           D3484593-9FEC-39A2-A9EE-9820EDF68479
+install-name:    '/System/Library/PrivateFrameworks/BiomeStorage.framework/Versions/A/BiomeStorage'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _BMPBStoreBookmarkReadFrom, _BiomeStorageVersionNumber, _BiomeStorageVersionString, 
+                       _bm_defaultStoreSegmentSize, _bm_defaultStoreVersion, _bm_frame_bytes, 
+                       _bm_frame_header_info, _bm_frame_header_status, _bm_generateChecksum, 
+                       _bm_useAdler32, _bm_useCrc32 ]
+    objc-classes:    [ BMFileLock, BMFrame, BMFrameStore, BMMemoryMapping, BMPBStoreBookmark, 
+                       BMPublicStreamUtilities, BMStoreBookmark, BMStoreConfig, BMStoreDirectory, 
+                       BMStoreEnumerator, BMStoreEvent, BMStreamDatastore, BMStreamDatastorePruner, 
+                       BMStreamDatastoreReader, BMStreamDatastoreWriter, BMStreamMetadata ]
+    objc-ivars:      [ BMPBStoreBookmark._has, BMPBStoreBookmark._iterationStartTime, 
+                       BMPBStoreBookmark._offset, BMPBStoreBookmark._segmentName, 
+                       BMPBStoreBookmark._streamId ]
+...

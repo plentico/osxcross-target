@@ -1,0 +1,15 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           A4F0D9C1-F061-3F21-BC77-D6DFE175C0F9
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           634D6F70-46EC-3DA9-B114-40314700587C
+install-name:    '/System/Library/PrivateFrameworks/AudioSession.framework/libSessionXPCServer.dylib'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _AVAudioSession_startXPCServer, _AudioSessionXPCServerIsEnabled ]
+...

@@ -1,0 +1,15 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           EA9C8106-1E8F-36BA-9308-9EE34138A91B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           354264F7-4079-3815-A0BD-5A29240EAEEB
+install-name:    '/usr/lib/log/liblog_geo.dylib'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _OSLogCopyFormattedString, _OSStateCreateStringWithData ]
+...

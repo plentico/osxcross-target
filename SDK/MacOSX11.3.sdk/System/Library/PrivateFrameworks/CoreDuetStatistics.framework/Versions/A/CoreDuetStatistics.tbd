@@ -1,0 +1,23 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           D550B98C-C333-3343-A059-5BB385FA596B
+  - target:          x86_64-maccatalyst
+    value:           D550B98C-C333-3343-A059-5BB385FA596B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           13431C57-7B64-3CE2-824A-C34E547AE450
+  - target:          arm64e-maccatalyst
+    value:           13431C57-7B64-3CE2-824A-C34E547AE450
+install-name:    '/System/Library/PrivateFrameworks/CoreDuetStatistics.framework/Versions/A/CoreDuetStatistics'
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    objc-classes:    [ CDSBasisObject, CDSEngine ]
+...

@@ -1,0 +1,23 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           35D6D4BA-EC5B-350D-828C-5F73BB2D43E4
+  - target:          x86_64-maccatalyst
+    value:           35D6D4BA-EC5B-350D-828C-5F73BB2D43E4
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           3C121022-9EAA-3172-B41A-8BCE8A95C7BF
+  - target:          arm64e-maccatalyst
+    value:           3C121022-9EAA-3172-B41A-8BCE8A95C7BF
+install-name:    '/System/Library/Frameworks/MediaToolbox.framework/Support/libSTS-N.dylib'
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _STSCreateFlavorN ]
+...

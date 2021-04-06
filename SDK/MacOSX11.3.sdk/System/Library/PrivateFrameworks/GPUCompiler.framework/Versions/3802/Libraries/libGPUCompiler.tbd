@@ -1,0 +1,18 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           E23F2AFB-3564-3EBF-8C75-5335006CDD66
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           3CBC1789-67AB-3BCD-A417-41F27CC20FE9
+install-name:    '/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/3802/Libraries/libGPUCompiler.dylib'
+current-version: 802.6
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _MTLGPUCompilerCompileAndSplitFromSource, _MTLGPUCompilerCompileFromSource, 
+                       _MTLGPUCompilerCreate, _MTLGPUCompilerDestroy, _MTLGPUCompilerSpecializeFunction, 
+                       _MTLUpgradeAIRModule, _MTLVerifyAIRModule ]
+...

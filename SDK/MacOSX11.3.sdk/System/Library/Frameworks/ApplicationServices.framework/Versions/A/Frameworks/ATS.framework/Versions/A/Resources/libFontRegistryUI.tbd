@@ -1,0 +1,19 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           8FDBB650-80E2-3FCA-A387-FAE90650EB6A
+  - target:          x86_64-maccatalyst
+    value:           8FDBB650-80E2-3FCA-A387-FAE90650EB6A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           8EC44ABE-80C9-33EB-A9A4-24A01E9AE65F
+  - target:          arm64e-maccatalyst
+    value:           8EC44ABE-80C9-33EB-A9A4-24A01E9AE65F
+install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontRegistryUI.dylib'
+...

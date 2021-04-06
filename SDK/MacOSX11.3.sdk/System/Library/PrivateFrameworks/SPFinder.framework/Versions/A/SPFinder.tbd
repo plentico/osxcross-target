@@ -1,0 +1,34 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           71835E8D-A350-32AF-A431-AF75D79B52C7
+  - target:          x86_64-maccatalyst
+    value:           71835E8D-A350-32AF-A431-AF75D79B52C7
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           15F2F284-8AAC-3ECA-988D-10C1A3A5DF92
+  - target:          arm64e-maccatalyst
+    value:           15F2F284-8AAC-3ECA-988D-10C1A3A5DF92
+install-name:    '/System/Library/PrivateFrameworks/SPFinder.framework/Versions/A/SPFinder'
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _SPFinderDisabledReasonBlockedDeviceRegion, _SPFinderDisabledReasonCannotPublishAnonymously, 
+                       _SPFinderDisabledReasonFindMyiPhoneOff, _SPFinderDisabledReasonLocationServices, 
+                       _SPFinderDisabledReasonLocationServicesFindMyFramework, _SPFinderDisabledReasonLowAccountSecurity, 
+                       _SPFinderDisabledReasonNone, _SPFinderDisabledReasonServiceDisabled, 
+                       _SPFinderDisabledReasonUserOptOut, _SPFinderDisabledReasoniCloudSignedOut, 
+                       _SPFinderStateChangedNotification ]
+    objc-classes:    [ SPAdvertisement, SPAdvertisementCache, SPAdvertisementCacheSearchCriteria, 
+                       SPAdvertisementCacheSearchResult, SPBeaconAdvertisement, SPBeaconPayload, 
+                       SPBeaconPayloadCacheSearchCriteria, SPBeaconPayloadCacheSearchResult, 
+                       SPEstimatedLocation, SPFinderInterface, SPFinderStateInfo, 
+                       SPFinderStateManager, SPScheduler, SPSchedulerInformation, 
+                       SPSearchResultMarker ]
+...

@@ -1,0 +1,22 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           96C46253-1DCD-3D35-9F66-E79A697A496C
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           4DCF9079-7740-3F9B-8E51-3F972CF6F905
+install-name:    '/System/Library/PrivateFrameworks/MobileObliteration.framework/Versions/A/MobileObliteration'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _Mobile_Obliterate, _Mobile_Obliterate_IsSupported, _kDisplayProgressBarKey, 
+                       _kMobileObliterationError, _kMobileObliterationInternalError, 
+                       _kMobileObliterationSuccess, _kObliterateDataPartition, _kObliterateEACS, 
+                       _kObliterationDelayAfterReplyKey, _kObliterationExclusionPathsKey, 
+                       _kObliterationIgnoreMissingPathKey, _kObliterationManagedDeviceWipeKey, 
+                       _kObliterationMessageKey, _kObliterationTypeKey, _kObliterationTypeMarkStart, 
+                       _kObliterationTypeWipeAndBrick, _kObliterationVolumePathKey, 
+                       _kSkipDataObliteration ]
+...

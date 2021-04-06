@@ -1,0 +1,19 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           5ABA37BC-971A-37C2-978D-AA36EFB0792A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           6F47F775-7041-3F35-91ED-F1928513A940
+install-name:    '/System/Library/PrivateFrameworks/CoreEmbeddedSpeechRecognition.framework/Versions/A/CoreEmbeddedSpeechRecognition'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _CoreEmbeddedSpeechRecognitionVersionNumber, _CoreEmbeddedSpeechRecognitionVersionString, 
+                       _CoreEmbeddedSpeechRecognizerInstanceUUIDBackground, _CoreEmbeddedSpeechRecognizerInstanceUUIDInteractive, 
+                       _CoreEmbeddedSpeechRecognizerTaskDictation, _CoreEmbeddedSpeechRecognizerTaskSearchOrMessaging, 
+                       _CoreEmbeddedSpeechRecognizerTaskTshot, _CoreEmbeddedSpeechRecognizerTaskVoiceMail ]
+    objc-classes:    [ CoreEmbeddedSpeechRecognizer ]
+...

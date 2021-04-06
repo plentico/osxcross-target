@@ -1,0 +1,16 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           9B01A970-8A3A-3CA1-A449-7F40D7F19351
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           30DFBB19-A363-3D06-B318-110E08149AFB
+install-name:    '/System/Library/PrivateFrameworks/UAUPlugin.framework/Versions/A/UAUPlugin'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _UAUPluginVersionNumber, _UAUPluginVersionString ]
+    objc-classes:    [ UAULogging, UAUSession, UpdaterSessionParameters ]
+...

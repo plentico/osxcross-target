@@ -1,0 +1,12 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           03B1B4BF-0976-36F2-B675-BEACD21B8776
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           3FDC6999-A896-3126-8836-4729EFB85B4E
+install-name:    '/System/Library/PrivateFrameworks/FoundationODR.framework/Versions/A/FoundationODR'
+...

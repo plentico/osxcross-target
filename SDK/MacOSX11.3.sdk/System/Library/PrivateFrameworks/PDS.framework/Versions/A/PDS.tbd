@@ -1,0 +1,21 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           8B339CAA-A98C-35DD-9582-E928928DF1C3
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           736DC0A5-9FB1-3219-8C3E-E40EF77451A4
+install-name:    '/System/Library/PrivateFrameworks/PDS.framework/Versions/A/PDS'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _PDSCDCacheErrorDomain, _PDSHeartbeatMaintenanceXPCActivityIdentifier, 
+                       _PDSInternalClientIDEntitlementKey, _PDSInternalDaemonMachServiceName, 
+                       _PDSInternalToolEntitlementKey, _PDSInternalWildcardClientID, 
+                       _PDSRegistrarErrorDomain, _PDSStringForEntryState, _PDSUserErrorDomain, 
+                       _PDSXPCErrorDomain, _pds_defaultLog, _pds_oversizedLog ]
+    objc-classes:    [ PDSEntry, PDSRegistrar, PDSRegistration, PDSRemoteRegistry, 
+                       PDSUser, PDSXPCAdapter, PDSXPCConnector, PDSXPCInterface ]
+...

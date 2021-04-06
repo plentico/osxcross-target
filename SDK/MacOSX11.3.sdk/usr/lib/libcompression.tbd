@@ -1,0 +1,33 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
+                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           18B2FDE7-3A51-3D4E-8B85-7A9A68801031
+  - target:          x86_64-maccatalyst
+    value:           18B2FDE7-3A51-3D4E-8B85-7A9A68801031
+  - target:          x86_64h-macos
+    value:           5403E10A-DD8E-3174-9204-D1EFE887D9F2
+  - target:          x86_64h-maccatalyst
+    value:           5403E10A-DD8E-3174-9204-D1EFE887D9F2
+  - target:          arm64-macos
+    value:           4D3BF74D-0210-3E33-B49F-B685925E62B3
+  - target:          arm64-maccatalyst
+    value:           4D3BF74D-0210-3E33-B49F-B685925E62B3
+  - target:          arm64e-macos
+    value:           EC957F57-BA38-3018-945F-D5A85F78DAEE
+  - target:          arm64e-maccatalyst
+    value:           EC957F57-BA38-3018-945F-D5A85F78DAEE
+install-name:    '/usr/lib/libcompression.dylib'
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos, x86_64h-macos, x86_64-maccatalyst, 
+                       x86_64h-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+    symbols:         [ _compression_decode_buffer, _compression_decode_scratch_buffer_size, 
+                       _compression_encode_buffer, _compression_encode_scratch_buffer_size, 
+                       _compression_stream_destroy, _compression_stream_get_decode_state_size, 
+                       _compression_stream_get_encode_state_size, _compression_stream_get_state_size, 
+                       _compression_stream_identify_algorithm, _compression_stream_init, 
+                       _compression_stream_init_with_state_buffer, _compression_stream_is_state_valid, 
+                       _compression_stream_process, _compression_stream_reinit ]
+...

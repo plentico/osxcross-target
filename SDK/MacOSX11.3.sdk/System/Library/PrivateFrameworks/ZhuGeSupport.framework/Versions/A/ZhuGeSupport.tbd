@@ -1,0 +1,15 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           310F34EC-36FB-3CBF-8B29-9F1D2453DD5A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           926FDC84-FD0B-3E92-9AC8-FF5E7C7F0737
+install-name:    '/System/Library/PrivateFrameworks/ZhuGeSupport.framework/Versions/A/ZhuGeSupport'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _ZhuGeCopyValueWithError ]
+...

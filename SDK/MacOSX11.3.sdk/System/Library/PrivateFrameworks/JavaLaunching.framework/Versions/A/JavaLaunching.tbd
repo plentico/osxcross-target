@@ -1,0 +1,16 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           ADEBF113-2538-3F55-8730-23B84E141D2E
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B3C0A617-DDFA-336A-AD54-177737215AEC
+install-name:    '/System/Library/PrivateFrameworks/JavaLaunching.framework/Versions/A/JavaLaunching'
+current-version: 319
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    objc-classes:    [ JLArchitecture, JLRuntime ]
+...

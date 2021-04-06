@@ -1,0 +1,16 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           8DC6E9D1-0AC3-33FB-8DE4-83C5AB3C08AC
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           DECC4181-B96C-39E0-9B5F-75B8345829D8
+install-name:    '/System/Library/PrivateFrameworks/JavaScriptOSA.framework/Versions/A/JavaScriptOSA'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _JavaScriptOpen ]
+    objc-classes:    [ JSStorage, JSStorageResult, JSStorageScriptContext ]
+...

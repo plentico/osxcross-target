@@ -1,0 +1,26 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           A57E7240-0429-3907-B36A-177BE1C8E505
+  - target:          x86_64-maccatalyst
+    value:           A57E7240-0429-3907-B36A-177BE1C8E505
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           A8B6F55F-5AED-3A52-91E0-1023510D29E5
+  - target:          arm64e-maccatalyst
+    value:           A8B6F55F-5AED-3A52-91E0-1023510D29E5
+install-name:    '/System/Library/PrivateFrameworks/EmailAddressing.framework/Versions/A/EmailAddressing'
+current-version: 3654.80
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _EAAddressComment ]
+    objc-classes:    [ EAEmailAddressGenerator, EAEmailAddressLists, EAEmailAddressParser, 
+                       EAEmailAddressSet, _EAEmailAddress, _EAEmailAddressSetEnumerator ]
+...

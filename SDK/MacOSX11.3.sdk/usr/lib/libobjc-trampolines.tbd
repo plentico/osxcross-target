@@ -1,0 +1,30 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, x86_64h-macos, x86_64h-maccatalyst, 
+                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           28CA510F-1C3C-31A8-8FE8-1EE2CEA404F8
+  - target:          x86_64-maccatalyst
+    value:           28CA510F-1C3C-31A8-8FE8-1EE2CEA404F8
+  - target:          x86_64h-macos
+    value:           EC12754A-F55D-3556-9F6D-4F0C75454D9C
+  - target:          x86_64h-maccatalyst
+    value:           EC12754A-F55D-3556-9F6D-4F0C75454D9C
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           9B62A7C4-66A3-33DA-A4DA-ABFC6138BAF2
+  - target:          arm64e-maccatalyst
+    value:           9B62A7C4-66A3-33DA-A4DA-ABFC6138BAF2
+install-name:    '/usr/lib/libobjc-trampolines.dylib'
+current-version: 228
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64h-macos, x86_64-maccatalyst, 
+                       x86_64h-maccatalyst, arm64e-maccatalyst, arm64-macos, arm64-maccatalyst ]
+    symbols:         [ __objc_blockTrampolineImpl, __objc_blockTrampolineImpl_stret, 
+                       __objc_blockTrampolineLast, __objc_blockTrampolineLast_stret, 
+                       __objc_blockTrampolineStart, __objc_blockTrampolineStart_stret ]
+...

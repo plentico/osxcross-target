@@ -1,0 +1,35 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           63EF90B1-3C91-335D-8E37-B4E4BFE3A482
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           CC0CDA03-25C9-332C-8E27-37873B3273B9
+install-name:    '/System/Library/PrivateFrameworks/SiriKitInvocation.framework/Versions/A/SiriKitInvocation'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _RunVoiceShortcutDirectInvocationIdentifier, _SKIHomeAutomationInvocationIdentifierAsyncResponse, 
+                       _SKIMessagesDirectInvocationIdentifierAnnounceMessage, _SKIMessagesDirectInvocationIdentifierNewMessage, 
+                       _SKIMessagesDirectInvocationIdentifierNewMessageToContact, 
+                       _SKIMessagesDirectInvocationIdentifierNewMessageToConversation, 
+                       _SKIMessagesDirectInvocationIdentifierReadFromConversation, 
+                       _SKIMessagesDirectInvocationIdentifierReadFromNotification, 
+                       _SKIMessagesDirectInvocationPayloadKeyAppBundleId, _SKIMessagesDirectInvocationPayloadKeyContactEmailAddress, 
+                       _SKIMessagesDirectInvocationPayloadKeyContactName, _SKIMessagesDirectInvocationPayloadKeyContactPhoneNumber, 
+                       _SKIMessagesDirectInvocationPayloadKeyConversationIdentifier, 
+                       _SKIMessagesDirectInvocationPayloadKeyNotificationIdentifier, 
+                       _SKIMessagesGatekeeperAppBundleIdKey, _SKIMessagesInvocationIdentifierGatekeeperFlow, 
+                       _SKIPhoneDirectInvocationIdentifierAnnounceIntercom, _SKIPhoneDirectInvocationIdentifierAnnounceIntercomNotification, 
+                       _SKIPhoneDirectInvocationIdentifierReadIntercom, _SKIPhoneDirectInvocationIdentifierStartPhoneCall, 
+                       _SKIPlaybackControlsStopMediaIdentifier, _SiriKitInvocationVersionNumber, 
+                       _SiriKitInvocationVersionString, _kMessageContentChangedViaSnippetDirectInvocationContentKey, 
+                       _kMessageContentChangedViaSnippetDirectInvocationIdentifier, 
+                       _kMessageSendViaSnippetDirectInvocationContentKey, _kMessageSendViaSnippetDirectInvocationIdentifier ]
+    objc-classes:    [ SKIDirectInvocation, SKIDirectInvocationContext, SKIDirectInvocationPayload, 
+                       SKIHomeAutomationInvocation, SKIMapsInvocation, SKIMediaControlsInvocation, 
+                       SKIMessagesGatekeeperPayload, SKIMessagesInvocation, SKIMusicInvocation, 
+                       SKIPhoneInvocation, SKIVoiceShortcutsInvocation ]
+...

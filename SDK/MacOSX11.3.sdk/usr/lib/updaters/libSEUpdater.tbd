@@ -1,0 +1,17 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           A186A2A0-BC17-3C09-994E-DA89FDEAF4BA
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           26B49B47-9251-3E2C-B7F2-0F3F08CAFA67
+install-name:    '/usr/lib/updaters/libSEUpdater.dylib'
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+    symbols:         [ _SEUpdaterCreate, _SEUpdaterExecCommand, _SEUpdaterIsDone, 
+                       _kSECmdCopyIdentifier, _kSECmdPerformNextStage, _kSECmdQueryInfo, 
+                       _kSECmdSendApduFile ]
+...

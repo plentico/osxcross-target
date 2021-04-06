@@ -1,0 +1,17 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           299EDE7E-C416-3B4C-B68B-829DEDFE3CD8
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           6D285A9A-DF52-3C35-9BA8-1CAEA1BDBB3D
+install-name:    '/System/Library/PrivateFrameworks/CoreSpotlightImportDaemon.framework/Versions/A/CoreSpotlightImportDaemon'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _CSImportAgentMachServiceName, _CoreSpotlightImportDaemonVersionNumber, 
+                       _CoreSpotlightImportDaemonVersionString ]
+    objc-classes:    [ CSImportAgent, CSImportAgentConnection ]
+...

@@ -1,0 +1,12 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           43E50B20-D77B-3A52-A63B-C8BFE2ED522E
+install-name:    '/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/libcl2module.dylib'
+current-version: 2.5.2
+exports:
+  - targets:         [ x86_64-macos ]
+    symbols:         [ _cl2module ]
+...

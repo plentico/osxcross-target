@@ -1,0 +1,12 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           787D0FAA-67C4-3ED3-8FBF-B9F722C96022
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           EF289B16-7E7B-3A1F-9854-CBE9B0344630
+install-name:    '@rpath/NetworkExtensioniOSSupport.framework/Versions/A/NetworkExtensioniOSSupport'
+...

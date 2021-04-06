@@ -1,0 +1,17 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           E7B0E649-586E-32B9-AE2A-75AA4F38F332
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           1F6A1C06-A7E5-30ED-B780-5D4D02FDF6F4
+install-name:    '/System/Library/PrivateFrameworks/XGBoostFramework.framework/Versions/A/XGBoostFramework'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _XGBoosterCreate, _XGBoosterFree, _XGBoosterLoadModel, _XGBoosterPredict, 
+                       _XGBoosterSaveModel, _XGBoosterSetParam, _XGBoosterUpdateOneIter, 
+                       _XGDMatrixCreateFromMat, _XGDMatrixFree, _XGDMatrixSetFloatInfo ]
+...

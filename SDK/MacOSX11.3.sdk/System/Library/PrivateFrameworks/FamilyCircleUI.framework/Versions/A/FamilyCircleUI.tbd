@@ -1,0 +1,22 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           D45EB8E6-977A-30A8-8DE1-F153B1B7A3C5
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           14A93D4C-E8F0-39FD-A9E3-7C8BCAE4F87E
+install-name:    '/System/Library/PrivateFrameworks/FamilyCircleUI.framework/Versions/A/FamilyCircleUI'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _FALogStringForQualityOfService, _FAProfilePictureStoreDefaultDiameter, 
+                       _FAProfilePictureStoreDidReloadImagesNotification, _FamilyCircleUIVersionNumber, 
+                       _FamilyCircleUIVersionString, __FALogSystem, __FASignpostCreate, 
+                       __FASignpostGetNanoseconds, __FASignpostLogSystem ]
+    objc-classes:    [ FACircularImageView, FACreateChildController, FAInviteLinkMetadata, 
+                       FAInviteLinkMetadataProvider, FAMugshotMarqueeView, FAProfilePictureStore, 
+                       FASharedServicesResponse, FASharingController, FASharingTransportItem, 
+                       FASharingTransportItemView, FASharingViewController ]
+...

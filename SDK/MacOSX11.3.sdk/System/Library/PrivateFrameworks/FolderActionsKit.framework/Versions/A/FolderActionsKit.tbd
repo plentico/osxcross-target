@@ -1,0 +1,18 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           D4B67B38-9EEE-36FF-9BDB-0B7FDB136BB9
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           CCDC986D-1CC2-3EB6-8306-16D93266CD00
+install-name:    '/System/Library/PrivateFrameworks/FolderActionsKit.framework/Versions/A/FolderActionsKit'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _FAFolderActionDispatcherSetLaunchDaemonEnabled, _FolderActionsKitVersionNumber, 
+                       _FolderActionsKitVersionString ]
+    objc-classes:    [ FAFolderAction, FAMessageTracer, FAScript, FAScriptableObject, 
+                       FAXPCDelegate, FAXPCListenerWrapper, FAXPCProxyObject, FolderActionsDispatcher ]
+...

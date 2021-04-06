@@ -1,6 +1,0 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 7CDD66E5-37CB-3608-B5F1-CEA2555EE5E1', 'x86_64: 7CDD66E5-37CB-3608-B5F1-CEA2555EE5E1' ]
-platform:        zippered
-install-name:    '/System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Versions/A/Libraries/libAWDProtobufFacetimeiMessage.dylib'
-...

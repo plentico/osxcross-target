@@ -1,0 +1,17 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           93F9F0EB-B29C-380C-9687-5C27BB8DDE2E
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           FD236231-4B39-3BC1-A5FE-2B1E6067C72D
+install-name:    '/System/Library/PrivateFrameworks/SafeEjectGPU.framework/Versions/A/SafeEjectGPU'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _SafeEjectGPUVersionNumber, _SafeEjectGPUVersionString, __Z13getClientTypej, 
+                       __Z14GetCurrentTimev, __Z24GetCurrentTimeContinuousv ]
+    objc-classes:    [ GpuAppMetrics, SafeEjectGPU, SafeEjectGPUCA, SafeEjectGPUSession ]
+...

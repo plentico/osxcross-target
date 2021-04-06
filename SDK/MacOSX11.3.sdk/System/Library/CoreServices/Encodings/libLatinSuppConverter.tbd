@@ -1,0 +1,24 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           63598AF8-DA15-3726-B7CC-026E9F066066
+  - target:          x86_64-maccatalyst
+    value:           63598AF8-DA15-3726-B7CC-026E9F066066
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           BEFE3A4D-4961-3D76-AEEC-E24BE5EA6B89
+  - target:          arm64e-maccatalyst
+    value:           BEFE3A4D-4961-3D76-AEEC-E24BE5EA6B89
+install-name:    '/System/Library/CoreServices/Encodings/libLatinSuppConverter.dylib'
+current-version: 90
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ ___CFStringEncodingGetLatinSuppConverterDefinition ]
+...

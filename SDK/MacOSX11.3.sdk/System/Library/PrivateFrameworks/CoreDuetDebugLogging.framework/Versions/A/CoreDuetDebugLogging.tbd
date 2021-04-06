@@ -1,0 +1,24 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           4BE8D4C0-FA9E-334D-A11B-0E6DC8104FAE
+  - target:          x86_64-maccatalyst
+    value:           4BE8D4C0-FA9E-334D-A11B-0E6DC8104FAE
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           F4EF2097-BB14-3F14-A655-54EA9B1BD153
+  - target:          arm64e-maccatalyst
+    value:           F4EF2097-BB14-3F14-A655-54EA9B1BD153
+install-name:    '/System/Library/PrivateFrameworks/CoreDuetDebugLogging.framework/Versions/A/CoreDuetDebugLogging'
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _CDDSetError, _CDDebugErrorStrings ]
+    objc-classes:    [ CDDebug ]
+...

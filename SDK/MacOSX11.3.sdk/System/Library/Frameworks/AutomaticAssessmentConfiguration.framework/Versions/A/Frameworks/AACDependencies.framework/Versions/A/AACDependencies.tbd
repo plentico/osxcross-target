@@ -1,0 +1,24 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           21D3F172-DB9E-3D93-AAF0-24227DEED3A5
+  - target:          x86_64-maccatalyst
+    value:           21D3F172-DB9E-3D93-AAF0-24227DEED3A5
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           586A0F6B-2389-3CA1-A560-F677F44B5E82
+  - target:          arm64e-maccatalyst
+    value:           586A0F6B-2389-3CA1-A560-F677F44B5E82
+install-name:    '/System/Library/Frameworks/AutomaticAssessmentConfiguration.framework/Versions/A/Frameworks/AACDependencies.framework/Versions/A/AACDependencies'
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    objc-classes:    [ AEDScreenPrimitivesProvider, AEDSingleAppModeConfiguration, 
+                       AEDWindowPrimitivesProvider, AEDWindowSpacePrimitivesProvider ]
+...

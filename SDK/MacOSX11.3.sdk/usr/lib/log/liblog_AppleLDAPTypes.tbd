@@ -1,0 +1,13 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           DFC9944E-A6BA-306A-9F60-DA8A1816C944
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           F672C0F2-4E64-32A4-8D49-8BACB5D4063A
+install-name:    '/usr/lib/log/liblog_AppleLDAPTypes.dylib'
+current-version: 54
+...

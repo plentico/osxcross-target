@@ -1,0 +1,25 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           244AF1DB-1863-3256-B197-E90FFFB1663B
+  - target:          x86_64-maccatalyst
+    value:           244AF1DB-1863-3256-B197-E90FFFB1663B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           36054AAB-857B-31EB-BBA1-6F56B6C5FE09
+  - target:          arm64e-maccatalyst
+    value:           36054AAB-857B-31EB-BBA1-6F56B6C5FE09
+install-name:    '/System/Library/PrivateFrameworks/AGXGPURawCounter.framework/Versions/A/AGXGPURawCounter'
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ __ZN16AGXGPURawCounter14createInstanceEj, __ZN16AGXGPURawCounter15destroyInstanceEv, 
+                       __ZN16AGXGPURawCounter8instanceEv, __ZNK16AGXGPURawCounter19sourceBufferMinSizeEv, 
+                       __ZNK16AGXGPURawCounter25sourceBufferSizeAlignmentEv ]
+...

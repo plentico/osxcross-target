@@ -1,7 +1,0 @@
---- !tapi-tbd-v3
-archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 5750BFAA-9C49-3F0C-B220-40BA5F2F9635' ]
-platform:        uikitformac
-install-name:    '/System/iOSSupport/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/SecItemShim.dylib'
-current-version: 609.3.5
-...

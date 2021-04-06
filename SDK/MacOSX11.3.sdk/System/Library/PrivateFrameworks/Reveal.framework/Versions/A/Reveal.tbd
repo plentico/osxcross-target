@@ -1,0 +1,16 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           57509970-8A9A-3BF9-82A4-91AF8BEC22A9
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           BBBF3B58-0E9D-3BEA-91D9-53F5BE3258C9
+install-name:    '/System/Library/PrivateFrameworks/Reveal.framework/Versions/A/Reveal'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _RevealVersionNumber, _RevealVersionString ]
+    objc-classes:    [ RVPresenter, RVPresentingContext ]
+...

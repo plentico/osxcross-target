@@ -1,0 +1,22 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           388F104F-A26C-30A5-BD78-2AFB7BBCECEC
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           BA4E3331-5EF6-321A-9961-AB24969586C8
+install-name:    '/System/Library/PrivateFrameworks/MessagesHelperKit.framework/Versions/A/MessagesHelperKit'
+current-version: 800
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _MessagesHelperKitVersionNumber, _MessagesHelperKitVersionString, 
+                       _SOAControllerLastConnectionDiedNotification, _SOFaceTimeDNDMenuOptionsDidChangeNotification, 
+                       _SOFaceTimeFavoritesDNDEnabledKey, _SOFaceTimeFavoritesKey, 
+                       _SOFaceTimeFavoritesMenuOptionsKey, _SOFaceTimeFavoritesSelectedMenuOptionKey, 
+                       _SOFaceTimeTwoTimeCallthroughEnabledKey ]
+    objc-classes:    [ SOAActiveChatManager, SOAController, SOAMessageTime, SOAPlugInController, 
+                       SOAReceiver ]
+...

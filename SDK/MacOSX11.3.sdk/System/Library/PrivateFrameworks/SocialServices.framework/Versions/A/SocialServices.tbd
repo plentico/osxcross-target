@@ -1,0 +1,16 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           D0507D40-8C93-3C29-AA19-2BB4F2B84C4E
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           3BDEC40A-B2A1-3280-BD65-F051754A9DD7
+install-name:    '/System/Library/PrivateFrameworks/SocialServices.framework/Versions/A/SocialServices'
+current-version: 0
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    objc-classes:    [ SLGoogleAuthController ]
+...

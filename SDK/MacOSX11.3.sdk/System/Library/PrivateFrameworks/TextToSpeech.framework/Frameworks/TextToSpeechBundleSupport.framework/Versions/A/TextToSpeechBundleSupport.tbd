@@ -1,0 +1,20 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           C2784CEC-33D2-3F7E-A069-EA55D1B26C13
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           1A16C634-D5BC-334A-8C60-9A60A9206205
+install-name:    '/System/Library/PrivateFrameworks/TextToSpeech.framework/Frameworks/TextToSpeechBundleSupport.framework/Versions/A/TextToSpeechBundleSupport'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _TTSSpeechCopyStringSubsitutingTones, _TTSVocalizerCopyEscapedStringFromAttributedString, 
+                       _TextToSpeechBundleSupportVersionNumber, _TextToSpeechBundleSupportVersionString, 
+                       __TTSThreadRegistryCreateRunLoopSource, __TTSThreadRegistryInitialize, 
+                       __TTSThreadRegistryMarkRunLoopSourceBusy, __TTSThreadRegistryRunLoopSourceWillTerminate, 
+                       __TTSThreadRegistryShouldTerminate, __TTSThreadRegistryTerminate ]
+    objc-classes:    [ TTSNashvilleSpeechVoice, TTSTimer, TTSTimerObject ]
+...

@@ -1,0 +1,16 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           7E90341E-90F5-338B-B38B-E128F110EE5E
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           D9ABAE3F-8D41-3428-8411-90827BD7ECAA
+install-name:    '/System/Library/PrivateFrameworks/TransparencyDetailsViewMac.framework/Versions/A/TransparencyDetailsViewMac'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _TransparencyDetailsViewMacVersionNumber, _TransparencyDetailsViewMacVersionString ]
+    objc-classes:    [ ADUserTransparencySheet ]
+...

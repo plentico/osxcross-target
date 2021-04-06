@@ -1,0 +1,18 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           D1558F98-832C-36FC-84B4-7BCD29B32A7E
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           7E1D6B16-7313-3C59-9EB2-DBF06DDFA49C
+install-name:    '/System/Library/PrivateFrameworks/SystemUIPlugin.framework/Versions/A/SystemUIPlugin'
+current-version: 39
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    objc-classes:    [ NSMenuExtra, NSMenuExtraView ]
+    objc-ivars:      [ NSMenuExtraView._alternateImage, NSMenuExtraView._image, NSMenuExtraView._menu, 
+                       NSMenuExtraView._menuExtra ]
+...

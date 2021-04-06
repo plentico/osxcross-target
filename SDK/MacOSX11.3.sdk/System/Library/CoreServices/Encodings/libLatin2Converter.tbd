@@ -1,0 +1,24 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           6B68C3B1-C945-32C9-813E-18B1B685263A
+  - target:          x86_64-maccatalyst
+    value:           6B68C3B1-C945-32C9-813E-18B1B685263A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           5D766A56-2227-3056-9C19-BFB72CEE0411
+  - target:          arm64e-maccatalyst
+    value:           5D766A56-2227-3056-9C19-BFB72CEE0411
+install-name:    '/System/Library/CoreServices/Encodings/libLatin2Converter.dylib'
+current-version: 90
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ ___CFStringEncodingGetLatin2ConverterDefinition ]
+...

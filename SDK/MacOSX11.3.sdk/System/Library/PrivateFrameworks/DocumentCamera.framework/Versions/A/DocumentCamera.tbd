@@ -1,0 +1,21 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           8E723CD4-5099-334A-A3AA-5AF7765F1114
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           D11C7584-1815-3664-81EC-B0754E19465E
+install-name:    '/System/Library/PrivateFrameworks/DocumentCamera.framework/Versions/A/DocumentCamera'
+current-version: 74
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _DCScanWasDeletedNotification, _DCTransformFromImageOrientation, 
+                       _dc_clockwiseRotationsFromUpToMatchOrientation, _dc_counterClockwiseRotationsFromUpToMatchOrientation, 
+                       _dc_nonLocalizedOrientationNameForType, _dc_orientationByRotatingLeft, 
+                       _dc_orientationByRotatingRight, _dc_orientationFromNonLocalizedName, 
+                       _kICDocCamImageQuadPerspectiveCorrectImageInset ]
+    objc-classes:    [ DCNotesSPI, ICDocCamImageFilters, ICDocCamImageQuad ]
+...

@@ -1,0 +1,18 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           EF2AD1C3-7F51-3480-964B-570042C51956
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           D3A6B602-ED4B-3A7F-965D-457856BB8962
+install-name:    '/System/Library/PrivateFrameworks/PowerlogControl.framework/Versions/A/PowerlogControl'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _PowerlogControlDefaultsChanged, _PowerlogControlEnablePowerLog, 
+                       _PowerlogControlEnablePowerLogOld, _PowerlogControlModeKey, 
+                       _PowerlogControlModeKeyOld, _PowerlogControlReadMode, _PowerlogControlSwitchMode, 
+                       _allowModeTransition, _containerPath, _validValue ]
+...

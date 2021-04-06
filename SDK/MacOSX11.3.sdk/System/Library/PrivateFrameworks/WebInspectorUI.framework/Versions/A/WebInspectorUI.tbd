@@ -1,0 +1,13 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           8D209DB3-AB0D-39C3-9F8E-3D37E8982FBE
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           D7FBB367-3993-3F55-96B3-5162A83674FF
+install-name:    '/System/Library/PrivateFrameworks/WebInspectorUI.framework/Versions/A/WebInspectorUI'
+current-version: 611.1.18
+...

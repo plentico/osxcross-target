@@ -1,0 +1,21 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           1E14C9B1-26E5-3B39-A0D9-977E011EF41F
+  - target:          x86_64-maccatalyst
+    value:           1E14C9B1-26E5-3B39-A0D9-977E011EF41F
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           7B7388E4-94B2-3BC7-9A0A-4BEEB3C3FDEA
+  - target:          arm64e-maccatalyst
+    value:           7B7388E4-94B2-3BC7-9A0A-4BEEB3C3FDEA
+install-name:    '/usr/lib/libmenu.5.4.dylib'
+current-version: 5.4
+compatibility-version: 5.4
+...

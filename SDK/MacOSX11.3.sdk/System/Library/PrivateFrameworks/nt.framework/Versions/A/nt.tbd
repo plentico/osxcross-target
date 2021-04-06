@@ -1,0 +1,17 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           62C1B21C-1A6D-3E64-A8C0-7704E0FEF7AB
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           C2D09CA7-350F-319B-8AB1-05BABB2B2C78
+install-name:    '/System/Library/PrivateFrameworks/nt.framework/Versions/A/nt'
+current-version: 520.100.3
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _DigestLogon, _NTLMLogon, _NetLogonChangeTrustPassword, _NetLogonProbe, 
+                       _NetSessionCount, _NtGenericErrnoStatus, _NtStatusToString ]
+...

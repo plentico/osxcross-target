@@ -1,0 +1,33 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           EE5F8252-9823-315C-8B41-680CFDD3658B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           56906B9C-BBA0-3792-AAD7-02D3D20BD753
+install-name:    '/System/Library/Frameworks/StoreKit.framework/Versions/A/StoreKit'
+current-version: 379
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+    symbols:         [ _SKCloudServiceCapabilitiesDidChangeNotification, _SKDownloadTimeRemainingUnknown, 
+                       _SKErrorDomain, _SKReceiptPropertyIsExpired, _SKReceiptPropertyIsRevoked, 
+                       _SKReceiptPropertyIsVolumePurchase, _SKStoreProductParameterAdvertisingPartnerToken, 
+                       _SKStoreProductParameterAffiliateToken, _SKStoreProductParameterCampaignToken, 
+                       _SKStoreProductParameterITunesItemIdentifier, _SKStoreProductParameterProductIdentifier, 
+                       _SKStoreProductParameterProviderToken, _SKStorefrontCountryCodeDidChangeNotification, 
+                       _SKStorefrontIdentifierDidChangeNotification, _SKTerminateForInvalidReceipt, 
+                       _SKUIServiceNavigationOptionBackButtonHidden, _SKUIServiceNavigationOptionBackButtonTitle, 
+                       _SKUIServiceNavigationOptionRightButtonEnabled, _SKUIServiceNavigationOptionRightButtonStyle, 
+                       _SKUIServiceNavigationOptionRightButtonTitle, _SKUIServiceNavigationOptionTitle, 
+                       _SKUIServiceReviewSandboxMode ]
+    objc-classes:    [ SKAccountPageSpecifierProvider, SKArcadeService, SKCloudServiceController, 
+                       SKCloudServiceSetupConfiguration, SKDownload, SKMutablePayment, 
+                       SKPayment, SKPaymentDiscount, SKPaymentQueue, SKPaymentQueueClient, 
+                       SKPaymentTransaction, SKProduct, SKProductDiscount, SKProductStorePromotionController, 
+                       SKProductSubscriptionPeriod, SKProductsRequest, SKProductsResponse, 
+                       SKReceiptRefreshRequest, SKRequest, SKSpecifierWithSubtitleCell, 
+                       SKStoreProductViewController, SKStoreReviewController, SKStorefront ]
+...

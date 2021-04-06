@@ -1,0 +1,32 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           D40714C0-043D-3C62-BD9B-1ABCA4C96C7A
+  - target:          x86_64-maccatalyst
+    value:           D40714C0-043D-3C62-BD9B-1ABCA4C96C7A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           72C4903E-6631-347D-A9D7-6C6F110FEFBA
+  - target:          arm64e-maccatalyst
+    value:           72C4903E-6631-347D-A9D7-6C6F110FEFBA
+install-name:    '/usr/lib/system/libkeymgr.dylib'
+current-version: 31
+parent-umbrella:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    umbrella:        System
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, x86_64-maccatalyst, arm64e-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ ___keymgr_dwarf2_register_sections, ___keymgr_initializer, 
+                       __keymgr_get_and_lock_processwide_ptr, __keymgr_get_and_lock_processwide_ptr_2, 
+                       __keymgr_get_lock_count_processwide_ptr, __keymgr_get_lockmode_processwide_ptr, 
+                       __keymgr_set_and_unlock_processwide_ptr, __keymgr_set_lockmode_processwide_ptr, 
+                       __keymgr_unlock_processwide_ptr, _keymgrVersionNumber, _keymgrVersionString ]
+...

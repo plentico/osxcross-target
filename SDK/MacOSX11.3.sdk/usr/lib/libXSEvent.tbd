@@ -1,0 +1,15 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           F779C7C1-FDD4-30FF-8085-EE50DD279E32
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           6C90A668-8239-3068-8CE1-A90E2DE5D899
+install-name:    '/usr/lib/libXSEvent.dylib'
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+    symbols:         [ _XSEventPortCreate, _XSEventPortDelete, _XSEventPortPostEvent ]
+...

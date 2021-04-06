@@ -1,0 +1,16 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           DB459077-9BCE-3CBD-871B-219FA390479B
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           06FC0994-0159-3432-8438-DD75471D6C35
+install-name:    '/System/Library/PrivateFrameworks/MetricKitCore.framework/Versions/A/MetricKitCore'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _MetricKitCoreVersionNumber, _MetricKitCoreVersionString ]
+    objc-classes:    [ MXCore, MXCorePayloadConstructor, MXSource ]
+...

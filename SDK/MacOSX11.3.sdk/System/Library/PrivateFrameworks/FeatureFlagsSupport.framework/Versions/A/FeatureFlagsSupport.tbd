@@ -1,0 +1,24 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           E37992E0-142F-3DCE-95CE-7FEA2328E00D
+  - target:          x86_64-maccatalyst
+    value:           E37992E0-142F-3DCE-95CE-7FEA2328E00D
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           3510D308-4433-3996-9896-DE0E3A2A4FD4
+  - target:          arm64e-maccatalyst
+    value:           3510D308-4433-3996-9896-DE0E3A2A4FD4
+install-name:    '/System/Library/PrivateFrameworks/FeatureFlagsSupport.framework/Versions/A/FeatureFlagsSupport'
+current-version: 28.60.1
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    objc-classes:    [ FFConfiguration, FFFeatureAttribute, FFFeatureState ]
+...

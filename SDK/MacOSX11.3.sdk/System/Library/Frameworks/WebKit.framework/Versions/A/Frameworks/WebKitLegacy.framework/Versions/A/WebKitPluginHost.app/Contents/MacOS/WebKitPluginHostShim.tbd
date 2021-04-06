@@ -1,0 +1,15 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           9C4F0275-3F05-3329-873C-31451F655A8A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           29542C9F-15FB-3F7B-BF53-6B56494D556D
+install-name:    '/usr/local/lib/WebKitPluginHostShim.dylib'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _WebKitPluginHostShimInitialize ]
+...

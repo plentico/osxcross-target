@@ -1,0 +1,18 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           FAE56538-FDCC-37D7-B314-C7D5B5C2846A
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           FBB1E8B0-D879-31A5-A9C7-773A9A2A7729
+install-name:    '/System/Library/PrivateFrameworks/RecoveryOS.framework/Versions/A/RecoveryOS'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    symbols:         [ _ROS_LOG, _ROS_LOG_IDENTIFIER, _ROS_SLEEP_ON_FAILURE_KEY, 
+                       _RecoveryOSVersionNumber, _RecoveryOSVersionString, _kROSAgentLabel, 
+                       _kROSDaemonLabel, _ros_run_task_synchronously, _ros_sleep_on_failure_set ]
+    objc-classes:    [ ROSAgent, ROSEnvironment ]
+...

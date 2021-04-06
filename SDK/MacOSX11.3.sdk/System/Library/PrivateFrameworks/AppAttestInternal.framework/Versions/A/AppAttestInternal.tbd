@@ -1,0 +1,28 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           57477EBE-17EF-3AC6-AFD1-C18C755BF3EA
+  - target:          x86_64-maccatalyst
+    value:           57477EBE-17EF-3AC6-AFD1-C18C755BF3EA
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           3EF5A5D4-D404-3418-A882-A39CC42C7B79
+  - target:          arm64e-maccatalyst
+    value:           3EF5A5D4-D404-3418-A882-A39CC42C7B79
+install-name:    '/System/Library/PrivateFrameworks/AppAttestInternal.framework/Versions/A/AppAttestInternal'
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _AppAttest_AppAttestation_Assert, _AppAttest_AppAttestation_AttestKey, 
+                       _AppAttest_AppAttestation_CreateKey, _AppAttest_AppAttestation_IsEligibleApplication, 
+                       _AppAttest_AppAttestation_IsSupported, _AppAttest_Common_AttestKey, 
+                       _AppAttest_WebAuthentication_AttestKey, _AppAttest_WebAuthentication_IsSupported, 
+                       __DCAALogSystem ]
+    objc-classes:    [ AppAttestKeychainCleanupController ]
+...

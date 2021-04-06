@@ -1,0 +1,35 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           C8AD245F-1434-32A6-B8D4-2BEE5994E8D2
+  - target:          x86_64-maccatalyst
+    value:           C8AD245F-1434-32A6-B8D4-2BEE5994E8D2
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B4DBD879-F401-32ED-9C71-D0D4B4C9498D
+  - target:          arm64e-maccatalyst
+    value:           B4DBD879-F401-32ED-9C71-D0D4B4C9498D
+install-name:    '/System/Library/PrivateFrameworks/CloudPhotoServices.framework/Versions/A/CloudPhotoServices'
+current-version: 340.0.220
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _CloudPhotoServicesOptionBakeInOrientationKey, _CloudPhotoServicesOptionColorOutputKey, 
+                       _CloudPhotoServicesOptionExportPresetKey, _CloudPhotoServicesOptionIsPassthroughConversionKey, 
+                       _CloudPhotoServicesOptionLivePhotoPairingIdentifierKey, _CloudPhotoServicesOptionMaximumPixelCountKey, 
+                       _CloudPhotoServicesOptionOriginatingSignatureKey, _CloudPhotoServicesOptionOutputFileTypeKey, 
+                       _CloudPhotoServicesOptionRenderOriginatingSignatureKey, _CloudPhotoServicesOptionRequestReasonKey, 
+                       _CloudPhotoServicesOptionTargetFileSizeKey, _CloudPhotoServicesRetryCount, 
+                       _CloudPhotoServicesRetryDelay, _CloudPhotoServicesVersionNumber, 
+                       _CloudPhotoServicesVersionString, _CloudPhotoServicesVideoConversionPowerEfficiencyKey, 
+                       _CloudPhotoServicesVideoConversionPowerEfficiencyMinimumDurationKey, 
+                       _CloudPhotoServicesVideoConversionPowerEfficiencyOverrideUserDefaultsKey, 
+                       __logDropDerivatives ]
+    objc-classes:    [ CloudPhotoServices, CloudPhotoServicesUtilities ]
+...

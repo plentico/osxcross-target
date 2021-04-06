@@ -1,0 +1,42 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           85F230D8-E993-3CEB-8C53-E88D288E917E
+  - target:          x86_64-maccatalyst
+    value:           85F230D8-E993-3CEB-8C53-E88D288E917E
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           87139AC6-F37F-397F-AF58-5932AC3F368F
+  - target:          arm64e-maccatalyst
+    value:           87139AC6-F37F-397F-AF58-5932AC3F368F
+install-name:    '/System/Library/PrivateFrameworks/CoreSuggestionsML.framework/Versions/A/CoreSuggestionsML'
+current-version: 1115.255
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _CoreSuggestionsMLVersionNumber, _CoreSuggestionsMLVersionString, 
+                       _SGCharacterSetWithCharactersInString, _SGRepairString, _markFilteredQuery, 
+                       _perRecipientCountUpsertQuery ]
+    objc-classes:    [ SGConversationTracker, SGConversationTurn, SGCustomResponsesParameters, 
+                       SGDefaultAssets, SGLanguageDetection, SGLazyInit, SGMessagePair, 
+                       SGMessagePairIterator, SGModelAsset, SGModelFeatures, SGModelHyperparameters, 
+                       SGModelSampler, SGModelSource, SGNestedArray, SGPipelineTransformer, 
+                       SGQuickResponse, SGQuickResponsesCategoryScore, SGQuickResponsesClassScore, 
+                       SGQuickResponsesClassificationModel, SGQuickResponsesClassificationParameters, 
+                       SGQuickResponsesConfig, SGQuickResponsesDatabase, SGQuickResponsesDistributingCount, 
+                       SGQuickResponsesEngagementDeltas, SGQuickResponsesInference, 
+                       SGQuickResponsesModel, SGQuickResponsesModelRules, SGQuickResponsesPersonalization, 
+                       SGQuickResponsesPredictionParameters, SGQuickResponsesRanking, 
+                       SGQuickResponsesRecords, SGQuickResponsesReplies, SGQuickResponsesReplyModel, 
+                       SGQuickResponsesReplyOption, SGQuickResponsesReplyRecord, 
+                       SGQuickResponsesScoring, SGQuickResponsesStore, SGQuickResponsesTransformerInstance, 
+                       SGRandomization, SGSelectiveTransformer, SGStringLabelingTransformer, 
+                       SGStringPreprocessingTransformer, SGStringPreprocessor, SGTextLabelTransformer, 
+                       SGTokenJoiningTransformer ]
+...

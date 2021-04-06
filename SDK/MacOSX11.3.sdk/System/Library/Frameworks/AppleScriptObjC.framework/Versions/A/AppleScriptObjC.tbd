@@ -1,0 +1,16 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           D1A53AE5-FACE-3E3E-BEC5-11870916D7DD
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           CFB63F90-E007-3459-BDB8-AF673C795DB9
+install-name:    '/System/Library/Frameworks/AppleScriptObjC.framework/Versions/A/AppleScriptObjC'
+current-version: 38
+exports:
+  - targets:         [ arm64e-macos, x86_64-macos, arm64-macos ]
+    symbols:         [ _BACreateClassForOSAIDInComponent, _BAHandleEvent, _BAObjCIDForOSAIDInComponent ]
+...

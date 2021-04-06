@@ -1,0 +1,17 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+uuids:
+  - target:          x86_64-macos
+    value:           D78109C5-5CCF-3036-9AE4-5A661B1DCAB8
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           B8D697C1-AB0B-3DCE-9336-73C3209D3658
+install-name:    '/System/Library/PrivateFrameworks/DirectoryEditor.framework/Versions/A/DirectoryEditor'
+exports:
+  - targets:         [ x86_64-macos, arm64e-macos, arm64-macos ]
+    objc-classes:    [ DirectoryEditorView ]
+    objc-ivars:      [ DirectoryEditorView._authForLocalNode, DirectoryEditorView._controller, 
+                       DirectoryEditorView._odSession ]
+...

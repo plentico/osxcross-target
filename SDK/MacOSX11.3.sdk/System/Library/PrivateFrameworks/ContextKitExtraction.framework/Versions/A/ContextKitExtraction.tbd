@@ -1,0 +1,25 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
+uuids:
+  - target:          x86_64-macos
+    value:           86280881-59E4-3E66-9110-77776477FB48
+  - target:          x86_64-maccatalyst
+    value:           86280881-59E4-3E66-9110-77776477FB48
+  - target:          arm64-macos
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64-maccatalyst
+    value:           00000000-0000-0000-0000-000000000000
+  - target:          arm64e-macos
+    value:           FA32A047-BAD4-3658-BEED-570CF202DC32
+  - target:          arm64e-maccatalyst
+    value:           FA32A047-BAD4-3658-BEED-570CF202DC32
+install-name:    '/System/Library/PrivateFrameworks/ContextKitExtraction.framework/Versions/A/ContextKitExtraction'
+exports:
+  - targets:         [ x86_64-maccatalyst, x86_64-macos, arm64e-maccatalyst, arm64e-macos, 
+                       arm64-macos, arm64-maccatalyst ]
+    symbols:         [ _ContextKitExtractionVersionNumber, _ContextKitExtractionVersionString ]
+    objc-classes:    [ CKContextContentProvider, CKContextContentProviderManager, 
+                       CKContextDonation, CKContextDonationItem, CKContextExecutor ]
+...

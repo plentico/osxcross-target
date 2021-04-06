@@ -1,6 +1,0 @@
-framework module MorphunAssetsUpdater {
-  umbrella header "MorphunAssetsUpdater.h"
-
-  export *
-  module * { export * }
-}
