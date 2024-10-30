@@ -1,0 +1,338 @@
+.\" Man page generated from reStructuredText.
+.
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.TH "METAL-NT" "1" "July 10, 2024" "32023" "Metal"
+.SH NAME
+metal-nt \- metal native translator
+.SH SYNOPSIS
+.sp
+\fBmetal\-nt\fP [\fIoptions\fP] [\fIfilename\fP]
+.SH DESCRIPTION
+.sp
+\fBmetal\-nt\fP is a tool translating AIR virtual code to native
+code. The translation process is driven by the input file kind and an optional
+script, specified via the \fI\%\-N\fP option. Each file kind has an associated
+script kind. Each script kind supports multiple formats. In particular, for
+those scripts backed by a FlatBuffer, both the JSON and binary representation
+of the FlatBuffer are valid script formats.
+.SH CORE TRANSLATIONS
+.sp
+The translation of an assembly or object file produces a target specific
+assembly file, or a MachO \fIMH_OBJECT\fP file. AIR assembly/objects scripts can be
+used to customize the translation process. They are both backed by FlatBuffers.
+The file extensions of the FlatBuffer JSON representations are \fI\&.aira\-json\fP
+and \fI\&.airo\-json\fP\&. The file extensions of the FlatBuffer binary representations
+are \fI\&.aira\fP and \fI\&.airo\fP\&.
+.sp
+The translation of an executable \fIMetalLib\fP results in a MachO \fIMH_GPU_EXECUTE\fP
+file. Each qualified function in the \fIMetalLib\fP is translated independently. An
+AIR function script can be used to customize the translation process of a
+single qualified function. AIR functions scripts are backed by FlatBuffers. The
+file extension for the Flatbuffer JSON encoding is \fI\&.airf\-json\fP\&. The file
+extension of the Flatbuffer binary encoding is \fI\&.airf\fP\&. If a function script is
+not specified, all the qualified functions in the \fIMetalLib\fP are translated.
+This still results in a single MachO being generated, containing the translation
+of all the qualified functions.
+.sp
+The translation of a \fIMetalLib\fP dynamic library produces a MachO \fIMH_GPU_DYLIB\fP\&.
+An AIR dynamic library script can be used to customize the translation process.
+Such script is backed by a Flatbuffer. The file extension of the JSON encoding
+is \fI\&.aird\-json\fP\&. The file extension of the binary encoding is \fI\&.aird\fP\&.
+.sp
+A pipeline can be created by invoking \fBmetal\-nt\fP with an executable
+\fIMetalLib\fP and an AIR pipeline script. AIR pipeline scripts are backed by
+Flatbuffers. The Flatbuffer JSON encoding file extension is \fI\&.airp\-json\fP\&.
+The Flatbuffer binary encoding file extension is \fI\&.airp\fP\&. The provided
+\fIMetalLib\fP must contains all the qualified functions referenced by the AIR
+pipeline script. The output of a pipeline translation is a MachO
+\fIMH_GPU_EXECUTE\fP\&.
+.sp
+Plugins implementing translation to binary code might provide support for
+builtin scripts. Such kind of scripts does not require any assembly, object, or
+\fIMetalLib\fP file input. The output of a builtin translation is a MachO
+\fIMH_GPU_EXECUTE\fP\&. The file extension and contents of builtin scripts are
+specific to each plugin. Refer to each plugin documentation for more
+information.
+.SH METAL TRANSLATIONS
+.sp
+Metal pipelines scripts describe how to create a pipeline using a syntax that
+mirrors the one provided by the \fIMetal.framework\fP API. They are backed by
+Flatbuffers. The JSON encoding file extension is \fI\&.mtlp\-json\fP\&. The binary
+encoding file extension is \fI\&.mtlp\fP\&.
+.sp
+Metal pipelines scripts are way more expressive than AIR pipeline scripts.
+Qualified functions of a specific \fIMetalLib\fP can be directly referenced from a
+Metal pipelines script, removing the need of providing a \fIMetalLib\fP argument to
+\fBmetal\-nt\fP\&. They also allow to specialize qualified functions and to
+stitch them together prior of pipeline creation.
+.sp
+The output of a Metal pipelines script translation is a \fIMachO\fP of type
+\fIMH_GPU_EXECUTE\fP that contains the translation of all the pipelines described by
+the Metal pipelines script.
+.SH OPTIONS
+.INDENT 0.0
+.TP
+.B \-archs
+Display all the architectures that can be targeted.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-impls <arch>
+Display all the implementations that can be targeted by the specified
+architecture.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-available <arch> <platform> <min_version>
+Display whether the specified target is supported. \fI<platform>\fP is one of the
+following strings:
+.INDENT 7.0
+.IP \(bu 2
+ios
+.IP \(bu 2
+ios\-simulator
+.IP \(bu 2
+mac\-catalyst
+.IP \(bu 2
+tvos
+.IP \(bu 2
+tvos\-simulator
+.IP \(bu 2
+watchos
+.IP \(bu 2
+watchos\-simulator
+.IP \(bu 2
+xros
+.IP \(bu 2
+xros\-simulator
+.IP \(bu 2
+macos
+.UNINDENT
+.sp
+The format of \fI<min_version>\fP is a version number such as 16.0 or 16.2.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-available\-archs <platform> <min_version>
+Display all the architectures that can be targeted for the specified target.
+\fI<platform>\fP and \fI<min_version>\fP follow the same rules documented for the
+\fI\%\-available\fP flag.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-arch <name>
+Select the architecture to target.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-platform_version <platform> <min_version> <sdk_version>
+Set the platform name, minimum deployment target version, and the SDK
+version the output is going to be built against. \fI<platform>\fP is one of the
+following strings:
+.INDENT 7.0
+.IP \(bu 2
+ios
+.IP \(bu 2
+ios\-simulator
+.IP \(bu 2
+mac\-catalyst
+.IP \(bu 2
+tvos
+.IP \(bu 2
+tvos\-simulator
+.IP \(bu 2
+watchos
+.IP \(bu 2
+watchos\-simulator
+.IP \(bu 2
+xros
+.IP \(bu 2
+xros\-simulator
+.IP \(bu 2
+macos
+.UNINDENT
+.sp
+Specifying a newer min or SDK version allows to assume features of that OS
+or SDK in the output file. The format of \fI<min_version>\fP and \fI<sdk_version>\fP
+is a version number such as 16.0 or 16.2.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-load <filename>
+Load a plugin supporting translation for a set of architectures or providing
+legalization passes.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-i
+Prints information about all the loaded plugins.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-S
+Translate an assembly file.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-c <filename>
+Override the configuration file path.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-N <filename>
+Set a translation script.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-o <filename>
+Specify the output file name. Defaults to \(dq\-\(dq \-\- i.e. standard output.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-j <n>
+Set the number of threads to be used in parallel translation. Default to the
+number of CPUs.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-L <dirname>
+Add \fI<dirname>\fP to the \fIMetalLib\fP search path. This allows to use relative
+paths when referencing to a \fIMetalLib\fP in Metal pipelines scripts.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-sysroot <dirname>
+Set the system root.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-runtime\-dir <dirname>
+Set the runtime directory.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-stop\-after <stage>
+Stop translation after performing \fI<stage>\fP\&. Valid values are:
+.INDENT 7.0
+.IP \(bu 2
+\fImetal\-script\fP stop after Metal to AIR script translation
+.IP \(bu 2
+\fIspecialize\fP   stop after function constant specialization
+.IP \(bu 2
+\fIstitch\fP       stop after function stitching
+.IP \(bu 2
+\fItranslate\fP    stop after AIR to native code translation
+.IP \(bu 2
+\fIpackage\fP      stop after packaging of multiple native codes
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-save\-temps
+Save all the temporaries files in the current working directory.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-mllvm <value>
+Forward \fI<value>\fP to the LLVM command line parser.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-mtranslator <value>
+Forward \fI<value>\fP to the plugins command line parser.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-disable\-optimizations
+Do not perform any optimization in the translation process.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-embed\-unused\-generated\-libraries
+Embed generated libraries that are not used by targets.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-help
+Display available options.
+.UNINDENT
+.SH FILES
+.sp
+\fI${TOOLCHAIN}/lib/air\-nt/config.yaml\fP Default configuration file
+.SH EXAMPLES
+.sp
+To build Metal pipelines:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ metal\-nt \-arch amdgpu_gfx600 foobar\-air64.metallib \-N foobar.mtlp\-json \-o foobar.metallib
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+To build a Metal dynamic library:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ metal\-nt \-arch amdgpu_gfx600 libfoo\-air64.metallib \-o libfoo.metallib
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+To build Metal pipelines without directly referencing any \fIMetalLib\fP:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ metal\-nt \-arch amdgpu_gfx600 \-L my\-libs\-dir \-N foobar.mtlp\-json
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH BUGS
+.sp
+To report bugs, please visit <\fI\%https://developer.apple.com/bug\-reporting/\fP>.
+.SH SEE ALSO
+.sp
+\fBmetal\-arch(1)\fP
+\fBmetal\-pipelines\-script(5)\fP
+.SH INTERNET RESOURCES
+.sp
+Metal Shading Language Specification: <\fI\%https://developer.apple.com/metal/Metal\-Shading\-Language\-Specification.pdf\fP>
+.SH COPYRIGHT
+2014-2024, The Metal Team
+.\" Generated by docutils manpage writer.
+.

@@ -32,4 +32,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/home/runner/work/osxcross/target/lib'
+libdir='/home/jim/Downloads/osxcross-master/target/lib'

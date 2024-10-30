@@ -1,0 +1,2018 @@
+.\" Man page generated from reStructuredText.
+.
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.TH "METAL-PIPELINES-SCRIPT" "5" "July 10, 2024" "32023" "Metal"
+.SH NAME
+metal-pipelines-script \- Metal pipelines script JSON file format
+.SH DESCRIPTION
+.sp
+A Metal pipelines script is used to specify a collection of Metal libraries and
+pipeline descriptors. \fBmetal\-nt\fP consumes this information to
+determine which input file to read and which GPU binaries must be generated and
+stored in a GPU binaries archive.
+.sp
+A Metal pipelines script has a JSON based textual representation. Its canonical
+file extension is \fI\&.mtlp\-json\fP\&. The script itself is a single object that can
+have the members:
+.INDENT 0.0
+.TP
+.B libraries
+An object describing the input Metal libraries from file or generated via the
+function constants specialization process. See \fI\%LIBRARIES\fP\&.
+.TP
+.B pipelines
+An object describing the compute pipelines, render pipelines, and
+tile\-render pipelines that need to be compiled into GPU binaries. See
+\fI\%PIPELINES\fP\&.
+.TP
+.B functions
+An object describing the intersection functions, and visible functions that
+need to be compiled separately into GPU binaries. See \fI\%FUNCTIONS\fP\&.
+.TP
+.B named_predicates
+An array of objects describing the named predicate definitions. Predicates
+can be used to control whether a pipeline should be compiled or ignored. See
+\fI\%PREDICATES\fP\&.
+.TP
+.B named_function_constant_values
+An array of objects describing the named function constant values
+definitions. These can be referenced by name from specialized function
+library definitions. See \fI\%NAMED FUNCTION CONSTANT VALUES\fP\&.
+.UNINDENT
+.SH LIBRARIES
+.sp
+The object describing the collection of Metal libraries can have the members:
+.INDENT 0.0
+.TP
+.B paths
+An array of objects describing a Metal library on disk. Each object can
+define the members:
+.INDENT 7.0
+.TP
+.B label \fI(required)\fP
+Unique identifier for the library in a Metal pipelines script. The label
+value is used for the \fIalias:\fP URIs to reference a function from the
+library with the given label. See \fI\%FUNCTION REFERENCE\fP\&.
+.TP
+.B path \fI(required)\fP
+Path to the Metal library on disk. If the path is relative, the library is
+resolved considering the library search paths provided with the option
+\fI\%\-L\fP to \fBmetal\-nt\fP\&.
+.UNINDENT
+.TP
+.B specialized_functions
+An array of objects describing a Metal library generated via the function
+constants specialization process. Each object can define the members:
+.INDENT 7.0
+.TP
+.B label \fI(required)\fP
+Unique identifier for the library in a Metal pipelines script. The label
+value is used for the \fIalias:\fP URIs to reference a function from the
+library with the given label. See \fI\%FUNCTION REFERENCE\fP\&.
+.TP
+.B function \fI(required)\fP
+Reference to the function to be specialized. See \fI\%FUNCTION REFERENCE\fP
+for more details about the different syntaxes to reference a function.
+.TP
+.B specialized_name
+Name of the function after specialization. If not specified, the original
+name is used.
+.TP
+.B named_constant_values
+Name of the named function constant values object to use for the constant
+specialization values. See \fI\%NAMED FUNCTION CONSTANT VALUES\fP\&.
+.TP
+.B constant_values
+An array of objects describing the constant specialization values. The
+constant specialization values defined in this array \fIoverrides\fP the
+corresponding values provided by the named function constant values object
+specified via \fInamed_function_constant_values\fP\&. See
+\fI\%FUNCTION CONSTANT VALUE\fP\&.
+.UNINDENT
+.TP
+.B stitched_libraries
+An array of objects describing a Metal stitched library. Each object is the
+equivalent structure of \fBMTLStitchedLibraryDescriptor\fP in the Metal API,
+and can define the members:
+.INDENT 7.0
+.TP
+.B label \fI(required)\fP
+Unique identifier for the library in a Metal pipelines script. The label
+value is used for the \fIalias:\fP URIs to reference a function from the
+library with the given label. See \fI\%FUNCTION REFERENCE\fP\&.
+.TP
+.B functions
+An array of functions. Each element is a reference to a stitchable function
+that is used for generating the functions associated with the function
+graphs of the given stitched library.
+See \fI\%FUNCTION REFERENCE\fP for more details about the different syntaxes
+to reference a function.
+.TP
+.B function_graphs
+An array of objects describing a function graph. See \fI\%FUNCTION GRAPH\fP\&.
+.UNINDENT
+.UNINDENT
+.SS NAMED FUNCTION CONSTANT VALUES
+.sp
+A named function constant values object can define the members:
+.INDENT 0.0
+.TP
+.B name \fI(required)\fP
+The name for the named function constant values being defined.
+.TP
+.B constant_values \fI(required)\fP
+An array of objects describing the constant specialization values. See
+\fI\%FUNCTION CONSTANT VALUE\fP\&.
+.UNINDENT
+.SS FUNCTION CONSTANT VALUE
+.sp
+A function constant value object can define the members:
+.INDENT 0.0
+.TP
+.B id_type \fI(required)\fP
+String with one of the following values:
+.INDENT 7.0
+.IP \(bu 2
+\fBFunctionConstantIndex\fP
+.IP \(bu 2
+\fBFunctionConstantName\fP
+.UNINDENT
+.TP
+.B id \fI(required)\fP
+If \fBid_type\fP is \fBFunctionConstantIndex\fP then \fBid\fP must be an object
+with a single member \fBdata\fP whose value must be an integer between \fB0\fP
+and \fB65535\fP representing the index of a function constant variable.
+.sp
+If \fBid_type\fP is \fBFunctionConstantName\fP then \fBid\fP must be a string
+whose value represents the name of function constant variable.
+.TP
+.B value_type \fI(required)\fP
+Data type of the function constant value. It must be one of the following
+string values:
+.INDENT 7.0
+.IP \(bu 2
+\fBConstantBool\fP
+.IP \(bu 2
+\fBConstantBool2\fP
+.IP \(bu 2
+\fBConstantBool3\fP
+.IP \(bu 2
+\fBConstantBool4\fP
+.IP \(bu 2
+\fBConstantChar\fP
+.IP \(bu 2
+\fBConstantChar2\fP
+.IP \(bu 2
+\fBConstantChar3\fP
+.IP \(bu 2
+\fBConstantChar4\fP
+.IP \(bu 2
+\fBConstantUChar\fP
+.IP \(bu 2
+\fBConstantUChar2\fP
+.IP \(bu 2
+\fBConstantUChar3\fP
+.IP \(bu 2
+\fBConstantUChar4\fP
+.IP \(bu 2
+\fBConstantShort\fP
+.IP \(bu 2
+\fBConstantShort2\fP
+.IP \(bu 2
+\fBConstantShort3\fP
+.IP \(bu 2
+\fBConstantShort4\fP
+.IP \(bu 2
+\fBConstantUShort\fP
+.IP \(bu 2
+\fBConstantUShort2\fP
+.IP \(bu 2
+\fBConstantUShort3\fP
+.IP \(bu 2
+\fBConstantUShort4\fP
+.IP \(bu 2
+\fBConstantInt\fP
+.IP \(bu 2
+\fBConstantInt2\fP
+.IP \(bu 2
+\fBConstantInt3\fP
+.IP \(bu 2
+\fBConstantInt4\fP
+.IP \(bu 2
+\fBConstantUInt\fP
+.IP \(bu 2
+\fBConstantUInt2\fP
+.IP \(bu 2
+\fBConstantUInt3\fP
+.IP \(bu 2
+\fBConstantUInt4\fP
+.IP \(bu 2
+\fBConstantLong\fP
+.IP \(bu 2
+\fBConstantLong2\fP
+.IP \(bu 2
+\fBConstantLong3\fP
+.IP \(bu 2
+\fBConstantLong4\fP
+.IP \(bu 2
+\fBConstantULong\fP
+.IP \(bu 2
+\fBConstantULong2\fP
+.IP \(bu 2
+\fBConstantULong3\fP
+.IP \(bu 2
+\fBConstantULong4\fP
+.IP \(bu 2
+\fBConstantFloat\fP
+.IP \(bu 2
+\fBConstantFloat2\fP
+.IP \(bu 2
+\fBConstantFloat3\fP
+.IP \(bu 2
+\fBConstantFloat4\fP
+.IP \(bu 2
+\fBConstantHalf\fP
+.IP \(bu 2
+\fBConstantHalf2\fP
+.IP \(bu 2
+\fBConstantHalf3\fP
+.IP \(bu 2
+\fBConstantHalf4\fP
+.UNINDENT
+.TP
+.B value \fI(required)\fP
+An object with a single member \fBdata\fP whose value is either a scalar or
+array of 2/3/4 integer/floating point values depending on the value of
+\fBvalue_type\fP\&.
+.UNINDENT
+.SS FUNCTION GRAPH
+.sp
+This is the equivalent structure of \fBMTLFunctionStitchingGraph\fP in the
+Metal API. A function graph object can define the members:
+.INDENT 0.0
+.TP
+.B function_name
+The name of the new stitched function.
+.TP
+.B nodes
+An array of objects describing the nodes in the function\(aqs call graph.
+Each object can define the members:
+.INDENT 7.0
+.TP
+.B node_type \fI(required)\fP
+String with one of the following values:
+.INDENT 7.0
+.IP \(bu 2
+\fBInputNode\fP
+.IP \(bu 2
+\fBFunctionNode\fP
+.UNINDENT
+.TP
+.B node \fI(required)\fP
+An object describing the given node.
+.sp
+If \fBnode_type\fP is \fBInputNode\fP then \fBnode\fP must be an object with a
+single member \fBindex\fP whose value represents the index of the given input
+node.
+.sp
+If \fBnode_type\fP is \fBFunctionNode\fP then \fBnode\fP must be an object with
+the following members:
+.INDENT 7.0
+.TP
+.B name \fI(required)\fP
+The name of the function associated with the given function node.
+.TP
+.B arguments
+An array of objects representing the node indices of the arguments used
+by the given function node. Each element must be an object with a single
+member \fBid\fP whose value is the position of the node in \fBnodes\fP
+representing the given argument. Valid values must be less than the
+position of the function node being defined.
+.TP
+.B control_dependencies
+An array of objects representing the node indices of the control
+dependencies by the given function node. Each element must be an
+object with a single member \fBid\fP whose value is the position of the
+function node in \fBnodes\fP representing the given control dependency.
+Valid values must be less than the position of the function node being
+defined.
+.UNINDENT
+.UNINDENT
+.TP
+.B output_node
+An object with a single member \fBid\fP whose value is the position of the
+function node in \fBnodes\fP that produces the return value of the new stitched
+function.
+.TP
+.B attributes
+An array of objects describing function attributes. Each element must be an
+object with the following members:
+.INDENT 7.0
+.TP
+.B attribute_type
+String with one of the following values:
+.INDENT 7.0
+.IP \(bu 2
+\fBAlwaysInlineAttribute\fP
+.UNINDENT
+.TP
+.B attribute
+An object describing the given attribute.
+.sp
+If \fBattribute_type\fP is \fBAlwaysInlineAttribute\fP then \fBattribute\fP must
+be an empty object.
+.UNINDENT
+.UNINDENT
+.SH PIPELINES
+.sp
+The object describing the collection of Metal pipelines can have the members:
+.INDENT 0.0
+.TP
+.B compute_pipelines
+An array of objects describing a Metal compute pipeline. See
+\fI\%COMPUTE PIPELINE DESCRIPTOR\fP\&.
+.TP
+.B render_pipelines
+An array of objects describing a Metal render pipeline. See
+\fI\%RENDER PIPELINE DESCRIPTOR\fP\&.
+.TP
+.B tile_render_pipelines
+An array of objects describing a Metal tile render pipeline. See
+\fI\%TILE RENDER PIPELINE DESCRIPTOR\fP\&.
+.UNINDENT
+.SS COMPUTE PIPELINE DESCRIPTOR
+.sp
+This is the equivalent structure of \fBMTLComputePipelineDescriptor\fP in the
+Metal API. A Metal compute pipeline descriptor object can have the members:
+.INDENT 0.0
+.TP
+.B enable
+A predicate expression that determines if the pipeline should be compiled or
+ignored. The default value is the empty expression. See \fI\%PREDICATES\fP\&.
+.TP
+.B compute_function \fI(required)\fP
+Reference to a kernel function. See \fI\%FUNCTION REFERENCE\fP for more details
+about the different syntaxes to reference a function.
+.TP
+.B threadgroup_size_is_multiple_of_thread_execution_width
+A boolean value that indicates if the threadgroup size is always a multiple
+of the thread execution width. The default value is \fBfalse\fP\&.
+.TP
+.B max_total_threads_per_threadgroup
+The maximum number of threads in a threadgroup when dispatching a command
+using this pipeline. If set to \fB0\fP, the implementation calculates this
+value based on the properties of the device and the compute function. The
+default value is \fB0\fP\&.
+.TP
+.B max_call_stack_depth
+The maximum function call depth from the compute function. The default value
+is \fB1\fP\&.
+.TP
+.B stage_input_descriptor
+The organization of input data for the compute function. See
+\fI\%STAGE INPUT OUTPUT DESCRIPTOR\fP\&.
+.TP
+.B buffers
+This is an array of objects describing the buffer mutability option for the
+compute function. Each array index corresponds to the same index in the
+buffer argument table for the compute function. See
+\fI\%PIPELINE BUFFER DESCRIPTOR\fP\&.
+.TP
+.B linked_functions
+The functions linked in the compute pipeline. See \fI\%LINKED FUNCTIONS\fP\&.
+.TP
+.B support_indirect_command_buffers
+A boolean value that indicates if the resulting pipeline state can be
+referenced by commands in an indirect command buffer. The default value is
+\fBfalse\fP\&.
+.TP
+.B support_adding_binary_functions
+A boolean value that indicates if the resulting pipeline state can be used to
+create new pipelines by adding binary functions to its callable functions
+list. The default value is \fBfalse\fP\&.
+.UNINDENT
+.SS RENDER PIPELINE DESCRIPTOR
+.sp
+This is the equivalent structure of \fBMTLRenderPipelineDescriptor\fP in the
+Metal API. A Metal render pipeline descriptor object can have the members:
+.INDENT 0.0
+.TP
+.B enable
+A predicate expression that determines if the pipeline should be compiled or
+ignored. The default value is the empty expression. See \fI\%PREDICATES\fP\&.
+.TP
+.B vertex_function \fI(required)\fP
+Reference to a vertex function. See \fI\%FUNCTION REFERENCE\fP for more details
+about the different syntaxes to reference a function.
+.TP
+.B fragment_function
+Reference to a fragment function. See \fI\%FUNCTION REFERENCE\fP for more
+details about the different syntaxes to reference a function.
+.TP
+.B max_vertex_call_stack_depth
+The maximum function call depth from the vertex function. The default value
+is \fB1\fP\&.
+.TP
+.B max_fragment_call_stack_depth
+The maximum function call depth from the fragment function. The default value
+is \fB1\fP\&.
+.TP
+.B vertex_descriptor
+The organization of vertex data for the vertex function. See
+\fI\%VERTEX DESCRIPTOR\fP\&.
+.TP
+.B input_primitive_topology
+The type of primitive topology the pipeline renders. It must be one of the
+following string values:
+.INDENT 7.0
+.IP \(bu 2
+\fBUnspecified\fP (default)
+.IP \(bu 2
+\fBPoint\fP
+.IP \(bu 2
+\fBLine\fP
+.IP \(bu 2
+\fBTriangle\fP
+.UNINDENT
+.TP
+.B max_tessellation_factor
+The maximum tessellation factor that the tessellator uses when tessellating
+patches. The default value is \fB16\fP\&.
+.TP
+.B tessellation_factor_scale_enabled
+A boolean value that determines if the pipeline scales the tessellation
+factor. The default value is \fBfalse\fP\&.
+.TP
+.B tessellation_factor_format
+The format of the tessellation factors in the tessellation factor buffer. It
+must be one of the following string values:
+.INDENT 7.0
+.IP \(bu 2
+\fBHalf\fP (default)
+.UNINDENT
+.TP
+.B tessellation_control_point_index_type
+The size of the control point indices in a control point index buffer. It
+must be one the following string values:
+.INDENT 7.0
+.IP \(bu 2
+\fBNone\fP (default)
+.IP \(bu 2
+\fBUInt16\fP
+.IP \(bu 2
+\fBUInt32\fP
+.UNINDENT
+.TP
+.B tessellation_factor_step_function
+The step function for determining the tessellation factors for a patch from
+the tessellation factor buffer. It must be one of the following string
+values:
+.INDENT 7.0
+.IP \(bu 2
+\fBConstant\fP (default)
+.IP \(bu 2
+\fBPerPatch\fP
+.IP \(bu 2
+\fBPerInstance\fP
+.IP \(bu 2
+\fBPerPatchAndPerInstance\fP
+.UNINDENT
+.TP
+.B tessellation_output_winding_order
+The winding order of triangles from the tessellator. It must be one of the
+following string values:
+.INDENT 7.0
+.IP \(bu 2
+\fBClockwise\fP (default)
+.IP \(bu 2
+\fBCounterClockwise\fP\&.
+.UNINDENT
+.TP
+.B tessellation_partition_mode
+The partitioning mode that the tessellator uses to derive the number and
+spacing of segments for subdividing a corresponding edge. It must be one of
+the following string values:
+.INDENT 7.0
+.IP \(bu 2
+\fBPow2\fP (default)
+.IP \(bu 2
+\fBInteger\fP
+.IP \(bu 2
+\fBFractionalOdd\fP
+.IP \(bu 2
+\fBFractionalEven\fP
+.UNINDENT
+.TP
+.B max_vertex_amplification_count
+The maximum vertex amplification count you can set when encoding render
+commands. The default value is \fB1\fP\&.
+.TP
+.B rasterization_enabled
+A boolean value that determines if the pipeline rasterizes primitives. The
+default value is \fBtrue\fP\&.
+.TP
+.B alpha_to_coverage_enabled
+A boolean value that indicates if the alpha channel fragment output for color
+attachments is read and used to compute a sample coverage mask. The default
+value is \fBfalse\fP\&.
+.TP
+.B alpha_to_one_enabled
+A boolean value that indicates if the alpha channel values for color
+attachments are forced to the largest representable value. The default value
+is \fBfalse\fP\&.
+.TP
+.B raster_sample_count
+The number of samples in each fragment. The default value is \fB1\fP\&.
+.TP
+.B color_attachments
+An array of objects describing the color data. Each object is the equivalent
+structure of \fBMTLRenderPipelineColorAttachmentDescriptor\fP in the Metal API,
+and can define the members:
+.INDENT 7.0
+.TP
+.B pixel_format
+The pixel format of the color attachment\(aqs texture. The default value is
+\fBInvalid\fP\&. See \fI\%PIXEL FORMAT\fP\&.
+.TP
+.B write_mask
+A bitmask that restricts which color channels are written into the texture.
+It must be a string containing one or more of the following string values
+separated by space:
+.INDENT 7.0
+.IP \(bu 2
+\fBNone\fP
+.IP \(bu 2
+\fBRed\fP
+.IP \(bu 2
+\fBGreen\fP
+.IP \(bu 2
+\fBBlue\fP
+.IP \(bu 2
+\fBAlpha\fP
+.IP \(bu 2
+\fBAll\fP (default)
+.UNINDENT
+.TP
+.B blending_enabled
+A boolean value that determines if blending is enabled. The default value
+is \fBfalse\fP\&.
+.TP
+.B alpha_blend_operation
+The blend operation assigned for the alpha data. The default value is
+\fBAdd\fP\&. See \fI\%BLEND OPERATION\fP\&.
+.TP
+.B rgb_blend_operation
+The blend operation assigned for the RGB data. The default value is
+\fBAdd\fP\&. See \fI\%BLEND OPERATION\fP\&.
+.TP
+.B destination_alpha_blend_factor
+The destination blend factor used by the alpha blend operation. The default
+value is \fBZero\fP\&. See \fI\%BLEND FACTOR\fP\&.
+.TP
+.B destination_rgb_blend_factor
+The destination blend factor used by the RGB blend operation. The default
+value is \fBZero\fP\&. See \fI\%BLEND FACTOR\fP\&.
+.TP
+.B source_alpha_blend_factor
+The source blend factor used by the alpha blend operation. The default
+value is \fBOne\fP\&. See \fI\%BLEND FACTOR\fP\&.
+.TP
+.B source_rgb_blend_factor
+The source blend factor used by the RGB blend operation. The default
+value is \fBOne\fP\&. See \fI\%BLEND FACTOR\fP\&.
+.UNINDENT
+.TP
+.B depth_attachment_pixel_format
+The pixel format of the attachment that stores depth data. The default value
+is \fBInvalid\fP\&. See \fI\%PIXEL FORMAT\fP\&.
+.TP
+.B stencil_attachment_pixel_format
+The pixel format of the attachment that stores stencil data. The default
+value is \fBInvalid\fP\&. See \fI\%PIXEL FORMAT\fP\&.
+.TP
+.B vertex_buffers
+This is an array of objects describing the buffer mutability option for the
+vertex function. Each array index corresponds to the same index in the buffer
+argument table for the vertex function. See \fI\%PIPELINE BUFFER DESCRIPTOR\fP\&.
+.TP
+.B fragment_buffers
+This is an array of objects describing the buffer mutability option for the
+fragment function. Each array index corresponds to the same index in the
+buffer argument table for the fragment function. See
+\fI\%PIPELINE BUFFER DESCRIPTOR\fP\&.
+.TP
+.B vertex_linked_functions
+The functions linked in the vertex stage of the render pipeline. See
+\fI\%LINKED FUNCTIONS\fP\&.
+.TP
+.B fragment_linked_functions
+The functions linked in the fragment stage of the render pipeline. See
+\fI\%LINKED FUNCTIONS\fP\&.
+.TP
+.B support_indirect_command_buffers
+A boolean value that indicates if the resulting pipeline state can be
+referenced by commands in an indirect command buffer. The default value is
+\fBfalse\fP\&.
+.TP
+.B support_adding_vertex_binary_functions
+A boolean value that indicates if the resulting pipeline state can be used to
+create new pipelines by adding binary functions to the vertex callable
+functions list. The default value is \fBfalse\fP\&.
+.TP
+.B support_adding_fragment_binary_functions
+A boolean value that indicates if the resulting pipeline state can be used to
+create new pipelines by adding binary functions to the fragment callable
+functions list. The default value is \fBfalse\fP\&.
+.UNINDENT
+.SS TILE RENDER PIPELINE DESCRIPTOR
+.sp
+This is the equivalent structure of \fBMTLTileRenderPipelineDescriptor\fP in the
+Metal API. A Metal tile render pipeline descriptor object can have the members:
+.INDENT 0.0
+.TP
+.B enable
+A predicate expression that determines if the pipeline should be compiled or
+ignored. The default value is the empty expression. See \fI\%PREDICATES\fP\&.
+.TP
+.B tile_function \fI(required)\fP
+Reference to a kernel or fragment function. See \fI\%FUNCTION REFERENCE\fP for
+more details about the different syntaxes to reference a function.
+.TP
+.B threadgroup_size_matches_tile_size
+A boolean value that indicates if all threadgroups completely cover tiles.
+The default value is \fBfalse\fP\&.
+.TP
+.B max_total_threads_per_threadgroup
+The maximum number of threads in a threadgroup when dispatching a command
+using this pipeline.  If set to \fB0\fP, the implementation calculates this value
+based on the properties of the device and the tile function. The default
+value is \fB0\fP\&.
+.TP
+.B max_call_stack_depth
+The maximum function call depth from the tile function. The default value
+is \fB1\fP\&.
+.TP
+.B raster_sample_count
+The number of samples in each fragment. The default value is \fB1\fP\&.
+.TP
+.B color_attachments
+An array of objects describing the color data. Each object is the equivalent
+structure of \fBMTLTileRenderPipelineColorAttachmentDescriptor\fP in the Metal
+API, and can define the members:
+.INDENT 7.0
+.TP
+.B pixel_format
+The pixel format associated with the tile shading render pipeline. The
+default value is \fBInvalid\fP\&. See \fI\%PIXEL FORMAT\fP\&.
+.UNINDENT
+.TP
+.B tile_buffers
+This is an array of objects describing the buffer mutability option for the
+tile function. Each array index corresponds to the same index in the buffer
+argument table for the tile function. See \fI\%PIPELINE BUFFER DESCRIPTOR\fP\&.
+.TP
+.B linked_functions
+The functions linked in the tile render pipeline. See \fI\%LINKED FUNCTIONS\fP\&.
+.TP
+.B support_adding_binary_functions
+A boolean value that indicates if the resulting pipeline state can be used to
+create new pipelines by adding binary functions to its callable functions
+list. The default value is \fBfalse\fP\&.
+.UNINDENT
+.SS STAGE INPUT OUTPUT DESCRIPTOR
+.sp
+This is the equivalent structure of \fBMTLStageInputOutputDescriptor\fP in the
+Metal API. A Metal stage/output descriptor object can have the members:
+.INDENT 0.0
+.TP
+.B attributes
+An array of objects describing where and how to fetch data for the function.
+Each object is the equivalent structure of \fBMTLAttributeDescriptor\fP in the
+Metal API, and can define the members:
+.INDENT 7.0
+.TP
+.B buffer_index
+The index in the argument table for the buffer that contains the data for
+the attribute.
+.TP
+.B offset
+The byte offset of the data from the start of the buffer data.
+.TP
+.B format
+The format of the attribute\(aqs data. See \fI\%ATTRIBUTE FORMAT\fP\&.
+.UNINDENT
+.TP
+.B layouts
+An array of objects describing how a function fetches input data for
+attributes from buffers. Each array index corresponds to the same index in
+the buffer argument table for the function. Each object is the equivalent
+structure of \fBMTLBufferLayoutDescriptor\fP in the Metal API, and can define
+the members:
+.INDENT 7.0
+.TP
+.B stride
+The distance in bytes between entries in the buffer for the attributes.
+.TP
+.B step_function
+Determines which aspect of command execution triggers data fetches. It must
+be one of the following string values:
+.INDENT 7.0
+.IP \(bu 2
+\fBConstant\fP
+.IP \(bu 2
+\fBPerInstance\fP
+.IP \(bu 2
+\fBPerPatch\fP
+.IP \(bu 2
+\fBPerPatchControlPoint\fP
+.IP \(bu 2
+\fBPerVertex\fP
+.IP \(bu 2
+\fBThreadPositionInGridX\fP
+.IP \(bu 2
+\fBThreadPositionInGridY\fP
+.IP \(bu 2
+\fBThreadPositionInGridXIndexed\fP
+.IP \(bu 2
+\fBThreadPositionInGridYIndexed\fP
+.UNINDENT
+.TP
+.B step_rate
+The rate at which data is fetched by the step function.
+.UNINDENT
+.TP
+.B index_buffer_index
+The location of the index buffer for a compute function using indexed thread
+addressing.
+.TP
+.B index_type
+The data type of the indices stored in the index buffer. It must be one of
+the following string values:
+.INDENT 7.0
+.IP \(bu 2
+\fBUInt16\fP
+.IP \(bu 2
+\fBUInt32\fP
+.UNINDENT
+.UNINDENT
+.SS VERTEX DESCRIPTOR
+.sp
+This is the equivalent structure of \fBMTLVertexDescriptor\fP in the Metal API. A
+Metal vertex descriptor object can have the members:
+.INDENT 0.0
+.TP
+.B attributes
+An array of objects describing where and how to fetch data for the function.
+Each object is the equivalent structure of \fBMTLVertexAttributeDescriptor\fP
+in the Metal API, and can define the members:
+.INDENT 7.0
+.TP
+.B buffer_index
+The index in the argument table for the buffer that contains the data for
+the attribute.
+.TP
+.B offset
+The byte offset of the data from the start of the buffer data.
+.TP
+.B format
+The format of the attribute\(aqs data. See \fI\%ATTRIBUTE FORMAT\fP\&.
+.UNINDENT
+.TP
+.B layouts
+An array of objects describing how a function fetches input data for
+attributes from buffers. Each array index corresponds to the same index in
+the buffer argument table for the function. Each object is the equivalent
+structure of \fBMTLVertexBufferLayoutDescriptor\fP in the Metal API and can
+define the members:
+.INDENT 7.0
+.TP
+.B stride
+The distance in bytes between entries in the buffer for the attributes.
+.TP
+.B step_function
+Determines which aspect of command execution triggers data fetches. It must
+be one of the following string values:
+.INDENT 7.0
+.IP \(bu 2
+\fBConstant\fP
+.IP \(bu 2
+\fBPerInstance\fP
+.IP \(bu 2
+\fBPerPatch\fP
+.IP \(bu 2
+\fBPerPatchControlPoint\fP
+.IP \(bu 2
+\fBPerVertex\fP (default)
+.UNINDENT
+.TP
+.B step_rate
+The rate at which data is fetched by the step function.
+.UNINDENT
+.UNINDENT
+.SS PIPELINE BUFFER DESCRIPTOR
+.sp
+This is the equivalent structure of \fBMTLPipelineBufferDescriptor\fP in the
+Metal API. A Metal pipeline buffer descriptor can define the members:
+.INDENT 0.0
+.TP
+.B mutability
+A mutability option that determines if a buffer\(aqs contents can be updated
+before related commands use the buffer. It must be one of the following
+string values:
+.INDENT 7.0
+.IP \(bu 2
+\fBDefault\fP (default)
+.IP \(bu 2
+\fBMutable\fP
+.IP \(bu 2
+\fBImmutable\fP
+.UNINDENT
+.UNINDENT
+.SS LINKED FUNCTIONS
+.sp
+This is the equivalent structure of \fBMTLLinkedFunctions\fP in the Metal API. A
+Metal linked functions object can have the members:
+.INDENT 0.0
+.TP
+.B functions
+An array of functions. Each element is a reference to a visible or
+intersection function that is linked into the given pipeline stage.
+See \fI\%FUNCTION REFERENCE\fP for more details about the different syntaxes to
+reference a function.
+.TP
+.B private_functions
+An array of functions. Each element is a reference to a visible or
+intersection function that is linked into the given pipeline stage without
+exporting the function publicly. See \fI\%FUNCTION REFERENCE\fP for more
+details about the different syntaxes to reference a function.
+.TP
+.B binary_functions
+An array of binary functions. Each element is the name of a binary function
+linked to the given pipeline stage.
+.TP
+.B groups
+An array of objects describing a group of functions. These describe the
+definition of groups referenced in a Metal program via the
+\fI[[function_groups(...)]]\fP attribute. Each object can define the members:
+.INDENT 7.0
+.TP
+.B name \fI(required)\fP
+.UNINDENT
+.sp
+The name of the group of functions.
+.INDENT 7.0
+.TP
+.B functions
+.UNINDENT
+.sp
+An array of functions. Each element is the name of function listed in the
+\fIfunctions\fP array.
+.UNINDENT
+.SS ATTRIBUTE FORMAT
+.sp
+This is the equivalent of \fBMTLVertexFormat\fP and \fBMTLAttributeFormat\fP in the
+Metal API. It must be one of the following string values:
+.INDENT 0.0
+.IP \(bu 2
+\fBInvalid\fP
+.IP \(bu 2
+\fBChar\fP
+.IP \(bu 2
+\fBChar2\fP
+.IP \(bu 2
+\fBChar3\fP
+.IP \(bu 2
+\fBChar4\fP
+.IP \(bu 2
+\fBUChar\fP
+.IP \(bu 2
+\fBUChar2\fP
+.IP \(bu 2
+\fBUChar3\fP
+.IP \(bu 2
+\fBUChar4\fP
+.IP \(bu 2
+\fBUCharNormalized\fP
+.IP \(bu 2
+\fBUChar2Normalized\fP
+.IP \(bu 2
+\fBUChar3Normalized\fP
+.IP \(bu 2
+\fBUChar4Normalized\fP
+.IP \(bu 2
+\fBCharNormalized\fP
+.IP \(bu 2
+\fBChar2Normalized\fP
+.IP \(bu 2
+\fBChar3Normalized\fP
+.IP \(bu 2
+\fBChar4Normalized\fP
+.IP \(bu 2
+\fBShort\fP
+.IP \(bu 2
+\fBShort2\fP
+.IP \(bu 2
+\fBShort3\fP
+.IP \(bu 2
+\fBShort4\fP
+.IP \(bu 2
+\fBUShort\fP
+.IP \(bu 2
+\fBUShort2\fP
+.IP \(bu 2
+\fBUShort3\fP
+.IP \(bu 2
+\fBUShort4\fP
+.IP \(bu 2
+\fBShortNormalized\fP
+.IP \(bu 2
+\fBShort2Normalized\fP
+.IP \(bu 2
+\fBShort3Normalized\fP
+.IP \(bu 2
+\fBShort4Normalized\fP
+.IP \(bu 2
+\fBUShortNormalized\fP
+.IP \(bu 2
+\fBUShort2Normalized\fP
+.IP \(bu 2
+\fBUShort3Normalized\fP
+.IP \(bu 2
+\fBUShort4Normalized\fP
+.IP \(bu 2
+\fBInt\fP
+.IP \(bu 2
+\fBInt2\fP
+.IP \(bu 2
+\fBInt3\fP
+.IP \(bu 2
+\fBInt4\fP
+.IP \(bu 2
+\fBUInt\fP
+.IP \(bu 2
+\fBUInt2\fP
+.IP \(bu 2
+\fBUInt3\fP
+.IP \(bu 2
+\fBUInt4\fP
+.IP \(bu 2
+\fBInt1010102Normalized\fP
+.IP \(bu 2
+\fBUInt1010102Normalized\fP
+.IP \(bu 2
+\fBUChar4Normalized_BGRA\fP
+.IP \(bu 2
+\fBHalf\fP
+.IP \(bu 2
+\fBHalf2\fP
+.IP \(bu 2
+\fBHalf3\fP
+.IP \(bu 2
+\fBHalf4\fP
+.IP \(bu 2
+\fBFloat\fP
+.IP \(bu 2
+\fBFloat2\fP
+.IP \(bu 2
+\fBFloat3\fP
+.IP \(bu 2
+\fBFloat4\fP
+.UNINDENT
+.SS PIXEL FORMAT
+.sp
+This is the equivalent of \fBMTLPixelFormat\fP in the Metal API. It must be one
+of the following string values:
+.INDENT 0.0
+.IP \(bu 2
+\fBInvalid\fP
+.IP \(bu 2
+\fBA8Unorm\fP
+.IP \(bu 2
+\fBR8Unorm\fP
+.IP \(bu 2
+\fBR8Unorm_sRGB\fP
+.IP \(bu 2
+\fBR8Snorm\fP
+.IP \(bu 2
+\fBR8Uint\fP
+.IP \(bu 2
+\fBR8Sint\fP
+.IP \(bu 2
+\fBR16Unorm\fP
+.IP \(bu 2
+\fBR16Snorm\fP
+.IP \(bu 2
+\fBR16Uint\fP
+.IP \(bu 2
+\fBR16Sint\fP
+.IP \(bu 2
+\fBR16Float\fP
+.IP \(bu 2
+\fBRG8Unorm\fP
+.IP \(bu 2
+\fBRG8Unorm_sRGB\fP
+.IP \(bu 2
+\fBRG8Snorm\fP
+.IP \(bu 2
+\fBRG8Uint\fP
+.IP \(bu 2
+\fBRG8Sint\fP
+.IP \(bu 2
+\fBB5G6R5Unorm\fP
+.IP \(bu 2
+\fBA1BGR5Unorm\fP
+.IP \(bu 2
+\fBABGR4Unorm\fP
+.IP \(bu 2
+\fBBGR5A1Unorm\fP
+.IP \(bu 2
+\fBR32Uint\fP
+.IP \(bu 2
+\fBR32Sint\fP
+.IP \(bu 2
+\fBR32Float\fP
+.IP \(bu 2
+\fBRG16Unorm\fP
+.IP \(bu 2
+\fBRG16Snorm\fP
+.IP \(bu 2
+\fBRG16Uint\fP
+.IP \(bu 2
+\fBRG16Sint\fP
+.IP \(bu 2
+\fBRG16Float\fP
+.IP \(bu 2
+\fBRGBA8Unorm\fP
+.IP \(bu 2
+\fBRGBA8Unorm_sRGB\fP
+.IP \(bu 2
+\fBRGBA8Snorm\fP
+.IP \(bu 2
+\fBRGBA8Uint\fP
+.IP \(bu 2
+\fBRGBA8Sint\fP
+.IP \(bu 2
+\fBBGRA8Unorm\fP
+.IP \(bu 2
+\fBBGRA8Unorm_sRGB\fP
+.IP \(bu 2
+\fBRGB10A2Unorm\fP
+.IP \(bu 2
+\fBRGB10A2Uint\fP
+.IP \(bu 2
+\fBRG11B10Float\fP
+.IP \(bu 2
+\fBRGB9E5Float\fP
+.IP \(bu 2
+\fBBGR10A2Unorm\fP
+.IP \(bu 2
+\fBRG32Uint\fP
+.IP \(bu 2
+\fBRG32Sint\fP
+.IP \(bu 2
+\fBRG32Float\fP
+.IP \(bu 2
+\fBRGBA16Unorm\fP
+.IP \(bu 2
+\fBRGBA16Snorm\fP
+.IP \(bu 2
+\fBRGBA16Uint\fP
+.IP \(bu 2
+\fBRGBA16Sint\fP
+.IP \(bu 2
+\fBRGBA16Float\fP
+.IP \(bu 2
+\fBRGBA32Uint\fP
+.IP \(bu 2
+\fBRGBA32Sint\fP
+.IP \(bu 2
+\fBRGBA32Float\fP
+.IP \(bu 2
+\fBBC1_RGBA\fP
+.IP \(bu 2
+\fBBC1_RGBA_sRGB\fP
+.IP \(bu 2
+\fBBC2_RGBA\fP
+.IP \(bu 2
+\fBBC2_RGBA_sRGB\fP
+.IP \(bu 2
+\fBBC3_RGBA\fP
+.IP \(bu 2
+\fBBC3_RGBA_sRGB\fP
+.IP \(bu 2
+\fBBC4_RUnorm\fP
+.IP \(bu 2
+\fBBC4_RSnorm\fP
+.IP \(bu 2
+\fBBC5_RGUnorm\fP
+.IP \(bu 2
+\fBBC5_RGSnorm\fP
+.IP \(bu 2
+\fBBC6H_RGBFloat\fP
+.IP \(bu 2
+\fBBC6H_RGBUfloat\fP
+.IP \(bu 2
+\fBBC7_RGBAUnorm\fP
+.IP \(bu 2
+\fBBC7_RGBAUnorm_sRGB\fP
+.IP \(bu 2
+\fBPVRTC_RGB_2BPP\fP
+.IP \(bu 2
+\fBPVRTC_RGB_2BPP_sRGB\fP
+.IP \(bu 2
+\fBPVRTC_RGB_4BPP\fP
+.IP \(bu 2
+\fBPVRTC_RGB_4BPP_sRGB\fP
+.IP \(bu 2
+\fBPVRTC_RGBA_2BPP\fP
+.IP \(bu 2
+\fBPVRTC_RGBA_2BPP_sRGB\fP
+.IP \(bu 2
+\fBPVRTC_RGBA_4BPP\fP
+.IP \(bu 2
+\fBPVRTC_RGBA_4BPP_sRGB\fP
+.IP \(bu 2
+\fBEAC_R11Unorm\fP
+.IP \(bu 2
+\fBEAC_R11Snorm\fP
+.IP \(bu 2
+\fBEAC_RG11Unorm\fP
+.IP \(bu 2
+\fBEAC_RG11Snorm\fP
+.IP \(bu 2
+\fBEAC_RGBA8\fP
+.IP \(bu 2
+\fBEAC_RGBA8_sRGB\fP
+.IP \(bu 2
+\fBETC2_RGB8\fP
+.IP \(bu 2
+\fBETC2_RGB8_sRGB\fP
+.IP \(bu 2
+\fBETC2_RGB8A1\fP
+.IP \(bu 2
+\fBETC2_RGB8A1_sRGB\fP
+.IP \(bu 2
+\fBASTC_4x4_sRGB\fP
+.IP \(bu 2
+\fBASTC_5x4_sRGB\fP
+.IP \(bu 2
+\fBASTC_5x5_sRGB\fP
+.IP \(bu 2
+\fBASTC_6x5_sRGB\fP
+.IP \(bu 2
+\fBASTC_6x6_sRGB\fP
+.IP \(bu 2
+\fBASTC_8x5_sRGB\fP
+.IP \(bu 2
+\fBASTC_8x6_sRGB\fP
+.IP \(bu 2
+\fBASTC_8x8_sRGB\fP
+.IP \(bu 2
+\fBASTC_10x5_sRGB\fP
+.IP \(bu 2
+\fBASTC_10x6_sRGB\fP
+.IP \(bu 2
+\fBASTC_10x8_sRGB\fP
+.IP \(bu 2
+\fBASTC_10x10_sRGB\fP
+.IP \(bu 2
+\fBASTC_12x10_sRGB\fP
+.IP \(bu 2
+\fBASTC_12x12_sRGB\fP
+.IP \(bu 2
+\fBASTC_4x4_LDR\fP
+.IP \(bu 2
+\fBASTC_5x4_LDR\fP
+.IP \(bu 2
+\fBASTC_5x5_LDR\fP
+.IP \(bu 2
+\fBASTC_6x5_LDR\fP
+.IP \(bu 2
+\fBASTC_6x6_LDR\fP
+.IP \(bu 2
+\fBASTC_8x5_LDR\fP
+.IP \(bu 2
+\fBASTC_8x6_LDR\fP
+.IP \(bu 2
+\fBASTC_8x8_LDR\fP
+.IP \(bu 2
+\fBASTC_10x5_LDR\fP
+.IP \(bu 2
+\fBASTC_10x6_LDR\fP
+.IP \(bu 2
+\fBASTC_10x8_LDR\fP
+.IP \(bu 2
+\fBASTC_10x10_LDR\fP
+.IP \(bu 2
+\fBASTC_12x10_LDR\fP
+.IP \(bu 2
+\fBASTC_12x12_LDR\fP
+.IP \(bu 2
+\fBASTC_4x4_HDR\fP
+.IP \(bu 2
+\fBASTC_5x4_HDR\fP
+.IP \(bu 2
+\fBASTC_5x5_HDR\fP
+.IP \(bu 2
+\fBASTC_6x5_HDR\fP
+.IP \(bu 2
+\fBASTC_6x6_HDR\fP
+.IP \(bu 2
+\fBASTC_8x5_HDR\fP
+.IP \(bu 2
+\fBASTC_8x6_HDR\fP
+.IP \(bu 2
+\fBASTC_8x8_HDR\fP
+.IP \(bu 2
+\fBASTC_10x5_HDR\fP
+.IP \(bu 2
+\fBASTC_10x6_HDR\fP
+.IP \(bu 2
+\fBASTC_10x8_HDR\fP
+.IP \(bu 2
+\fBASTC_10x10_HDR\fP
+.IP \(bu 2
+\fBASTC_12x10_HDR\fP
+.IP \(bu 2
+\fBASTC_12x12_HDR\fP
+.IP \(bu 2
+\fBGBGR422\fP
+.IP \(bu 2
+\fBBGRG422\fP
+.IP \(bu 2
+\fBDepth16Unorm\fP
+.IP \(bu 2
+\fBDepth32Float\fP
+.IP \(bu 2
+\fBStencil8\fP
+.IP \(bu 2
+\fBDepth24Unorm_Stencil8\fP
+.IP \(bu 2
+\fBDepth32Float_Stencil8\fP
+.IP \(bu 2
+\fBX32_Stencil8\fP
+.IP \(bu 2
+\fBX24_Stencil8\fP
+.IP \(bu 2
+\fBBGRA10_XR\fP
+.IP \(bu 2
+\fBBGRA10_XR_sRGB\fP
+.IP \(bu 2
+\fBBGR10_XR\fP
+.IP \(bu 2
+\fBBGR10_XR_sRGB\fP
+.IP \(bu 2
+\fBBGRA10Uint\fP
+.IP \(bu 2
+\fBBGRA10Unorm\fP
+.IP \(bu 2
+\fBBGRA10Unorm_sRGB\fP
+.IP \(bu 2
+\fBBGRA10Unorm_HLG\fP
+.IP \(bu 2
+\fBBGRA10Unorm_PQ\fP
+.UNINDENT
+.SS BLEND OPERATION
+.sp
+This is the equivalent of \fBMTLBlendOperation\fP in the Metal API. It must be
+one of the following string values:
+.INDENT 0.0
+.IP \(bu 2
+\fBAdd\fP
+.IP \(bu 2
+\fBSubtract\fP
+.IP \(bu 2
+\fBReverseSubtract\fP
+.IP \(bu 2
+\fBMin\fP
+.IP \(bu 2
+\fBMax\fP
+.UNINDENT
+.SS BLEND FACTOR
+.sp
+This is the equivalent of \fBMTLBlendFactor\fP in the Metal API. It must be one
+of the following string values:
+.INDENT 0.0
+.IP \(bu 2
+\fBZero\fP
+.IP \(bu 2
+\fBOne\fP
+.IP \(bu 2
+\fBSourceColor\fP
+.IP \(bu 2
+\fBOneMinusSourceColor\fP
+.IP \(bu 2
+\fBSourceAlpha\fP
+.IP \(bu 2
+\fBOneMinusSourceAlpha\fP
+.IP \(bu 2
+\fBDestinationColor\fP
+.IP \(bu 2
+\fBOneMinusDestinationColor\fP
+.IP \(bu 2
+\fBDestinationAlpha\fP
+.IP \(bu 2
+\fBOneMinusDestinationAlpha\fP
+.IP \(bu 2
+\fBSourceAlphaSaturated\fP
+.IP \(bu 2
+\fBBlendColor\fP
+.IP \(bu 2
+\fBOneMinusBlendColor\fP
+.IP \(bu 2
+\fBBlendAlpha\fP
+.IP \(bu 2
+\fBOneMinusBlendAlpha\fP
+.IP \(bu 2
+\fBSource1Color\fP
+.IP \(bu 2
+\fBOneMinusSource1Color\fP
+.IP \(bu 2
+\fBSource1Alpha\fP
+.IP \(bu 2
+\fBOneMinusSource1Alpha\fP
+.UNINDENT
+.SH FUNCTIONS
+.sp
+The object describing the collection of Metal binary functions can have the
+members:
+.INDENT 0.0
+.TP
+.B intersection_functions
+An array of objects describing a Metal binary intersection function. See
+\fI\%INTERSECTION FUNCTION DESCRIPTOR\fP\&.
+.TP
+.B visible_functions
+An array of objects describing a Metal binary visible function. See
+\fI\%VISIBLE FUNCTION DESCRIPTOR\fP\&.
+.UNINDENT
+.SS INTERSECTION FUNCTION DESCRIPTOR
+.sp
+A Metal binary intersection function descriptor object can have the members:
+.INDENT 0.0
+.TP
+.B enable
+A predicate expression that determines if the function should be compiled or
+ignored. The default value is the empty expression. See \fI\%PREDICATES\fP\&.
+.TP
+.B function \fI(required)\fP
+Reference to an intersection function. See \fI\%FUNCTION REFERENCE\fP for more
+details about the different syntaxes to reference a function.
+.UNINDENT
+.SS VISIBLE FUNCTION DESCRIPTOR
+.sp
+A Metal binary visible function descriptor object can have the members:
+.INDENT 0.0
+.TP
+.B enable
+A predicate expression that determines if the function should be compiled or
+ignored. The default value is the empty expression. See \fI\%PREDICATES\fP\&.
+.TP
+.B function \fI(required)\fP
+Reference to a visible function. See \fI\%FUNCTION REFERENCE\fP for more
+details about the different syntaxes to reference a function.
+.UNINDENT
+.SH FUNCTION REFERENCE
+.sp
+Referencing functions in Metal libraries can be done in different ways based on
+the kind of library being referenced.
+.SS FUNCTION NAME
+.sp
+The function name shall be used in the case the desired function is part of the
+input library specified as a command line argument to \fBmetal\-nt\fP\&.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+{
+  \(dqpipelines\(dq: {
+    \(dqcompute_pipelines\(dq: [
+      {
+        \(dqcompute_function\(dq: \(dqmy_kernel_function\(dq
+      }
+    ]
+  }
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SS ALIAS URI
+.sp
+The syntax \fBalias:<library\-identifier>#<function\-name>\fP shall be used in the
+case the desired function is part of a library defined in the \fBlibraries\fP
+object of the Metal script.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+{
+  \(dqlibraries\(dq: {
+    \(dqpaths\(dq: [
+      {
+        \(dqlabel\(dq: \(dqlib1\(dq,
+        \(dqpath\(dq: \(dqpath/to/lib1.metallib\(dq
+      }
+    ]
+  },
+  \(dqpipelines\(dq: {
+    \(dqcompute_pipelines\(dq: [
+      {
+        \(dqcompute_function\(dq: \(dqalias:lib1#my_kernel_function\(dq
+      }
+    ]
+  }
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SS FILE URI
+.sp
+The syntax \fBfile:<path\-to\-library\-file>#<function\-name>\fP shall be used in the
+case the desired function is part of a library file on disk.
+.sp
+Paths can either be absolute or relative. Relative paths are always resolved
+using the library search paths provided with the option \fI\%\-L\fP to
+\fBmetal\-nt\fP\&.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+{
+  \(dqpipelines\(dq: {
+    \(dqcompute_pipelines\(dq: [
+      {
+        \(dqcompute_function\(dq: \(dqfile:path/to/lib1.metallib#my_kernel_function\(dq
+      }
+    ]
+  }
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH PREDICATES
+.sp
+A predicate expression is an arbitrary boolean expression combining builtin
+predicates and user defined named predicates with the operator \fB&&\fP (logical
+AND), \fB||\fP (logical OR), and \fB!\fP (logical NOT). If a predicate expression
+is empty it is evaluated to \fBtrue\fP\&.
+.SS BUILTIN PREDICATES
+.INDENT 0.0
+.TP
+.B supportsFamily(<family>)
+The \fBsupportsFamily(<family>)\fP predicate evaluates to \fBtrue\fP if the target
+architecture specified with the option \fI\%\-arch\fP to \fBmetal\-nt\fP
+supports the specified family. The supported \fB<family>\fP values are:
+.INDENT 7.0
+.IP \(bu 2
+\fBapple1\fP
+.IP \(bu 2
+\fBapple2\fP
+.IP \(bu 2
+\fBapple3\fP
+.IP \(bu 2
+\fBapple4\fP
+.IP \(bu 2
+\fBapple5\fP
+.IP \(bu 2
+\fBapple6\fP
+.IP \(bu 2
+\fBapple7\fP
+.IP \(bu 2
+\fBapple8\fP
+.IP \(bu 2
+\fBapple9\fP
+.IP \(bu 2
+\fBmac2\fP
+.IP \(bu 2
+\fBcommon1\fP
+.IP \(bu 2
+\fBcommon2\fP
+.IP \(bu 2
+\fBcommon3\fP
+.IP \(bu 2
+\fBmetal3\fP
+.UNINDENT
+.UNINDENT
+.SS NAMED PREDICATE
+.sp
+It is possible to define named predicates in a Metal pipelines script. Each
+object describing a named predicate can define the members:
+.INDENT 0.0
+.TP
+.B name \fI(required)\fP
+The name for the predicate being defined.
+.TP
+.B predicate \fI(required)\fP
+Predicate expression. It can reference other named predicates previously
+defined.
+.UNINDENT
+.sp
+A named predicate can be referenced in an expression with the syntax
+\fB$<predicate\-name>()\fP\&.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+{
+  \(dqnamed_predicates\(dq: [
+    {
+      \(dqname\(dq: \(dqmyPredicate1\(dq,
+      \(dqpredicate\(dq: \(dqsupportsFamily(apple6) || supportsFamily(mac2)\(dq
+    },
+    {
+      \(dqname\(dq: \(dqmyPredicate2\(dq,
+      \(dqpredicate\(dq: \(dq$myPredicate1() && !supportsFamily(common1)\(dq
+    }
+  ],
+  \(dqpipelines\(dq: {
+    \(dqcompute_pipelines\(dq: [
+      {
+        \(dqcompute_function\(dq: \(dqmy_kernel_basic\(dq
+      },
+      {
+        \(dqenable\(dq: \(dq$myPredicate1()\(dq,
+        \(dqcompute_function\(dq: \(dqmy_kernel_advanced\(dq
+      },
+      {
+        \(dqenable\(dq: \(dq$myPredicate2() || supportsFamily(apple8) || supportsFamily(metal3)\(dq,
+        \(dqcompute_function\(dq: \(dqmy_kernel_more_advanced\(dq
+      }
+    ]
+  }
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH EXAMPLES
+.SS Implicit input library
+.sp
+This example shows a Metal pipelines script with two compute pipelines and
+three render pipelines. All the functions are from the input library provided
+as a command line argument to \fBmetal\-nt\fP\&.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+{
+  \(dqpipelines\(dq: {
+    \(dqcompute_pipelines\(dq: [
+      {
+        \(dqcompute_function\(dq: \(dqmy_kernel_1\(dq
+      },
+      {
+        \(dqcompute_function\(dq: \(dqmy_kernel_2\(dq
+      }
+    ],
+    \(dqrender_pipelines\(dq: [
+      {
+        \(dqvertex_function\(dq: \(dqmy_vertex\(dq,
+        \(dqfragment_function\(dq: \(dqmy_fragment_1\(dq,
+        \(dqcolor_attachments\(dq: [
+          {
+            \(dqpixel_format\(dq: \(dqBGRA8Unorm\(dq
+          }
+        ]
+      },
+      {
+        \(dqvertex_function\(dq: \(dqmy_vertex\(dq,
+        \(dqfragment_function\(dq: \(dqmy_fragment_2\(dq,
+        \(dqcolor_attachments\(dq: [
+          {
+            \(dqpixel_format\(dq: \(dqBGRA8Unorm\(dq
+          }
+        ]
+      },
+      {
+        \(dqvertex_function\(dq: \(dqmy_vertex_side_effects\(dq,
+        \(dqrasterization_enabled\(dq: false
+      }
+    ]
+  }
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SS Specialized functions
+.sp
+This example shows a Metal pipelines script with two render pipelines. The
+fragment functions used in these render pipelines are specialized functions,
+hence the script contains a description of the specialization process. Since
+the only way to reference the specialized function libraries is via the library
+unique identifier, the \fI\%ALIAS URI\fP syntax is used to reference the
+specialized functions.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+{
+  \(dqnamed_function_constant_values\(dq: [
+    {
+      \(dqname\(dq: \(dqmy_common_fc_values\(dq,
+      \(dqconstant_values\(dq: [
+        {
+          \(dqid_type\(dq: \(dqFunctionConstantIndex\(dq,
+          \(dqid\(dq: {
+            \(dqdata\(dq: 0
+          },
+          \(dqvalue_type\(dq: \(dqConstantUInt\(dq,
+          \(dqvalue\(dq: {
+            \(dqdata\(dq: 42
+          }
+        },
+        {
+          \(dqid_type\(dq: \(dqFunctionConstantName\(dq,
+          \(dqid\(dq: \(dqbase_color\(dq,
+          \(dqvalue_type\(dq: \(dqConstantFloat4\(dq,
+          \(dqvalue\(dq: {
+            \(dqdata\(dq: [0.5, 0.22, 0.25, 1.0]
+          }
+        }
+      ]
+    }
+  ],
+  \(dqlibraries\(dq: {
+    \(dqspecialized_functions\(dq: [
+      {
+        \(dqlabel\(dq: \(dqfragment_1_lib\(dq,
+        \(dqfunction\(dq: \(dqmy_fragment\(dq,
+        \(dqnamed_constant_values\(dq: \(dqmy_common_fc_values\(dq,
+        \(dqconstant_values\(dq: [
+          {
+            \(dqid_type\(dq: \(dqFunctionConstantName\(dq,
+            \(dqid\(dq: \(dqbase_color\(dq,
+            \(dqvalue_type\(dq: \(dqConstantFloat4\(dq,
+            \(dqvalue\(dq: {
+              \(dqdata\(dq: [0.25, 0.25, 0.5, 1.0]
+            }
+          },
+        ]
+      },
+      {
+        \(dqlabel\(dq: \(dqfragment_2_lib\(dq,
+        \(dqfunction\(dq: \(dqmy_fragment\(dq,
+        \(dqnamed_constant_values\(dq: \(dqmy_common_fc_values\(dq,
+        \(dqconstant_values\(dq: [
+          {
+            \(dqid_type\(dq: \(dqFunctionConstantIndex\(dq,
+            \(dqid\(dq: {
+              \(dqdata\(dq: 0
+            },
+            \(dqvalue_type\(dq: \(dqConstantUInt\(dq,
+            \(dqvalue\(dq: {
+              \(dqdata\(dq: 23
+            }
+          }
+        ]
+      }
+    ]
+  },
+  \(dqpipelines\(dq: {
+    \(dqrender_pipelines\(dq: [
+      {
+        \(dqvertex_function\(dq: \(dqmy_vertex\(dq,
+        \(dqfragment_function\(dq: \(dqalias:fragment_1_lib#my_fragment\(dq,
+        \(dqcolor_attachments\(dq: [
+          {
+            \(dqpixel_format\(dq: \(dqBGRA8Unorm\(dq
+          }
+        ]
+      },
+      {
+        \(dqvertex_function\(dq: \(dqmy_vertex\(dq,
+        \(dqfragment_function\(dq: \(dqalias:fragment_2_lib#my_fragment\(dq,
+        \(dqcolor_attachments\(dq: [
+          {
+            \(dqpixel_format\(dq: \(dqBGRA8Unorm\(dq
+          }
+        ]
+      }
+    ]
+  }
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Note that in \fIfragment_1_lib\fP the function constant value for the variable
+\fIbase_color\fP provided by \fImy_common_fc_values\fP is overridden locally. Similarly
+in \fIfragment_2_lib\fP the function constant value for the variable with index \fI0\fP
+provided by \fImy_common_fc_values\fP is overridden locally.
+.SS Explicit Metal libraries on disk
+.sp
+This example shows a Metal pipelines script with three compute pipelines where
+functions are from libraries either defined as input libraries on disk in the
+Metal script (see \fBpaths\fP), or directly referenced using the \fI\%FILE URI\fP
+syntax, or from specialized function libraries using the \fI\%ALIAS URI\fP
+syntax.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+{
+  \(dqlibraries\(dq: {
+    \(dqpaths\(dq: [
+      {
+        \(dqlabel\(dq: \(dqlib1\(dq,
+        \(dqpath\(dq: \(dqlibraries/lib1.metallib\(dq
+      }
+    ],
+    \(dqspecialized_functions\(dq: [
+      {
+        \(dqlabel\(dq: \(dqkernel_42_lib\(dq,
+        \(dqfunction\(dq: \(dqalias:lib1#my_kernel\(dq,
+        \(dqspecialized_name\(dq: \(dqmy_specialized_kernel\(dq,
+        \(dqconstant_values\(dq: [
+          {
+            \(dqid_type\(dq: \(dqFunctionConstantIndex\(dq,
+            \(dqid\(dq: {
+              \(dqdata\(dq: 0
+            },
+            \(dqvalue_type\(dq: \(dqConstantUInt\(dq,
+            \(dqvalue\(dq: {
+              \(dqdata\(dq: 42
+            }
+          }
+        ]
+      }
+    ]
+  },
+  \(dqpipelines\(dq: {
+    \(dqcompute_pipelines\(dq: [
+      {
+        \(dqcompute_function\(dq: \(dqalias:kernel_42_lib#my_specialized_kernel\(dq
+      },
+      {
+        \(dqcompute_function\(dq: \(dqfile:/path/to/custom/lib.metallib#custom_kernel\(dq
+      },
+      {
+        \(dqcompute_function\(dq: \(dqalias:lib1#base_kernel\(dq
+      }
+    ]
+  }
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SS Linked functions
+.sp
+This example shows a Metal pipelines script with a compute pipeline with a
+\fIlinked_functions\fP object.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+{
+  \(dqlibraries\(dq: {
+    \(dqpaths\(dq: [
+      {
+        \(dqlabel\(dq: \(dqvisible_functions\(dq,
+        \(dqpath\(dq: \(dqlibraries/visible_fns.metallib\(dq
+      },
+      {
+        \(dqlabel\(dq: \(dqintersection_functions\(dq,
+        \(dqpath\(dq: \(dqlibraries/intersection_fns.metallib\(dq
+      }
+    ]
+  },
+  \(dqpipelines\(dq: {
+    \(dqcompute_pipelines\(dq: [
+      {
+        \(dqcompute_function\(dq: \(dqmy_kernel\(dq,
+        \(dqlinked_functions\(dq: {
+          \(dqfunctions\(dq: [
+            \(dqmy_visible_1\(dq,
+            \(dqalias:visible_functions#helper_visible_1\(dq,
+            \(dqalias:visible_functions#helper_visible_2\(dq,
+            \(dqalias:visible_functions#helper_visible_3\(dq,
+            \(dqalias:intersection_functions#triangle_intersection_1\(dq,
+            \(dqalias:intersection_functions#triangle_intersection_2\(dq,
+            \(dqalias:intersection_functions#triangle_intersection_3\(dq
+          ],
+          \(dqbinary_functions\(dq: [
+            \(dqbounding_box_intersection_1\(dq,
+            \(dqbounding_box_intersection_2\(dq,
+            \(dqbounding_box_intersection_3\(dq
+          ],
+          \(dqgroups\(dq: [
+            {
+              \(dqname\(dq: \(dqhelpers_group_1\(dq,
+              \(dqfunctions\(dq: [\(dqhelper_visible_1\(dq, \(dqhelper_visible_2\(dq]
+            },
+            {
+              \(dqname\(dq: \(dqhelpers_group_2\(dq,
+              \(dqfunctions\(dq: [\(dqhelper_visible_3\(dq]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Note that the elements in \fIbinary_functions\fP array are simple function names,
+while the elements in the \fIfunctions\fP array can be any form of function
+reference.
+.SS Separately compiled functions
+.sp
+This example shows a Metal pipelines script with separately compiled visible
+and intersection functions.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+{
+  \(dqlibraries\(dq: {
+    \(dqpaths\(dq: [
+      {
+        \(dqlabel\(dq: \(dqvisible_functions\(dq,
+        \(dqpath\(dq: \(dqlibraries/visible_fns.metallib\(dq
+      },
+      {
+        \(dqlabel\(dq: \(dqintersection_functions\(dq,
+        \(dqpath\(dq: \(dqlibraries/intersection_fns.metallib\(dq
+      }
+    ]
+  },
+  \(dqfunctions\(dq: {
+    \(dqvisible_functions\(dq: [
+      {
+        \(dqfunction\(dq: \(dqfile:/path/to/other.metallib#my_visible_1\(dq,
+      },
+      {
+        \(dqfunction\(dq: \(dqmy_visible_2\(dq,
+      },
+      {
+        \(dqfunction\(dq: \(dqalias:visible_functions#my_visible_1\(dq,
+      }
+    ],
+    \(dqintersection_functions\(dq: [
+      {
+        \(dqfunction\(dq: \(dqmy_intersection_1\(dq,
+      },
+      {
+        \(dqfunction\(dq: \(dqalias:intersection_functions#my_intersection_2\(dq,
+      },
+      {
+        \(dqfunction\(dq: \(dqfile:/path/to/other.metallib#my_intersection_1\(dq,
+      }
+    ]
+  }
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SS Stitched libraries
+.sp
+This example shows a Metal pipelines script with a compute pipeline and
+separately compiled visible function using a stitched function.
+The only way to reference the stitched libraries is via the library
+unique identifier, the \fI\%ALIAS URI\fP syntax is used to reference the
+stitched functions.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+{
+  \(dqlibraries\(dq: {
+    \(dqstitched_libraries\(dq: [
+      {
+        \(dqlabel\(dq: \(dqstitched_functions\(dq,
+        \(dqfunctions\(dq: [
+          \(dqmul\(dq,
+          \(dqadd\(dq
+        ],
+        \(dqfunction_graphs\(dq: [
+          {
+            \(dqfunction_name\(dq: \(dqmuladd\(dq,
+            \(dqnodes\(dq: [
+              {
+                \(dqnode_type\(dq: \(dqInputNode\(dq,
+                \(dqnode\(dq: {
+                  \(dqindex\(dq: 0
+                }
+              },
+              {
+                \(dqnode_type\(dq: \(dqInputNode\(dq,
+                \(dqnode\(dq: {
+                  \(dqindex\(dq: 1
+                }
+              },
+              {
+                \(dqnode_type\(dq: \(dqFunctionNode\(dq,
+                \(dqnode\(dq: {
+                  \(dqname\(dq: \(dqmul\(dq,
+                  \(dqarguments\(dq: [
+                    {
+                      \(dqid\(dq: 0
+                    },
+                    {
+                      \(dqid\(dq: 1
+                    }
+                  ]
+                }
+              },
+              {
+                \(dqnode_type\(dq: \(dqInputNode\(dq,
+                \(dqnode\(dq: {
+                  \(dqindex\(dq: 2
+                }
+              },
+              {
+                \(dqnode_type\(dq: \(dqFunctionNode\(dq,
+                \(dqnode\(dq: {
+                  \(dqname\(dq: \(dqadd\(dq,
+                  \(dqarguments\(dq: [
+                    {
+                      \(dqid\(dq: 2
+                    },
+                    {
+                      \(dqid\(dq: 3
+                    }
+                  ]
+                }
+              }
+            ],
+            \(dqoutput_node\(dq: {
+              \(dqid\(dq: 4
+            }
+          }
+        ]
+      }
+    ]
+  },
+  \(dqpipelines\(dq: {
+    \(dqcompute_pipelines\(dq: [
+      {
+        \(dqcompute_function\(dq: \(dqmy_kernel\(dq,
+        \(dqlinked_functions\(dq: {
+          \(dqfunctions\(dq: [
+            \(dqalias:stitched_functions#muladd\(dq,
+          ]
+        }
+      }
+    ]
+  },
+  \(dqfunctions\(dq: {
+    \(dqvisible_functions\(dq: [
+      {
+        \(dqfunction\(dq: \(dqalias:stitched_functions#muladd\(dq,
+      }
+    ]
+  }
+}
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.SH COPYRIGHT
+2014-2024, The Metal Team
+.\" Generated by docutils manpage writer.
+.

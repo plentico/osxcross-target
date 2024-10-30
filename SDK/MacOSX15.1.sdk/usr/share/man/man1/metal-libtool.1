@@ -1,0 +1,317 @@
+.\" Man page generated from reStructuredText.
+.
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.TH "METAL-LIBTOOL" "1" "July 10, 2024" "32023" "Metal"
+.SH NAME
+metal-libtool \- create metal libraries
+.SH SYNOPSIS
+.sp
+\fBmetal\-libtool\fP \-static \-o output [\fIoptions\fP] \fIfilename ...\fP
+.sp
+\fBmetal\-libtool\fP \-dynamic \-o output [\fIoptions\fP] \fIfilename ...\fP
+.sp
+\fBmetal\-libtool\fP \-lowering \-o output [\fIoptions\fP] \fIfilename ...\fP
+.SH DESCRIPTION
+.sp
+The \fBmetal\-libtool\fP command takes the specified input object files and
+creates a library for use with the link editor, \fBmetal\-lld\fP\&. The
+library name is specified by \fIoutput\fP (the argument of the \fI\%\-o\fP flag).
+The input  object files may be in any correct format that contains object files
+(\fIuniversal\fP files, archives, object files). \fBmetal\-libtool\fP will not
+put any non\-object input file into the output library.
+.sp
+\fBmetal\-libtool\fP can create statically linked libraries, with
+\fI\%\-static\fP, dynamically linked shared libraries, with
+\fI\%\-dynamic\fP, or lowering libraries, with \fI\%\-lowering\fP\&.
+.SH STATICALLY LINKED LIBRARIES
+.sp
+Statically linked libraries are \fIar\fP format files. To build a statically linked
+library, \fBmetal\-libtool\fP runs the link editor, \fBmetal\-lld\fP,
+with \fI\-create\-static\-library\fP once for each architecture present in the input
+objects and then \fBmetal\-lipo\fP to create a universal file if needed.
+.sp
+The archive member name for a table of contents is either \(dq__.SYMDEF\(dq or
+\(dq__.SYMDEF SORTED\(dq for archives with 32\-bit file offsets. The latter being used
+when when table of contents is sorted. The table of contents archive member
+name for archives with 64\-bit file offsets is either \(dq__.SYMDEF_64\(dq or
+\(dq__.SYMDEF_64 SORTED\(dq.
+.SH DYNAMICALLY LINKED SHARED LIBRARIES
+.sp
+Dynamically linked libraries, unlike statically linked libraries, are MetalLib
+format files and not \fIar\fP format files. Dynamically linked libraries have two
+restrictions: No symbol may be defined in more than one object file and no
+common symbol can be used. To build a dynamically linked library,
+\fBmetal\-libtool\fP runs the link editor, \fBmetal\-lld\fP, with
+\fI\-create\-shared\-library\fP once for each architecture present in the input objects
+and then \fBmetal\-lipo\fP to create a universal file if needed.
+.SH LOWERING LIBRARIES
+.sp
+Lowering libraries are statically linked libraries where each member contains
+only one symbol with external linkage. To build a lowering library,
+\fBmetal\-libtool\fP runs the link editor, \fBmetal\-lld\fP, with
+\fI\-create\-lowering\-library\fP once for each architecture present in the input
+objects and then \fBmetal\-lipo\fP to create a universal file if needed.
+.SH OPTIONS
+.SS Driver Options
+.INDENT 0.0
+.TP
+.B \-help
+Display available options.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-static
+Produce a statically linked library from the input files. This is the default.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-dynamic
+Produce a dynamically linked shared library from the input files.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-lowering
+Produce a statically linked lowering library from the input files.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-arch_only <arch>
+Produce a library for the specific arch.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-arch <arch>
+Alias for \fI\%\-arch_only\fP\&.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-o <filename>
+Specifies output filename.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-verbose
+Echo all spawned commands.
+.UNINDENT
+.SS Target Selection Options
+.INDENT 0.0
+.TP
+.B \-ios_version_min <version>
+Specify the minimum iOS version to build for.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-ios_simulator_version_min <version>
+Specify the minimum iOS Simulator version to build for.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-maccatalyst_version_min <version>
+Specify the minimum Mac Catalyst version to build for.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-tvos_version_min <version>
+Specify the minimum tvOS version to build for.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-tvos_simulator_version_min <version>
+Specify the minimum tvOS Simulator version to build for.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-watchos_version_min <version>
+Specify the minimum watchOS version to build for.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-watchos_simulator_version_min <version>
+Specify the minimum watchOS Simulator version to build for.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-xros_version_min <version>
+Specify the minimum visionOS version to build for.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-xros_simulator_version_min <version>
+Specify the minimum visonOS Simulator version to build for.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-macos_version_min <version>
+Specify the minimum macOS version to build for.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-platform_version <platform name> <os version> <sdk version>
+This is set to indicate the platform, oldest supported version of that
+platform that output is to be used on, and the SDK that the output was built
+against; \fI<platform name>\fP is one of the following strings:
+.INDENT 7.0
+.INDENT 3.5
+.INDENT 0.0
+.IP \(bu 2
+ios
+.IP \(bu 2
+ios\-simulator
+.IP \(bu 2
+mac\-catalyst
+.IP \(bu 2
+tvos
+.IP \(bu 2
+tvos\-simulator
+.IP \(bu 2
+watchos
+.IP \(bu 2
+watchos\-simulator
+.IP \(bu 2
+xros
+.IP \(bu 2
+xros\-simulator
+.IP \(bu 2
+macos
+.UNINDENT
+.UNINDENT
+.UNINDENT
+.sp
+Specifying a newer \fI<os version>\fP or \fI<sdk version>\fP enables the link editor
+to assume features of that OS or SDK in the output file. The format of
+\fI<os version>\fP and \fI<sdk version>\fP is a version number such as 10.13 or 10.14.
+.UNINDENT
+.SS Dynamically Linked Shared Library Options
+.INDENT 0.0
+.TP
+.B \-l <name>
+Link with library \fI<name>\fP\&.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-L <dirname>
+Add \fI<dirname>\fP to the libraries search path.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-framework <name>
+Link with framework \fI<name>\fP\&.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-F <dirname>
+Add \fI<dirname>\fP to the frameworks search path.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-exported_symbols_list <filename>
+Specify a linker export file.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-install_name <name>
+Set dynamic library install name to \fI<name>\fP\&.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-nostdlib
+Only search libraries on directories specified on the command line.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-sysroot <dirname>
+Set the system root.
+.UNINDENT
+.SS Source Embedding Options
+.INDENT 0.0
+.TP
+.B \-embed_sources
+Save inputs into the final output, mainly for recompilation purposes.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-no_embed_sources
+Do not save inputs into the final output.
+.UNINDENT
+.SH EXAMPLES
+.sp
+To create a static library:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ metal\-libtool \-create\-static\-library foo.air bar.air \-o libfoobar.a
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+To create a dynamic library:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ metal\-libtool \-create\-dynamic\-library foo.air bar.air \-install_name libfoobar.metallib \-o libfoobar.metallib
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+To link only one architecture:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ metal\-libtool \-create\-static\-library \-arch_only air64_v18 foo\-air64_v16.air foo\-air64_v18.air foo\-air64_v111.air \-o libfoo.a
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+The \fIlibfoo.a\fP output is a \fIair64_v18\fP thin archive. It contains two members;
+\fIfoo\-air64_v18.air\fP is copied verbatim, while \fIfoo\-air64_v16.air\fP is upgraded
+to \fIair64_v18\fP before putting it into the archive. \fIfoo\-air64_v111\fP is ignored,
+as there is no upgrade path from there to \fIair64_v18\fP\&.
+.SH BUGS
+.sp
+To report bugs, please visit <\fI\%https://developer.apple.com/bug\-reporting/\fP>.
+.SH SEE ALSO
+.sp
+\fBmetal\-arch(1)\fP
+\fBmetal\-lld(1)\fP
+.SH INTERNET RESOURCES
+.sp
+Metal Shading Language Specification: <\fI\%https://developer.apple.com/metal/Metal\-Shading\-Language\-Specification.pdf\fP>
+.SH COPYRIGHT
+2014-2024, The Metal Team
+.\" Generated by docutils manpage writer.
+.

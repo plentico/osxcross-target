@@ -1,0 +1,613 @@
+.\" Man page generated from reStructuredText.
+.
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.TH "METAL-TOOLCHAIN" "7" "July 10, 2024" "32023" "Metal"
+.SH NAME
+metal-toolchain \- metal compiler toolchain overview
+.SH DESCRIPTION
+.sp
+The Metal toolchain consists of a set of programs targeting Apple GPUs. The
+goal of this document is to provide an overview of the toolchain behavior.
+Refer to the documentation of individual programs for more specific
+information.
+.sp
+Metal supports two compilation mode: split\-compilation and traditional.
+.sp
+In the split\-compilation mode, the toolchain targets the \fBAIR\fP virtual target.
+Final translation to the actual GPU binary code is performed at runtime. In the
+more traditional mode, the toolchain directly emits binary code compatible with
+the selected GPU target.
+.SH TARGET ARCHITECTURES
+.sp
+The architecture of the AIR virtual target is \fBair64\fP\&. There are different
+subarchitectures for \fBair64\fP\&. Each architecture is associated with a platform
+version.
+.sp
+The currently supported AIR achitectures, together with their native platform
+versions are:
+.INDENT 0.0
+.INDENT 3.5
+.nf
+\fBair64_v16\fP
+.fi
+.sp
+.INDENT 0.0
+.INDENT 3.5
+iPhoneOS 8
+.UNINDENT
+.UNINDENT
+.nf
+\fBair64_v18\fP
+.fi
+.sp
+.INDENT 0.0
+.INDENT 3.5
+iPhoneOS 9, macOS 10.11, tvOS 9
+.UNINDENT
+.UNINDENT
+.nf
+\fBair64_v111\fP
+.fi
+.sp
+.INDENT 0.0
+.INDENT 3.5
+iPhoneOS 10, macOS 10.12, tvOS 10, watchOS 3
+.UNINDENT
+.UNINDENT
+.nf
+\fBair64_v20\fP
+.fi
+.sp
+.INDENT 0.0
+.INDENT 3.5
+iPhoneOS 11, macOS 10.13, tvOS 11, watchOS 4
+.UNINDENT
+.UNINDENT
+.nf
+\fBair64_v21\fP
+.fi
+.sp
+.INDENT 0.0
+.INDENT 3.5
+iPhoneOS 12, macOS 10.14, tvOS 12, watchOS 5
+.UNINDENT
+.UNINDENT
+.nf
+\fBair64_v22\fP
+.fi
+.sp
+.INDENT 0.0
+.INDENT 3.5
+iPhoneOS 13, macOS 10.15, tvOS 13, watchOS 6
+.UNINDENT
+.UNINDENT
+.nf
+\fBair64_v23\fP
+.fi
+.sp
+.INDENT 0.0
+.INDENT 3.5
+iPhoneOS 14, macOS 11, tvOS 14, watchOS 7
+.UNINDENT
+.UNINDENT
+.nf
+\fBair64_v24\fP
+.fi
+.sp
+.INDENT 0.0
+.INDENT 3.5
+iPhoneOS 15, macOS 12, tvOS 15, watchOS 8
+.UNINDENT
+.UNINDENT
+.nf
+\fBair64_v25\fP
+.fi
+.sp
+.INDENT 0.0
+.INDENT 3.5
+iPhoneOS 16, macOS 13, tvOS 16, watchOS 9
+.UNINDENT
+.UNINDENT
+.nf
+\fBair64_v26\fP
+.fi
+.sp
+.INDENT 0.0
+.INDENT 3.5
+iPhoneOS 17, macOS 14, tvOS 17, watchOS 10, visionOS 1
+.UNINDENT
+.UNINDENT
+.nf
+\fBair64_v27\fP
+.fi
+.sp
+.INDENT 0.0
+.INDENT 3.5
+iPhoneOS 18, macOS 15, tvOS 18, watchOS 11, visionOS 2
+.UNINDENT
+.UNINDENT
+.UNINDENT
+.UNINDENT
+.sp
+Native GPU targets are in the \fB<vendor>gpu_<arch>\fP form, where \fB<vendor>\fP
+can be \fBapple\fP, \fBamd\fP, or \fBintel\fP; \fB<arch>\fP identifies the actual GPU
+architecture.
+.sp
+Known Apple GPU architectures are:
+.INDENT 0.0
+.INDENT 3.5
+.nf
+\fBapplegpu_gx2\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g4p\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g4g\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g5p\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g9p\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g9g\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g10p\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g11p\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g11m\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g11g\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g11g_8fstp\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g12p\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g13p\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g13g\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g13s\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g13c\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g13d\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g14p\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g14g\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g14s\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g14d\fP
+.fi
+.sp
+.nf
+\fBapplegpu_g15p\fP
+.fi
+.sp
+.UNINDENT
+.UNINDENT
+.sp
+Known AMD GPU architectures are:
+.INDENT 0.0
+.INDENT 3.5
+.nf
+\fBamdgpu_gfx600\fP
+.fi
+.sp
+.nf
+\fBamdgpu_gfx600_nwh\fP
+.fi
+.sp
+.nf
+\fBamdgpu_gfx701\fP
+.fi
+.sp
+.nf
+\fBamdgpu_gfx704\fP
+.fi
+.sp
+.nf
+\fBamdgpu_gfx803\fP
+.fi
+.sp
+.nf
+\fBamdgpu_gfx802\fP
+.fi
+.sp
+.nf
+\fBamdgpu_gfx900\fP
+.fi
+.sp
+.nf
+\fBamdgpu_gfx904\fP
+.fi
+.sp
+.nf
+\fBamdgpu_gfx906\fP
+.fi
+.sp
+.nf
+\fBamdgpu_gfx1010_nsgc\fP
+.fi
+.sp
+.nf
+\fBamdgpu_gfx1010\fP
+.fi
+.sp
+.nf
+\fBamdgpu_gfx1011\fP
+.fi
+.sp
+.nf
+\fBamdgpu_gfx1012\fP
+.fi
+.sp
+.nf
+\fBamdgpu_gfx1030\fP
+.fi
+.sp
+.nf
+\fBamdgpu_gfx1032\fP
+.fi
+.sp
+.UNINDENT
+.UNINDENT
+.sp
+Known Intel GPU architectures are:
+.INDENT 0.0
+.INDENT 3.5
+.nf
+\fBintelgpu_skl_gt2r6\fP
+.fi
+.sp
+.nf
+\fBintelgpu_skl_gt2r7\fP
+.fi
+.sp
+.nf
+\fBintelgpu_skl_gt3r10\fP
+.fi
+.sp
+.nf
+\fBintelgpu_kbl_gt2r0\fP
+.fi
+.sp
+.nf
+\fBintelgpu_kbl_gt2r2\fP
+.fi
+.sp
+.nf
+\fBintelgpu_kbl_gt2r4\fP
+.fi
+.sp
+.nf
+\fBintelgpu_kbl_gt3r1\fP
+.fi
+.sp
+.nf
+\fBintelgpu_kbl_gt3r6\fP
+.fi
+.sp
+.nf
+\fBintelgpu_icl_1x6x8r7\fP
+.fi
+.sp
+.nf
+\fBintelgpu_icl_1x8x8r7\fP
+.fi
+.sp
+.UNINDENT
+.UNINDENT
+.sp
+Having multiple architectures allows to store inside the same universal binary
+multiple binaries, each targeting a different version of the same platform.
+.SH TARGET PLATFORMS
+.sp
+The AIR toolchain is able to target the following platforms:
+.INDENT 0.0
+.INDENT 3.5
+.nf
+iPhoneOS
+.fi
+.sp
+.INDENT 0.0
+.INDENT 3.5
+Minimum supported version is iPhoneOS 8
+.UNINDENT
+.UNINDENT
+.nf
+macOS
+.fi
+.sp
+.INDENT 0.0
+.INDENT 3.5
+Minimum supported version is macOS 10.11
+.UNINDENT
+.UNINDENT
+.nf
+tvOS
+.fi
+.sp
+.INDENT 0.0
+.INDENT 3.5
+Minimum supported version is tvOS 9
+.UNINDENT
+.UNINDENT
+.nf
+watchOS
+.fi
+.sp
+.INDENT 0.0
+.INDENT 3.5
+Minimum supported version is watchOS 3
+.UNINDENT
+.UNINDENT
+.nf
+visionOS
+.fi
+.sp
+.INDENT 0.0
+.INDENT 3.5
+Minimum supported version is visionOS 1
+.UNINDENT
+.UNINDENT
+.UNINDENT
+.UNINDENT
+.sp
+Starting with \fBair64_v23\fP, all platforms are compatible with each other. So
+for instance you can link an \fBair64_v23\-apple\-iphoneos14\fP object
+and an \fBair64_v23\-apple\-macos11\fP object together.
+.SH FILE FORMATS
+.sp
+There two main inputs of the AIR toolchain are Metal source files and Metal
+scripts. The canonical extension of Metal source files is \fB\&.metal\fP\&. The
+canonical extension of Metal scripts is \fB\&.mtlp\-json\fP\&.
+.sp
+Metal scripts are consumed by tools emitting GPU binary code. Depending on the
+code being emitted, a Metal script might be required or not. For instance, a
+Metal script is required to emit a pipeline, but it is not required when
+emitting a dynamic library.
+.sp
+The AIR toolchain emits \fBMetalLibs\fP and \fBMachOs\fP\&. The former stores AIR
+binaries. The latter stores GPU binaries.
+.sp
+The AIR toolchain also emits universal binaries, that can contains both
+\fBMetalLib\fP and \fBMachO\fP slices at the same time.
+.SH COMPILER DRIVERS
+.sp
+The AIR toolchain provides two main compiler drivers: \fBmetal\fP and
+\fBmetal\-tt\fP\&.
+.sp
+\fBmetal\fP primary goal is to translate a bunch of source files into
+\fBMetalLibs\fP, \fBMachOs\fP, or universal binaries.
+.sp
+What is actually emitted depends on the selected target architectures. If more
+than one architecture is selected, a universal binary is emitted. Otherwise,
+if the target architecture is AIR a \fBMetalLib\fP is emitted. If the target
+architecture is a GPU architecture, a \fBMachO\fP is emitted.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ metal \-arch air64_v23 foo.metal \-o foo.metallib
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Emits a \fBMetalLib\fP\&.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ metal \-arch applegpu_g13s foo.metal \-N foo.mtlp\-json \-o foo.metallib
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Emits a \fBMachO\fP\&.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ metal \-arch air64_v23 \-arch applegpu_g13s foo.metal \-N foo.mtlp\-json \-o foo.metallib
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Emits a universal binary, with one \fBMetalLib\fP slice and one \fBMachO\fP slice.
+.sp
+The most efficient way to use the \fBmetal\fP driver is to independently compile a
+bunch of source files, followed by a link step:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ metal \-arch air64_v23 \-c foo.metal \-o foo.air
+$ metal \-arch air64_v23 \-c bar.metal \-o bar.air
+$ metal \-arch air64_v23 foo.air bar.air \-o foobar.metallib
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Since the emission of GPU binaries starts from \fBMetalLibs\fP, it is only needed
+to specify a GPU architecture at the link step:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ metal \-arch air64_v23 \-c foo.metal \-o foo.air
+$ metal \-arch air64_v23 \-c bar.metal \-o bar.air
+$ metal \-arch applegpu_g13s foo.air bar.air \-N foobar.mtlp\-json \-o foobar.metallib
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+The \fBmetal\fP driver requires to be told what architectures to target, which
+can be challenging when a large number of GPU architectures has to be targeted.
+The \fBmetal\-tt\fP driver solves this problem by automatically targeting all the
+GPU architectures supported by the toolchain:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ metal \-arch air64_v23 foo.metal \-o foo.metallib\-air64_v23
+$ metal\-tt foo.metallib\-air64_v23 foo.mtlp\-json \-o foo.metallib
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+The produced \fBfoo.metallib\fP contains one slice for each supported GPU
+architecture, plus the \fBair64_v23\fP slice produced by \fBmetal\fP\&.
+.SH TARGET SELECTION
+.sp
+A target is composed of a target architecture and a target platform.
+.sp
+Generally speaking, the target used by a compiler driver can be explicitly
+spelled out in the compiler driver command line. If the target is only
+partially spelled out \-\- e.g. the command line only specifies the target
+architecture \-\- the remaining components of the target are deduced by the
+compiler driver.
+.sp
+The deduction process is specific to each compiler driver, but it generally
+split deduction into two steps: selection of an architecture, followed by
+selection of a platform.
+.sp
+The default architecture is \fBair64\fP\&.
+.sp
+The platform is selected starting from the system root. If the system root
+points to a Darwin SDK, the target platform is set to the one of the SDK.
+.sp
+For instance assuming \fBiPhoneOS16.0.sdk\fP contains a valid iPhoneOS SDK, the
+target selected by the following command:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+$ metal \-isysroot iPhoneOS16.0.sdk foo.metal \-o foo.metallib
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Would be \fBair64\-apple\-iphoneos16.0\fP\&.
+.sp
+The system root can also be set using the \fBSDKROOT\fP environment variable. On
+Darwin, development tools are usually invoked using \fBxcrun\fP, which
+automatically sets \fBSDKROOT\fP to the selected SDK. Thus this command:
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.nf
+.ft C
+xcrun \-sdk iphoneos metal foo.metal \-o foo.metallib
+.ft P
+.fi
+.UNINDENT
+.UNINDENT
+.sp
+Will target \fBair64\-apple\-iphoneosX.Y\fP, where \fBX.Y\fP is the iPhoneOS SDK
+target platform found by \fBxcrun\fP\&.
+.SH UTILITIES
+.sp
+The \fBmetal\-arch\fP tool prints information about the
+architectures of the GPUs available in the current platform.
+.sp
+The \fBmetal\-config\fP tool prints information about the GPU architectures that
+can be targeted by the current toolchain.
+.SH BUGS
+.sp
+To report bugs, please visit <\fI\%https://developer.apple.com/bug\-reporting/\fP>.
+.SH SEE ALSO
+.sp
+\fBmetal(1)\fP,
+\fBmetal\-arch(1)\fP,
+\fBmetal\-config(1)\fP,
+\fBmetal\-pipelines\-script(5)\fP,
+\fBmetal\-tt(1)\fP,
+\fBxcrun(1)\fP
+.SH INTERNET RESOURCES
+.sp
+Metal Shading Language Specification: <\fI\%https://developer.apple.com/metal/Metal\-Shading\-Language\-Specification.pdf\fP>
+.SH COPYRIGHT
+2014-2024, The Metal Team
+.\" Generated by docutils manpage writer.
+.

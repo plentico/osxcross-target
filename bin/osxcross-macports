@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ##
-## A minimalistic MacPorts Packet Manager for OSXCross,
+## A minimalistic MacPorts Package Manager for OSXCross,
 ## based on: https://github.com/maci0/pmmacports.
 ## Please see README.MACPORTS for more.
 ## License: GPLv2.
@@ -81,7 +81,11 @@ case $MACOSX_DEPLOYMENT_TARGET in
   10.14* ) OSXVERSION="darwin_18" ;;
   10.15* ) OSXVERSION="darwin_19" ;;
   10.16* ) OSXVERSION="darwin_20" ;;
-  11.* )   OSXVERSION="darwin_20" ;;
+  11.*   ) OSXVERSION="darwin_20" ;;
+  12.*   ) OSXVERSION="darwin_21" ;;
+  13.*   ) OSXVERSION="darwin_22" ;;
+  14.*   ) OSXVERSION="darwin_23" ;;
+  15.*   ) OSXVERSION="darwin_24" ;;
        * ) unsupportedDepTarget ;;
 esac
 
@@ -274,10 +278,17 @@ verifyFileIntegrity()
 getPkgUrl()
 {
   local pkgname="$1"
+  local pkgversion
   local pkgs
   local pkg
 
   set +e
+
+  local pkg_info_url="https://ports.macports.org"
+  pkg_info_url+="/api/v1/ports/$pkgname/?format=json"
+  pkgversion=$(getFileStdout "$pkg_info_url" | \
+               grep -o -E '"version":"[^"]+"' | \
+               cut -d'"' -f4)
 
   pkgs=$(getFileStdout "$MIRROR/$pkgname/?C=M;O=A" | \
          grep -o -E 'href="([^"#]+)"' | \
@@ -298,9 +309,25 @@ getPkgUrl()
     verboseMsg "  $p"
   done
 
-  local pkg=$(echo "$pkgs" | grep $OSXVERSION | grep $ARCH | uniq | tail -n1)
+  local pkg=$(echo "$pkgs" | \
+              grep "$pkgname-$pkgversion" | grep $OSXVERSION | grep $ARCH | \
+              uniq | tail -n1)
+  if [ -z "$pkg" ]; then
+    pkg=$(echo "$pkgs" | \
+          grep "$pkgname-$pkgversion" | grep $OSXVERSION | grep "noarch" | \
+          uniq | tail -n1)
+  fi
+  if [ -z "$pkg" ]; then
+    pkg=$(echo "$pkgs" | grep $OSXVERSION | grep $ARCH | uniq | tail -n1)
+  fi
   if [ -z "$pkg" ]; then
     pkg=$(echo "$pkgs" | grep $OSXVERSION | grep "noarch" | uniq | tail -n1)
+  fi
+  if [ -z "$pkg" ]; then
+    pkg=$(echo "$pkgs" | grep "any" | grep $ARCH | uniq | tail -n1)
+  fi
+  if [ -z "$pkg" ]; then
+    pkg=$(echo "$pkgs" | grep "any" | grep "noarch" | uniq | tail -n1)
   fi
 
   verboseMsg " selected: $pkg"
@@ -586,6 +613,8 @@ main()
         ARCH="i386"
       elif [ $opt == "-universal" -o $opt == "--universal" ]; then
         ARCH="i386-x86_64"
+      elif [ $opt == "-arm64" -o $opt == "--arm64" ]; then
+        ARCH="arm64"
       elif [ $opt == "-sm" -o $opt == "--select-mirror" ]; then
         selectMirror
         exit
