@@ -19,8 +19,8 @@ jobs:
       
       - name: Create ZIP archive
         run: |
-          zip -r osxcross-target.zip . -x ".git/*" ".github/*"
-          tar -czf osxcross-target.tar.gz --exclude=".git" --exclude=".github" .
+          zip --symlinks -r osxcross-target.zip . -x ".git/*" ".github/*"
+          tar --dereference -czf osxcross-target.tar.gz --exclude=".git" --exclude=".github" .
       
       - name: Create Release
         env:
