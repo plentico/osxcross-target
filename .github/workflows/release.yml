@@ -1,0 +1,35 @@
+name: Create Release on Tag
+
+on:
+  push:
+    tags:
+      - 'v*' # Triggers on any tag that starts with 'v'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed for creating releases
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Important for getting all tags
+      
+      - name: Create ZIP archive
+        run: |
+          zip -r osxcross-target.zip . -x ".git/*" ".github/*"
+          tar -czf osxcross-target.tar.gz --exclude=".git" --exclude=".github" .
+      
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Release ${{ github.ref_name }}
+          generate_release_notes: true # Generate release notes automatically from commits
+          prerelease: ${{ contains(github.ref, '-') }} # Allows marking a pre-release based on tag format (e.g., v1.0.0-beta)
+          files: |
+            osxcross-target.zip
+            osxcross-target.tar.gz
